@@ -1,0 +1,1 @@
+<view class="self_input_box data-v-0b76800c"><text hidden="{{!(label)}}" class="self_input_label data-v-0b76800c">{{label}}</text><view class="self_inputs data-v-0b76800c"><slot name="prefix"></slot><input class="self_input data-v-0b76800c" placeholder="{{placeholder}}"/><slot name="suffix"></slot><slot name="fill"></slot></view></view>

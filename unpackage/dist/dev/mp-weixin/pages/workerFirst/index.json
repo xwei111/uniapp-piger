@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "self-bg": "/components/self-bg",
+    "self-content": "/components/self-content",
+    "self-steps": "/components/self-steps",
+    "self-button": "/components/self-button",
+    "self-input": "/components/self-input",
+    "self-checkbox": "/components/self-checkbox",
+    "self-agree": "/components/self-agree"
+  }
+}

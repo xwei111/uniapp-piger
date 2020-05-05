@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "self-button": "/components/self-button"
+  }
+}

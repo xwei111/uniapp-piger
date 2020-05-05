@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "self-button": "/components/self-button",
+    "self-bg": "/components/self-bg",
+    "self-content": "/components/self-content"
+  }
+}

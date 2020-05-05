@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['handleClick',['$event']]]]]}}" class="{{['data-v-13ab9932',kind=='default'?'self_default_button':'self_plain_button']}}" bindtap="__e">{{''+text+''}}</view>
