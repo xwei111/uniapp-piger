@@ -6,7 +6,7 @@
 			<view v-show="active == 1">
 				<self-input label="手机号" placeholder="请输入您的手机号" v-model="tell"></self-input>
 				<self-input label="验证码" placeholder="请输入验证码" v-model="code">
-					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${this.number}s ` : '获取验证码'}}</view>
+					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${number}s ` : '获取验证码'}}</view>
 				</self-input>
 			</view>
 			<view v-show="active == 2">
@@ -310,7 +310,7 @@
 	.deleteBtn {
 		font-size:34rpx;
 		position: absolute;
-		top: 14rpx;
+		top: 30rpx;
 		right: 0;
 		color: #999;
 	}

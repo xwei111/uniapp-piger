@@ -43,6 +43,9 @@
   color: white;
   background-color: #0B8E69;
 }
+.getCode.disCode.data-v-6714b3bc {
+  opacity: .4;
+}
 .nextButton.data-v-6714b3bc {
   margin-top: 70rpx;
   margin-bottom: 30rpx;

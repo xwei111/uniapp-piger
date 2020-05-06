@@ -1,7 +1,10 @@
 <template>
 	<view class="self_tabs">
 		<view class="self_tab" v-for="(item, index) in list" :key="index" @click="selectHandle(item)">
-			<text>{{item.title}}</text>
+			<text>
+				{{item.title}}
+				<text class="self_tab_num">{{item.num ? item.num > 99 ? '99+' : item.num : ''}}</text>
+			</text>
 			<view v-show="item.id == active" class="self_tab_border"></view>
 		</view>
 	</view>
@@ -47,6 +50,9 @@
 			font-family:PingFangSC-Regular,PingFang SC;
 			font-weight:400;
 			color:rgba(34,34,34,1);
+			.self_tab_num {
+				color: #0FBB87;
+			}
 			.self_tab_border {
 				width: 108rpx;
 				height: 7rpx;

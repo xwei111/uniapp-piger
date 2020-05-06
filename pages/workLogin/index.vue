@@ -68,7 +68,6 @@
 				} else {
 					this.isError = false
 					this.status = 'default'
-					uni.showToast({ title: '登录成功', icon: 'none' });
 					if(first) {
 						uni.navigateTo({ url: '/pages/workerFirst/index' })
 					} else {

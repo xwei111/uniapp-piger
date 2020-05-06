@@ -37,7 +37,7 @@
   display: block;
   height: 48rpx;
   font-size: 34rpx;
-  font-family: PingFangSC-Regular,PingFang SC;
+  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
   line-height: 48rpx;
@@ -69,5 +69,8 @@
   -webkit-flex: 1;
           flex: 1;
   height: 100%;
+}
+.self_input_box .self_inputs.self_inputs-error.data-v-0b76800c {
+  border-color: #f00;
 }
 
