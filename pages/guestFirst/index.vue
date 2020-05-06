@@ -4,19 +4,19 @@
 		<self-content>
 			<self-steps :lists="lists" :active="active"></self-steps>
 			<view v-show="active == 1">
-				<self-input label="手机号" placeholder="请输入您的手机号"></self-input>
-				<self-input label="验证码" placeholder="请输入验证码">
-					<view class="getCode" slot="suffix">获取验证码</view>
+				<self-input label="手机号" placeholder="请输入您的手机号" v-model="tell"></self-input>
+				<self-input label="验证码" placeholder="请输入验证码" v-model="code">
+					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${this.number}s ` : '获取验证码'}}</view>
 				</self-input>
 			</view>
 			<view v-show="active == 2">
-				<self-input label="姓名" placeholder="请输入您的姓名"></self-input>
-				<self-input label="身份证号" placeholder="请输入您的身份证号"></self-input>
+				<self-input label="姓名" placeholder="请输入您的姓名" v-model="user"></self-input>
+				<self-input label="身份证号" placeholder="请输入您的身份证号" v-model="sfz"></self-input>
 			</view>
 			<view v-show="active == 3">
 				<view class="people">您是:</view>
 				<self-radio :options="options" :active="radioActive" @changeHandle="changeHandle" class="radio" ></self-radio>
-				<self-input v-if="radioActive == 2" placeholder="请输入您的企业名"></self-input>
+				<self-input v-if="radioActive == 2" placeholder="请输入您的企业名" v-model="company"></self-input>
 				<self-input label="来访事由">
 					<view slot="fill" class="fill_content">
 						<picker @change="bindPickerChange" :value="index" :range="array">
@@ -24,6 +24,19 @@
 						</picker>
 					</view>
 				</self-input>
+				<view class="addUser" >
+					<text @click="addUserHandle">+ 新增来访人员</text>
+					<text v-if="accompanying.length" @click="accShowHandle">{{ accShow ? '隐藏' : '展开' }}</text>
+				</view>
+				<view v-show="accShow">
+					<view style="position: relative;" v-for="(item, index) in accompanying" :key="index">
+						<view class="deleteBtn" @click="deleteHandle(item, index)">
+							<icon type="clear" size="14"/>
+						</view>
+						<self-input :label="`随行人员 ${index+1} 姓名`" v-model="item.user"></self-input>
+						<self-input :label="`随行人员 ${index+1} 身份证`" v-model="item.sfz"></self-input>
+					</view>
+				</view>
 				
 				<self-input label="目的地">
 					<view slot="fill" class="fill_content">
@@ -47,7 +60,7 @@
 			</view>
 			<self-button :text="active == 3 ? '提交' : '下一步' " @handleClick="nextClick" class="nextButton"></self-button>
 			<self-checkbox :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
-			<view class="isGuest">我是员工</view>
+			<view class="isGuest" @click="toWorkHandle">我是员工</view>
 		</self-content>
 		<self-agree :isShow="isShow" @closeHandle="closeHandle"></self-agree>
 	</view>
@@ -85,7 +98,16 @@
 				index: 0,
 				address: ['猪场A', '猪场B', '猪场C'],
 				idx: 0,
-				value: ''
+				value: '',
+				tell: '',
+				code: '',
+				user: '',
+				sfz: '',
+				company: '',
+				number: 60,
+				isBegin: false,
+				accompanying: [],
+				accShow: true
 			}
 		},
 		components: {
@@ -112,11 +134,55 @@
 		},
 		methods: {
 			nextClick() {
+				if(this.active == 1) {
+					if(!this.tell) {
+						uni.showToast({ title: '请输入手机号', icon: 'none' });
+						return
+					}
+					if(!/^\d{11}$/.test(this.tell)) {
+						uni.showToast({ title: '手机格式错误', icon: 'none' });
+						return
+					}
+					if(!this.code) {
+						uni.showToast({ title: '请输入验证码', icon: 'none' });
+						return
+					}
+				}
+				if(this.active == 2) {
+					if(!this.user) {
+						uni.showToast({ title: '请输入姓名', icon: 'none' });
+						return
+					}
+					if(!this.sfz) {
+						uni.showToast({ title: '请输入身份证', icon: 'none' });
+						return
+					}
+				}
 				if(this.active == 3) {
+					if(this.radioActive == 2 && !this.company) {
+						uni.showToast({ title: '请输入企业名称', icon: 'none' });
+						return
+					} 
+					if(this.accompanying && this.accompanying.length) {
+						let isOk = true;
+						this.accompanying.map(e=>{
+							if(!e.user || !e.sfz) {
+								isOk = false
+							}
+						})
+						if(!isOk) {
+							uni.showToast({ title: '有随行人员姓名或身份证未填写', icon: 'none' });
+							return
+						}
+					}
+					if(!this.chekck) {
+						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
+						return
+					}
+					console.log('login', this.tell, this.code, this.user, this.sfz, this.radioActive, this.company, this.accompanying, this.array[this.index], this.address[this.idx], this.value)
 					uni.navigateTo({
 						url: '/pages/guestInfo/index'
 					})
-					this.active = 1
 					return
 				}
 				this.active = ++this.active
@@ -132,7 +198,6 @@
 				this.isShow = false
 			},
 			changeHandle(e) {
-				console.log('ee', e)
 				this.radioActive = e.id
 			},
 			bindPickerChange(e) {
@@ -142,8 +207,39 @@
 				this.idx = e.target.value
 			},
 			bindChange(e) {
-				console.log('eeeeee',e)
 				this.value = e
+			},
+			getCodeHandle() {
+				if(this.isBegin) return
+				this.isBegin = true;
+				setInterval(()=>{
+					this.number = --this.number
+					if(this.number < 0) {
+						this.number = 60
+						this.isBegin = false;
+					}
+				}, 1000)
+				
+				// uni.showModal({
+				//     title: '很抱歉',
+				//     content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
+				// 	showCancel: false,
+				// 	confirmColor: '#02BB00'
+				// });
+			},
+			accShowHandle() {
+				this.accShow = !this.accShow
+			},
+			addUserHandle() {
+				this.accShow = true
+				this.accompanying.push({user:'', sfz: ''})
+			},
+			deleteHandle(e, index) {
+				let accompanying = this.accompanying
+				this.accompanying.splice(index, 1);
+			},
+			toWorkHandle() {
+				uni.navigateTo({ url: '/pages/workLogin/index' });
 			}
 		}
 	}
@@ -162,6 +258,9 @@
 		font-weight:400;
 		color:rgba(255,255,255,1);
 		background-color: #0B8E69;
+		&.disCode {
+			opacity: .4;
+		}
 	}
 	.nextButton {
 		margin-top: 70rpx;
@@ -197,5 +296,22 @@
 		padding-left: 30rpx;
 		line-height: 94rpx;
 		z-index: 9;
+	}
+	
+	.addUser {
+		font-size:34rpx;
+		font-family:PingFangSC-Regular,PingFang SC;
+		font-weight:400;
+		color:rgba(15,187,135,1);
+		padding: 30rpx 0 0 0;
+		display: flex;
+		justify-content: space-between;
+	}
+	.deleteBtn {
+		font-size:34rpx;
+		position: absolute;
+		top: 14rpx;
+		right: 0;
+		color: #999;
 	}
 </style>

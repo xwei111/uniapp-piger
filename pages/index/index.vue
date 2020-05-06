@@ -16,7 +16,6 @@
 	export default {
 		data() {
 			return {
-				
 			}
 		},
 		components:{
@@ -29,7 +28,7 @@
 		},
 		methods: {
 			workClick(e) {
-				uni.navigateTo({ url: '/pages/workerFirst/index' });
+				uni.navigateTo({ url: '/pages/workLogin/index' });
 			},
 			guestClick(e) {
 				uni.navigateTo({ url: '/pages/guestFirst/index' });

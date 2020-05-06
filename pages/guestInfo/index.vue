@@ -6,56 +6,83 @@
 				<view class="info_top"></view>
 				<view class="info_content">
 					<image class="success_ig" src="/static/success.png"></image>
-					<text class="info_ok">您的信息已提交，请等待审核！</text>
+					<text class="info_ok">
+						{{ status == 'success' ? '审核已通过，欢迎您！' : '您的信息已提交，请等待审核！'}}
+					</text>
+					<!-- 申请通过 -->
+					<view style="width: 100%;" v-if="status == 'success'">
+						<view class="info_title">
+							<text class="info_title_text">来访须知</text>
+							<view class="info_title_border"></view>
+						</view>
+						<view class="info_list">
+							<view class="info_list_label">
+								<view>隔离点</view>
+							</view>
+							<view class="info_people_list">
+								<view>成都万城国际酒店</view>
+								<view class="info_people_card">成都市天城区万里路34号</view>
+							</view>
+						</view>
+						<view class="opentime">
+							<text class="opentime_label">开放时间</text>
+							<text class="opentime_date">2020/05/08 8:00-17:00</text>
+						</view>
+						<view class="seeDetail">查看详细《来访须知》</view>
+					</view>
+					<!-- 访客信息 -->
 					<view class="info_title">
 						<text class="info_title_text">访客信息</text>
 						<view class="info_title_border"></view>
+						<text v-if="status == 'success'" class="isEx" @click="expendClick">{{isShow ? '关闭' : '展开'}}</text>
 					</view>
-					<view class="info_list">
-						<view class="info_list_label">
-							<view>来访人</view>
-							<view class="info_people_num">2人</view>
+					<view style="width: 100%;" v-show="isShow">
+						<view class="info_list">
+							<view class="info_list_label">
+								<view>来访人</view>
+								<view class="info_people_num">2人</view>
+							</view>
+							<view class="info_people_list">
+								<view>李雨珊</view>
+								<view class="info_people_card">330108****0294877</view>
+								<view>张宇</view>
+								<view class="info_people_card">330108****0294877</view>
+							</view>
 						</view>
-						<view class="info_people_list">
-							<view>李雨珊</view>
-							<view class="info_people_card">330108****0294877</view>
-							<view>张宇</view>
-							<view class="info_people_card">330108****0294877</view>
+						<view class="info_list">
+							<view class="info_list_label">
+								<view>访客类型</view>
+							</view>
+							<view class="info_people_list">
+								<view>企业 | 浙江天恒科技公司</view>
+							</view>
+						</view>
+						<view class="info_list">
+							<view class="info_list_label">
+								<view>来访事由</view>
+							</view>
+							<view class="info_people_list">
+								<view>维修</view>
+							</view>
+						</view>
+						<view class="info_list">
+							<view class="info_list_label">
+								<view>目的地</view>
+							</view>
+							<view class="info_people_list">
+								<view>猪场A</view>
+							</view>
+						</view>
+						<view class="info_list info_last">
+							<view class="info_list_label">
+								<view>来访时间</view>
+							</view>
+							<view class="info_people_list">
+								<view>2020-05-09 10：00 </view>
+							</view>
 						</view>
 					</view>
-					<view class="info_list">
-						<view class="info_list_label">
-							<view>访客类型</view>
-						</view>
-						<view class="info_people_list">
-							<view>企业 | 浙江天恒科技公司</view>
-						</view>
-					</view>
-					<view class="info_list">
-						<view class="info_list_label">
-							<view>来访事由</view>
-						</view>
-						<view class="info_people_list">
-							<view>维修</view>
-						</view>
-					</view>
-					<view class="info_list">
-						<view class="info_list_label">
-							<view>目的地</view>
-						</view>
-						<view class="info_people_list">
-							<view>猪场A</view>
-						</view>
-					</view>
-					<view class="info_list info_last">
-						<view class="info_list_label">
-							<view>来访时间</view>
-						</view>
-						<view class="info_people_list">
-							<view>2020-05-09 10：00 </view>
-						</view>
-					</view>
-					<self-button text="修改信息" @handleClick="changeClickClick" class="nextButton"></self-button>
+					<self-button v-if="status !== 'success'" text="修改信息" @handleClick="changeClick" class="nextButton"></self-button>
 				</view>
 			</view>
 		</self-content>
@@ -69,11 +96,30 @@
 	import selfButton from '@/components/self-button.vue';
 	
 	export default {
+		data() {
+			return {
+				status: 'change',
+				isShow: true
+			}
+		},
 		components: {
 			selfBg,
 			selfContent,
 			selfButton
 		},
+		onLoad() {
+			this.isShow = this.status == 'success' ? false : true
+		},
+		methods: {
+			expendClick() {
+				this.isShow = !this.isShow
+			},
+			changeClick() {
+				uni.navigateTo({
+					url: '/pages/guestFirst/index'
+				})
+			}
+		}
 	}
 </script>
 
@@ -85,6 +131,7 @@
 		border-radius:28rpx;
 		overflow: hidden;
 		padding-bottom: 30rpx;
+		margin-bottom: 280rpx;
 		.info_top {
 			height: 14rpx;
 			width: 100%;
@@ -115,11 +162,11 @@
 				overflow: hidden;
 				align-items: center;
 				margin-bottom: 30rpx;
+				font-size:34rpx;
+				font-family:PingFangSC-Regular,PingFang SC;
+				font-weight:400;
+				color:rgba(0,0,0,0.7);
 				.info_title_text {
-					font-size:34rpx;
-					font-family:PingFangSC-Regular,PingFang SC;
-					font-weight:400;
-					color:rgba(0,0,0,0.7);
 					margin-right: 30rpx;
 					width: 136rpx;
 					text-align: right;
@@ -129,11 +176,16 @@
 					height: 1px;
 					background-color: #979797;
 				}
+				.isEx {
+					width: 96rpx;
+					text-align: right;
+				}
 			}
 			.info_list {
 				width: 100%;
 				display: flex;
 				overflow: hidden;
+				margin-bottom: 20rpx;
 				.info_list_label {
 					font-size:34rpx;
 					font-family:PingFangSC-Regular,PingFang SC;
@@ -159,6 +211,35 @@
 			}
 			.info_last{
 				margin-bottom: 50rpx;
+			}
+			.opentime {
+				width:calc(100% + 60rpx);
+				margin-left: -30rpx;
+				height:66rpx;
+				background:rgba(228,242,238,1);
+				margin-bottom: 40rpx;
+				font-size:34rpx;
+				font-family:PingFangSC-Regular,PingFang SC;
+				font-weight:400;
+				color:rgba(11,142,105,1);
+				line-height: 66rpx;
+				.opentime_label {
+					display: inline-block;
+					width: 166rpx;
+					text-align: right;
+					margin-right: 30rpx;
+				}
+			}
+			.seeDetail {
+				width:100%;
+				height:40rpx;
+				font-size:28rpx;
+				font-family:PingFangSC-Regular,PingFang SC;
+				font-weight:400;
+				color:rgba(65,114,255,1);
+				line-height:40rpx;
+				text-align: center;
+				margin-bottom: 60rpx;
 			}
 		}
 		
