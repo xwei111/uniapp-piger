@@ -56,7 +56,7 @@
 		},
 		onLoad() {
 			setTimeout(()=> {
-				this.color = 'blue'
+				this.color = 'red'
 				this.color != 'blue' && uni.hideTabBar()
 			}, 1000)
 		},
@@ -78,6 +78,8 @@
 			},
 			colorDetailHandle(e) {
 				console.log('e', e)
+				this.color != 'blue' && uni.showTabBar()
+				this.color = null
 			}
 		}
 	}
