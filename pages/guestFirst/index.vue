@@ -24,18 +24,31 @@
 						</picker>
 					</view>
 				</self-input>
-				<view class="addUser" >
-					<text @click="addUserHandle">+ 新增来访人员</text>
-					<text v-if="accompanying.length" @click="accShowHandle">{{ accShow ? '隐藏' : '展开' }}</text>
-				</view>
-				<view v-show="accShow">
-					<view style="position: relative;" v-for="(item, index) in accompanying" :key="index">
-						<view class="deleteBtn" @click="deleteHandle(item, index)">
-							<icon type="clear" size="14"/>
+				<view v-if="accompanying.length" class="otherPeople">
+					<view class="otherPeople_title">其他访客</view>
+					<view v-for="(item, index) in accompanying" :key="index" class="otherPeople_box" >
+						<view class="otherPeople_box_list">
+							<text class="otherPeople_box_list_name">姓名</text>
+							<text class="otherPeople_box_list_sfz">{{item.user}}</text>
 						</view>
-						<self-input :label="`随行人员 ${index+1} 姓名`" v-model="item.user"></self-input>
-						<self-input :label="`随行人员 ${index+1} 身份证`" v-model="item.sfz"></self-input>
+						<view class="otherPeople_box_list">
+							<text class="otherPeople_box_list_name">身份证号</text>
+							<text class="otherPeople_box_list_sfz">{{item.sfz}}</text>
+						</view>
+						<view class="otherPeople_box_delete" @click="deleteHandle(item, index)">
+							<view class="otherPeople_box_delete_icon"></view>
+						</view>
 					</view>
+				</view>
+				<view class="addUser" v-if="!accShow" >
+					<text @click="addUserHandle">+ 新增来访人员</text>
+				</view>
+				<view v-if="accShow">
+					<self-input label=" 姓名" v-model="othserUser"></self-input>
+					<self-input label="身份证号" v-model="othserSfz"></self-input>
+				</view>
+				<view class="addUser" v-if="accShow" @click="addHandle" >
+					<text>加入该访客</text>
 				</view>
 				
 				<self-input label="目的地">
@@ -107,7 +120,9 @@
 				number: 60,
 				isBegin: false,
 				accompanying: [],
-				accShow: true
+				accShow: false,
+				othserUser: '',
+				othserSfz: ''
 			}
 		},
 		components: {
@@ -162,18 +177,6 @@
 					if(this.radioActive == 2 && !this.company) {
 						uni.showToast({ title: '请输入企业名称', icon: 'none' });
 						return
-					} 
-					if(this.accompanying && this.accompanying.length) {
-						let isOk = true;
-						this.accompanying.map(e=>{
-							if(!e.user || !e.sfz) {
-								isOk = false
-							}
-						})
-						if(!isOk) {
-							uni.showToast({ title: '有随行人员姓名或身份证未填写', icon: 'none' });
-							return
-						}
 					}
 					if(!this.chekck) {
 						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
@@ -227,15 +230,24 @@
 				// 	confirmColor: '#02BB00'
 				// });
 			},
-			accShowHandle() {
-				this.accShow = !this.accShow
-			},
 			addUserHandle() {
 				this.accShow = true
-				this.accompanying.push({user:'', sfz: ''})
+			},
+			addHandle() {
+				if(!this.othserUser) {
+					uni.showToast({ title: '请输入姓名', icon: 'none' });
+					return
+				}
+				if(!this.othserSfz) {
+					uni.showToast({ title: '请输入身份证', icon: 'none' });
+					return
+				}
+				this.accompanying.push({user: this.othserUser, sfz: this.othserSfz})
+				this.othserUser = '';
+				this.othserSfz = '';
+				this.accShow = false
 			},
 			deleteHandle(e, index) {
-				let accompanying = this.accompanying
 				this.accompanying.splice(index, 1);
 			},
 			toWorkHandle() {
@@ -313,5 +325,61 @@
 		top: 30rpx;
 		right: 0;
 		color: #999;
+	}
+	.otherPeople {
+		padding-top: 35rpx;
+		.otherPeople_title {
+			font-size:34rpx;
+			font-family:PingFangSC-Regular,PingFang SC;
+			font-weight:400;
+			color:rgba(0,0,0,0.7);
+			margin-bottom: 25rpx;
+		}
+		.otherPeople_box {
+			width: 582rpx;
+			height: 194rpx;
+			background-color: rgba(216,216,216,0.2);
+			margin-bottom: 35rpx;
+			position: relative;
+			.otherPeople_box_list {
+				width: 100%;
+				height: 50%;
+				display: flex;
+				align-items: center;
+				box-sizing: border-box;
+				padding-left: 23rpx;
+				font-size:30rpx;
+				font-family:PingFangSC-Regular,PingFang SC;
+				font-weight:400;
+				color:rgba(76,76,76,1);
+				.otherPeople_box_list_name {
+					width: 150rpx;
+					color: #0B8E69;
+				}
+				.otherPeople_box_list_sfz {
+					color: #4C4C4C;
+				}
+			}
+			.otherPeople_box_delete {
+				position: absolute;
+				width:52rpx;
+				height:52rpx;
+				background:rgba(255,113,113,1);
+				color: #fff;
+				font-size: 100rpx;
+				top: -26rpx;
+				right: -26rpx;
+				border-radius: 50%;
+				.otherPeople_box_delete_icon {
+					position: absolute;
+					width:25rpx;
+					height:4rpx;
+					background:rgba(255,255,255,1);
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+			}
+		}
 	}
 </style>

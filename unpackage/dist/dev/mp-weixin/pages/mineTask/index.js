@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTabs = function selfTabs() {__webpack_require__.e(/*! require.ensure | components/self-tabs */ "components/self-tabs").then((function () {return resolve(__webpack_require__(/*! @/components/self-tabs.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSearch = function selfSearch() {__webpack_require__.e(/*! require.ensure | components/self-search */ "components/self-search").then((function () {return resolve(__webpack_require__(/*! @/components/self-search.vue */ 142));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskMine = function selfTaskMine() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-mine */ "components/taskmodel/self-task-mine").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-mine.vue */ 149));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskColor = function selfTaskColor() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-color */ "components/taskmodel/self-task-color").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-color.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfEmpty = function selfEmpty() {__webpack_require__.e(/*! require.ensure | components/self-empty */ "components/self-empty").then((function () {return resolve(__webpack_require__(/*! @/components/self-empty.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTabs = function selfTabs() {__webpack_require__.e(/*! require.ensure | components/self-tabs */ "components/self-tabs").then((function () {return resolve(__webpack_require__(/*! @/components/self-tabs.vue */ 137));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSearch = function selfSearch() {__webpack_require__.e(/*! require.ensure | components/self-search */ "components/self-search").then((function () {return resolve(__webpack_require__(/*! @/components/self-search.vue */ 144));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskMine = function selfTaskMine() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-mine */ "components/taskmodel/self-task-mine").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-mine.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskColor = function selfTaskColor() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-color */ "components/taskmodel/self-task-color").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-color.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfEmpty = function selfEmpty() {__webpack_require__.e(/*! require.ensure | components/self-empty */ "components/self-empty").then((function () {return resolve(__webpack_require__(/*! @/components/self-empty.vue */ 165));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -188,7 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 
   onLoad: function onLoad() {var _this = this;
     setTimeout(function () {
-      _this.color = 'blue';
+      _this.color = 'red';
       _this.color != 'blue' && uni.hideTabBar();
     }, 1000);
   },
@@ -210,6 +210,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     colorDetailHandle: function colorDetailHandle(e) {
       console.log('e', e);
+      this.color != 'blue' && uni.showTabBar();
+      this.color = null;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -102,4 +102,66 @@
   right: 0;
   color: #999;
 }
+.otherPeople.data-v-266ea27e {
+  padding-top: 35rpx;
+}
+.otherPeople .otherPeople_title.data-v-266ea27e {
+  font-size: 34rpx;
+  font-family: PingFangSC-Regular,PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 25rpx;
+}
+.otherPeople .otherPeople_box.data-v-266ea27e {
+  width: 582rpx;
+  height: 194rpx;
+  background-color: rgba(216, 216, 216, 0.2);
+  margin-bottom: 35rpx;
+  position: relative;
+}
+.otherPeople .otherPeople_box .otherPeople_box_list.data-v-266ea27e {
+  width: 100%;
+  height: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-left: 23rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular,PingFang SC;
+  font-weight: 400;
+  color: #4c4c4c;
+}
+.otherPeople .otherPeople_box .otherPeople_box_list .otherPeople_box_list_name.data-v-266ea27e {
+  width: 150rpx;
+  color: #0B8E69;
+}
+.otherPeople .otherPeople_box .otherPeople_box_list .otherPeople_box_list_sfz.data-v-266ea27e {
+  color: #4C4C4C;
+}
+.otherPeople .otherPeople_box .otherPeople_box_delete.data-v-266ea27e {
+  position: absolute;
+  width: 52rpx;
+  height: 52rpx;
+  background: #ff7171;
+  color: #fff;
+  font-size: 100rpx;
+  top: -26rpx;
+  right: -26rpx;
+  border-radius: 50%;
+}
+.otherPeople .otherPeople_box .otherPeople_box_delete .otherPeople_box_delete_icon.data-v-266ea27e {
+  position: absolute;
+  width: 25rpx;
+  height: 4rpx;
+  background: white;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
 

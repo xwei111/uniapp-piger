@@ -208,7 +208,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer/GetDate.js */ 41));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 72));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer/GetDate.js */ 41));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 81));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 88));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 116));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 74));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 95));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 102));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 109));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 123));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 130));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -239,7 +252,9 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
       number: 60,
       isBegin: false,
       accompanying: [],
-      accShow: true };
+      accShow: false,
+      othserUser: '',
+      othserSfz: '' };
 
   },
   components: {
@@ -295,18 +310,6 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
           uni.showToast({ title: '请输入企业名称', icon: 'none' });
           return;
         }
-        if (this.accompanying && this.accompanying.length) {
-          var isOk = true;
-          this.accompanying.map(function (e) {
-            if (!e.user || !e.sfz) {
-              isOk = false;
-            }
-          });
-          if (!isOk) {
-            uni.showToast({ title: '有随行人员姓名或身份证未填写', icon: 'none' });
-            return;
-          }
-        }
         if (!this.chekck) {
           uni.showToast({ title: '请阅读用户协议', icon: 'none' });
           return;
@@ -359,15 +362,24 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
       // 	confirmColor: '#02BB00'
       // });
     },
-    accShowHandle: function accShowHandle() {
-      this.accShow = !this.accShow;
-    },
     addUserHandle: function addUserHandle() {
       this.accShow = true;
-      this.accompanying.push({ user: '', sfz: '' });
+    },
+    addHandle: function addHandle() {
+      if (!this.othserUser) {
+        uni.showToast({ title: '请输入姓名', icon: 'none' });
+        return;
+      }
+      if (!this.othserSfz) {
+        uni.showToast({ title: '请输入身份证', icon: 'none' });
+        return;
+      }
+      this.accompanying.push({ user: this.othserUser, sfz: this.othserSfz });
+      this.othserUser = '';
+      this.othserSfz = '';
+      this.accShow = false;
     },
     deleteHandle: function deleteHandle(e, index) {
-      var accompanying = this.accompanying;
       this.accompanying.splice(index, 1);
     },
     toWorkHandle: function toWorkHandle() {
