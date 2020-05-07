@@ -1,6 +1,18 @@
 <template>
 	<view :class="kind == 'default' ? 'self_default_button' : 'self_plain_button'" @click="handleClick">
-		{{text}}
+		<text v-if="!isUser">{{text}}</text>
+		<button 
+			v-if="isUser"
+			:class="[
+				kind == 'default' ? 'self_default_button' : 'self_plain_button',
+				'uni_btn'
+			]"
+			open-type="getUserInfo" 
+			@getuserinfo="getuserinfo" 
+			withCredentials="true"
+		>
+			{{text}}
+		</button >
 	</view>
 </template>
 
@@ -14,11 +26,20 @@
 			kind: {
 				type: String,
 				default: 'default'
+			},
+			isUser: {
+				type: Boolean,
+				default: false
 			}
 		},
 		methods: {
 			handleClick() {
+				console.log('click')
 				this.$emit('handleClick', this.text)
+			},
+			getuserinfo(e) {
+				console.log('info')
+				this.$emit('getuserinfo', e)
 			}
 		}
 	}
@@ -49,5 +70,8 @@
 		font-size:36rpx;
 		font-family:PingFangSC-Regular,PingFang SC;
 		font-weight:400;
+	}
+	.uni_btn {
+		border: none;
 	}
 </style>

@@ -7,21 +7,17 @@
 			uni.getProvider({
 				service: 'oauth',
 				success: function(provider) {
-					console.log('provider', provider)
+					console.log('provider---------', provider)
+					uni.login({
+						provider: 'weixin',
+						success: function(loginRes) {
+							console.log('loginRes-----------', loginRes);
+						}
+					});
 				}
 			});
-			uni.getUserInfo({
-				provider: 'weixin',
-				success: function(infoRes) {
-					console.log('infoRes', infoRes);
-				}
-			});
-			uni.login({
-				provider: 'weixin',
-				success: function(loginRes) {
-					console.log('loginRes', loginRes);
-				}
-			});
+			
+			
 		},
 		onShow: function() {
 			// console.log('App Show')

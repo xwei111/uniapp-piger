@@ -38,11 +38,11 @@
         "text": "我",
         "pagePath": "pages/mine/index",
         "iconPath": "static/mine.png",
-        "selectedIconPath": "static/mine.png"
+        "selectedIconPath": "static/mine_select.png"
       }
     ]
   },
   "permission": {},
   "usingComponents": {},
-  "sitemapLocation": "sitemap81.json"
+  "sitemapLocation": "sitemap7.json"
 }

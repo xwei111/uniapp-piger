@@ -49,4 +49,7 @@
   font-family: PingFangSC-Regular,PingFang SC;
   font-weight: 400;
 }
+.uni_btn.data-v-13ab9932 {
+  border: none;
+}
 

@@ -3,8 +3,8 @@
 		<self-bg src="/static/home.png"></self-bg>
 		<self-content>
 			<text class='title'>新希望养殖场，欢迎你！</text>
-			<self-button text="我是员工" class="button_top" @handleClick="workClick"></self-button>
-			<self-button text="我是访客" kind="plain" @handleClick="guestClick"></self-button>
+			<self-button text="我是员工" class="button_top" @getuserinfo="workGetuserinfo" :isUser="true"></self-button>
+			<self-button text="我是访客" kind="plain" @getuserinfo="guestGetuserinfo" :isUser="true"></self-button>
 		</self-content>
 	</view>
 </template>
@@ -26,13 +26,16 @@
 			selfContent
 		},
 		onLoad() {
-			getTellCode().then(e=>console.log('e------------------', e))
+			// getTellCode().then(e=>console.log('e------------------', e))
 		},
 		methods: {
-			workClick(e) {
+			workGetuserinfo(e) {
+				console.log('e', e)
+				if(!e.detail.userInfo) return
 				uni.navigateTo({ url: '/pages/workLogin/index' });
 			},
-			guestClick(e) {
+			guestGetuserinfo(e) {
+				if(!e.detail.userInfo) return
 				uni.navigateTo({ url: '/pages/guestFirst/index' });
 			}
 		}
