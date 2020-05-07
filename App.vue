@@ -1,13 +1,33 @@
 <script>
 	export default {
+		globalData: {
+			baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://localhost:4000'
+		},
 		onLaunch: function() {
-			console.log('App Launch')
+			uni.getProvider({
+				service: 'oauth',
+				success: function(provider) {
+					console.log('provider', provider)
+				}
+			});
+			uni.getUserInfo({
+				provider: 'weixin',
+				success: function(infoRes) {
+					console.log('infoRes', infoRes);
+				}
+			});
+			uni.login({
+				provider: 'weixin',
+				success: function(loginRes) {
+					console.log('loginRes', loginRes);
+				}
+			});
 		},
 		onShow: function() {
-			console.log('App Show')
+			// console.log('App Show')
 		},
 		onHide: function() {
-			console.log('App Hide')
+			// console.log('App Hide')
 		}
 	}
 </script>

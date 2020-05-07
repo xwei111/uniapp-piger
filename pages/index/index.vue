@@ -13,6 +13,8 @@
 	import selfButton from '@/components/self-button.vue';
 	import selfBg from '@/components/self-bg.vue';
 	import selfContent from '@/components/self-content.vue';
+	import { getTellCode } from '@/api/login';
+	
 	export default {
 		data() {
 			return {
@@ -24,7 +26,7 @@
 			selfContent
 		},
 		onLoad() {
-
+			getTellCode().then(e=>console.log('e------------------', e))
 		},
 		methods: {
 			workClick(e) {
