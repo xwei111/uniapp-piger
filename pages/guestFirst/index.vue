@@ -4,19 +4,19 @@
 		<self-content>
 			<self-steps :lists="lists" :active="active"></self-steps>
 			<view v-show="active == 1">
-				<self-input label="手机号" placeholder="请输入您的手机号" v-model="tell"></self-input>
-				<self-input label="验证码" placeholder="请输入验证码" v-model="code">
+				<self-input label="手机号" placeholder="请输入您的手机号" v-model="phone"></self-input>
+				<self-input label="验证码" placeholder="请输入验证码" v-model="smsCode">
 					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${number}s ` : '获取验证码'}}</view>
 				</self-input>
 			</view>
 			<view v-show="active == 2">
-				<self-input label="姓名" placeholder="请输入您的姓名" v-model="user"></self-input>
-				<self-input label="身份证号" placeholder="请输入您的身份证号" v-model="sfz"></self-input>
+				<self-input label="姓名" placeholder="请输入您的姓名" v-model="name"></self-input>
+				<self-input label="身份证号" placeholder="请输入您的身份证号" v-model="idNo"></self-input>
 			</view>
 			<view v-show="active == 3">
 				<view class="people">您是:</view>
-				<self-radio :options="options" :active="radioActive" @changeHandle="changeHandle" class="radio" ></self-radio>
-				<self-input v-if="radioActive == 2" placeholder="请输入您的企业名" v-model="company"></self-input>
+				<self-radio :options="options" :active="visitorType" @changeHandle="changeHandle" class="radio" ></self-radio>
+				<self-input v-if="visitorType == 2" placeholder="请输入您的企业名" v-model="companyName"></self-input>
 				<self-input label="来访事由">
 					<view slot="fill" class="fill_content">
 						<picker @change="bindPickerChange" :value="index" :range="array">
@@ -29,11 +29,11 @@
 					<view v-for="(item, index) in accompanying" :key="index" class="otherPeople_box" >
 						<view class="otherPeople_box_list">
 							<text class="otherPeople_box_list_name">姓名</text>
-							<text class="otherPeople_box_list_sfz">{{item.user}}</text>
+							<text class="otherPeople_box_list_sfz">{{item.name}}</text>
 						</view>
 						<view class="otherPeople_box_list">
 							<text class="otherPeople_box_list_name">身份证号</text>
-							<text class="otherPeople_box_list_sfz">{{item.sfz}}</text>
+							<text class="otherPeople_box_list_sfz">{{item.idNo}}</text>
 						</view>
 						<view class="otherPeople_box_delete" @click="deleteHandle(item, index)">
 							<view class="otherPeople_box_delete_icon"></view>
@@ -64,7 +64,7 @@
 							fields="second"
 							start="2010-00-00 00:00:00"
 							end="2999-12-30 23:59:59"
-							:value="value"
+							:value="visitDate"
 							@change="bindChange"
 						></timer>
 					</view>
@@ -89,7 +89,8 @@
 	import selfAgree from '@/components/self-agree.vue';
 	import selfRadio from '@/components/self-radio.vue';
 	import timer from '@/components/timer/index.vue';
-	import GetDate from '@/components/timer/GetDate.js'
+	import GetDate from '@/components/timer/GetDate.js';
+	import { guestGetTellCode, guestFirst, guestSecond, guestThree } from '@/api/login.js';
 	
 	export default{
 		data() {
@@ -106,17 +107,17 @@
 					{ id: 1, label: '个人访客' },
 					{ id: 2, label: '企业访客' }
 				],
-				radioActive: 1,
+				visitorType: 1,
 				array: ['观摩', '学习', '请教'],
 				index: 0,
 				address: ['猪场A', '猪场B', '猪场C'],
 				idx: 0,
-				value: '',
-				tell: '',
-				code: '',
-				user: '',
-				sfz: '',
-				company: '',
+				visitDate: '',
+				phone: '',
+				smsCode: '',
+				name: '',
+				idNo: '',
+				companyName: '',
 				number: 60,
 				isBegin: false,
 				accompanying: [],
@@ -145,36 +146,47 @@
 					break;
 				}
 			}
-			this.value = GetDate.format(arr);
+			this.visitDate = GetDate.format(arr);
 		},
 		methods: {
 			nextClick() {
 				if(this.active == 1) {
-					if(!this.tell) {
+					if(!this.phone) {
 						uni.showToast({ title: '请输入手机号', icon: 'none' });
 						return
 					}
-					if(!/^\d{11}$/.test(this.tell)) {
+					if(!/^\d{11}$/.test(this.phone)) {
 						uni.showToast({ title: '手机格式错误', icon: 'none' });
 						return
 					}
-					if(!this.code) {
+					if(!this.smsCode) {
 						uni.showToast({ title: '请输入验证码', icon: 'none' });
 						return
 					}
+					guestFirst({ phone: this.phone, smsCode: this.smsCode }).then(e=>{
+						if(e.success) {
+							this.active = ++this.active
+						}
+					})
 				}
 				if(this.active == 2) {
-					if(!this.user) {
+					if(!this.name) {
 						uni.showToast({ title: '请输入姓名', icon: 'none' });
 						return
 					}
-					if(!this.sfz) {
+					if(!this.idNo) {
 						uni.showToast({ title: '请输入身份证', icon: 'none' });
 						return
 					}
+					// {"phone":"13738051234","idNo":"330727199011171234","name":"张五"}
+					guestSecond({ phone: this.phone, idNo: this.idNo, name: this.name }).then(e=>{
+						if(e.success) {
+							this.active = ++this.active
+						}
+					})
 				}
 				if(this.active == 3) {
-					if(this.radioActive == 2 && !this.company) {
+					if(this.visitorType == 2 && !this.companyName) {
 						uni.showToast({ title: '请输入企业名称', icon: 'none' });
 						return
 					}
@@ -182,13 +194,26 @@
 						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
 						return
 					}
-					console.log('login', this.tell, this.code, this.user, this.sfz, this.radioActive, this.company, this.accompanying, this.array[this.index], this.address[this.idx], this.value)
-					uni.navigateTo({
-						url: '/pages/guestInfo/index'
+					console.log('login', this.phone, this.smsCode, this.name, this.idNo, this.visitorType, this.companyName, this.accompanying, this.array[this.index], this.address[this.idx], this.visitDate)
+					const detail = {
+						visitorType: this.visitorType,
+						visitors: this.accompanying,
+						jsonParams: JSON.stringify({
+							reason: this.array[this.index],
+							companyName: this.companyName,
+							visitDate: this.visitDate,
+							targetLocation: this.address[this.idx],
+							phone: this.phone
+						}),
+						phone: this.phone
+					}
+					guestThree(detail).then(e=> {
+						e.success && uni.navigateTo({
+							url: '/pages/guestInfo/index'
+						})
 					})
-					return
 				}
-				this.active = ++this.active
+				
 				
 			},
 			selectHandle() {
@@ -201,7 +226,7 @@
 				this.isShow = false
 			},
 			changeHandle(e) {
-				this.radioActive = e.id
+				this.visitorType = e.id
 			},
 			bindPickerChange(e) {
 				this.index = e.target.value
@@ -210,7 +235,7 @@
 				this.idx = e.target.value
 			},
 			bindChange(e) {
-				this.value = e
+				this.visitDate = e
 			},
 			getCodeHandle() {
 				if(this.isBegin) return
@@ -222,13 +247,20 @@
 						this.isBegin = false;
 					}
 				}, 1000)
+				// {"phone":"13738051234"}
+				guestGetTellCode({"phone": this.phone}).then(e=> {
+					console.log('eeee', e)
+					if(!e.success && e.code == 4107) {
+						uni.showModal({
+						    title: '很抱歉',
+						    content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
+							showCancel: false,
+							confirmColor: '#02BB00'
+						});
+					}
+				})
 				
-				// uni.showModal({
-				//     title: '很抱歉',
-				//     content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
-				// 	showCancel: false,
-				// 	confirmColor: '#02BB00'
-				// });
+				
 			},
 			addUserHandle() {
 				this.accShow = true
@@ -242,7 +274,7 @@
 					uni.showToast({ title: '请输入身份证', icon: 'none' });
 					return
 				}
-				this.accompanying.push({user: this.othserUser, sfz: this.othserSfz})
+				this.accompanying.push({name: this.othserUser, idNo: this.othserSfz})
 				this.othserUser = '';
 				this.othserSfz = '';
 				this.accShow = false

@@ -34,11 +34,9 @@
 		},
 		methods: {
 			handleClick() {
-				console.log('click')
 				this.$emit('handleClick', this.text)
 			},
 			getuserinfo(e) {
-				console.log('info')
 				this.$emit('getuserinfo', e)
 			}
 		}

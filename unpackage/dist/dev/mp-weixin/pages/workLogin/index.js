@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -155,14 +155,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
     return {
       isError: false,
       status: 'default',
-      user: '',
-      pass: '',
+      staffCode: '',
+      password: '',
       chekck: false,
       isShow: false };
 
@@ -176,36 +177,34 @@ __webpack_require__.r(__webpack_exports__);
     selfAgree: selfAgree },
 
   methods: {
-    loginClick: function loginClick() {
+    loginClick: function loginClick() {var _this = this;
       var first = true;
-      console.log('user', this.user);
-      console.log('pass', this.pass);
-      if (!this.user) {
+      if (!this.staffCode) {
         uni.showToast({ title: '请输入员工号', icon: 'none' });
         return;
       }
-      if (!this.pass) {
+      if (!this.password) {
         uni.showToast({ title: '请输入密码', icon: 'none' });
         return;
       }
-      // if(!this.chekck) {
-      // 	uni.showToast({ title: '请阅读用户协议', icon: 'none' });
-      // 	return
-      // }
-      if (this.user != 'test' || this.pass != '123') {
-        this.isError = true;
-        this.status = 'error';
-        uni.showToast({ title: '员工号或密码有误', icon: 'none' });
-        return;
-      } else {
-        this.isError = false;
-        this.status = 'default';
-        if (first) {
-          uni.navigateTo({ url: '/pages/workerFirst/index' });
-        } else {
-          uni.switchTab({ url: '/pages/mineTask/index' });
+      // {"staffCode":"5","password":"123456"}
+      (0, _login.workerLogin)({ "staffCode": this.staffCode, "password": this.password }).then(function (e) {
+        if (e) {
+          if (e.code == 4103 || e.code == 4105) {
+            _this.isError = true;
+            _this.status = 'error';
+          } else {
+            _this.isError = false;
+            _this.status = 'default';var
+            data = e.data;
+            if (data.userInfo.firstLogin === 0) {
+              uni.navigateTo({ url: '/pages/workerFirst/index' });
+            } else if (data.userInfo.firstLogin === 1) {
+              uni.switchTab({ url: '/pages/mineTask/index' });
+            }
+          }
         }
-      }
+      });
     },
     selectHandle: function selectHandle() {
       this.chekck = !this.chekck;

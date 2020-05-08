@@ -87,26 +87,24 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   globalData: {
-    baseUrl:  true ? 'http://localhost:3000' : undefined },
+    baseUrl:  true ? '/piger' : undefined },
 
   onLaunch: function onLaunch() {
-    uni.getProvider({
-      service: 'oauth',
-      success: function success(provider) {
-        console.log('provider---------', provider);
-        uni.login({
-          provider: 'weixin',
-          success: function success(loginRes) {
-            console.log('loginRes-----------', loginRes);
-          } });
-
-      } });
-
-
-
+    // uni.getProvider({
+    // 	service: 'oauth',
+    // 	success: function(provider) {
+    // 		console.log('provider---------', provider)
+    // 		uni.login({
+    // 			provider: 'weixin',
+    // 			success: function(loginRes) {
+    // 				console.log('loginRes-----------', loginRes);
+    // 			}
+    // 		});
+    // 	}
+    // });
   },
   onShow: function onShow() {
     // console.log('App Show')
@@ -114,7 +112,6 @@ __webpack_require__.r(__webpack_exports__);
   onHide: function onHide() {
     // console.log('App Hide')
   } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 8 */

@@ -150,11 +150,9 @@ var _default =
 
   methods: {
     handleClick: function handleClick() {
-      console.log('click');
       this.$emit('handleClick', this.text);
     },
     getuserinfo: function getuserinfo(e) {
-      console.log('info');
       this.$emit('getuserinfo', e);
     } } };exports.default = _default;
 

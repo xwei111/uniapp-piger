@@ -78,5 +78,25 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "h5" : {
+        "devServer" : {
+            "proxy": {
+                "/piger": {
+                    "target": "http://4bkec15r.xiaomy.net",
+                    "changeOrigin": true,
+                    "secure": false,
+                    "pathRewrite": {"^/piger": ""}
+                }
+            }
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : false
+            }
+        },
+        "sdkConfigs" : {
+            "maps" : {}
+        }
     }
 }

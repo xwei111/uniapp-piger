@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -150,7 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _login = __webpack_require__(/*! @/api/login */ 17);var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 {
   data: function data() {
@@ -163,9 +163,15 @@ var _login = __webpack_require__(/*! @/api/login */ 17);var selfButton = functio
     selfContent: selfContent },
 
   onLoad: function onLoad() {
-    // getTellCode().then(e=>console.log('e------------------', e))
+
   },
   methods: {
+    workHandleClick: function workHandleClick() {
+      uni.navigateTo({ url: '/pages/workLogin/index' });
+    },
+    guestHandleClick: function guestHandleClick() {
+      uni.navigateTo({ url: '/pages/guestFirst/index' });
+    },
     workGetuserinfo: function workGetuserinfo(e) {
       console.log('e', e);
       if (!e.detail.userInfo) return;

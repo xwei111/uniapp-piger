@@ -3,8 +3,8 @@
 		<self-bg src="/static/bg.png"></self-bg>
 		<view v-show="isError" class="error_info">员工号或密码有误，请再试一次</view>
 		<self-content>
-			<self-input label="员工号" placeholder="请输入您的员工号" :status="status" v-model="user" ></self-input>
-			<self-input label="密码" placeholder="请输入密码" :status="status" v-model="pass" type="password"></self-input>
+			<self-input label="员工号" placeholder="请输入您的员工号" :status="status" v-model="staffCode" ></self-input>
+			<self-input label="密码" placeholder="请输入密码" :status="status" v-model="password" type="password"></self-input>
 			<self-button text="下一步" @handleClick="loginClick" class="nextButton"></self-button>
 			<self-checkbox :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
 			<view class="isGuest">
@@ -23,14 +23,15 @@
 	import selfButton from '@/components/self-button.vue';
 	import selfCheckbox from '@/components/self-checkbox.vue';
 	import selfAgree from '@/components/self-agree.vue';
+	import { workerLogin } from '@/api/login';
 	
 	export default{
 		data() {
 			return {
 				isError: false,
 				status: 'default',
-				user: '',
-				pass: '',
+				staffCode: '',
+				password: '',
 				chekck: false,
 				isShow: false,
 			}
@@ -46,34 +47,32 @@
 		methods: {
 			loginClick() {
 				const first = true;
-				console.log('user', this.user)
-				console.log('pass', this.pass)
-				if(!this.user) {
+				if(!this.staffCode) {
 					uni.showToast({ title: '请输入员工号', icon: 'none' });
 					return
 				}
-				if(!this.pass) {
+				if(!this.password) {
 					uni.showToast({ title: '请输入密码', icon: 'none' });
 					return
 				}
-				// if(!this.chekck) {
-				// 	uni.showToast({ title: '请阅读用户协议', icon: 'none' });
-				// 	return
-				// }
-				if(this.user != 'test' || this.pass != '123') {
-					this.isError = true
-					this.status = 'error'
-					uni.showToast({ title: '员工号或密码有误', icon: 'none' });
-					return
-				} else {
-					this.isError = false
-					this.status = 'default'
-					if(first) {
-						uni.navigateTo({ url: '/pages/workerFirst/index' })
-					} else {
-						uni.switchTab({ url: '/pages/mineTask/index' })
+				// {"staffCode":"5","password":"123456"}
+				workerLogin({"staffCode": this.staffCode,"password": this.password}).then(e=>{
+					if(e) {
+						if(e.code == 4103 || e.code == 4105) {
+							this.isError = true
+							this.status = 'error'
+						} else {
+							this.isError = false
+							this.status = 'default'
+							const { data } = e
+							if(data.userInfo.firstLogin === 0) {
+								uni.navigateTo({ url: '/pages/workerFirst/index' })
+							} else if(data.userInfo.firstLogin === 1) {
+								uni.switchTab({ url: '/pages/mineTask/index' })
+							}
+						}
 					}
-				}
+				})
 			},
 			selectHandle() {
 				this.chekck = !this.chekck

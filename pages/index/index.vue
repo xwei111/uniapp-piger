@@ -3,8 +3,8 @@
 		<self-bg src="/static/home.png"></self-bg>
 		<self-content>
 			<text class='title'>新希望养殖场，欢迎你！</text>
-			<self-button text="我是员工" class="button_top" @getuserinfo="workGetuserinfo" :isUser="true"></self-button>
-			<self-button text="我是访客" kind="plain" @getuserinfo="guestGetuserinfo" :isUser="true"></self-button>
+			<self-button text="我是员工" class="button_top" @handleClick="workHandleClick" @getuserinfo="workGetuserinfo" :isUser="true"></self-button>
+			<self-button text="我是访客" kind="plain" @handleClick="guestHandleClick" @getuserinfo="guestGetuserinfo" :isUser="true"></self-button>
 		</self-content>
 	</view>
 </template>
@@ -13,7 +13,7 @@
 	import selfButton from '@/components/self-button.vue';
 	import selfBg from '@/components/self-bg.vue';
 	import selfContent from '@/components/self-content.vue';
-	import { getTellCode } from '@/api/login';
+	
 	
 	export default {
 		data() {
@@ -26,9 +26,15 @@
 			selfContent
 		},
 		onLoad() {
-			// getTellCode().then(e=>console.log('e------------------', e))
+			
 		},
 		methods: {
+			workHandleClick() {
+				uni.navigateTo({ url: '/pages/workLogin/index' });
+			},
+			guestHandleClick() {
+				uni.navigateTo({ url: '/pages/guestFirst/index' });
+			},
 			workGetuserinfo(e) {
 				console.log('e', e)
 				if(!e.detail.userInfo) return

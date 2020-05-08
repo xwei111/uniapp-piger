@@ -4,18 +4,18 @@
 		<self-content>
 			<self-steps :lists="lists" :active="active"></self-steps>
 			<view v-show="active == 1">
-				<self-input label="手机号" placeholder="请输入您的手机号" v-model="tell"></self-input>
-				<self-input label="验证码" placeholder="请输入验证码" v-model="code">
+				<self-input label="手机号" placeholder="请输入您的手机号" v-model="phone"></self-input>
+				<self-input label="验证码" placeholder="请输入验证码" v-model="smsCode">
 					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${number}s ` : '获取验证码'}}</view>
 				</self-input>
 			</view>
 			<view v-show="active == 2">
-				<self-input label="员工号" placeholder="请输入您的员工号" v-model="workcode"></self-input>
-				<self-input label="初始密码（身份证后6位）" placeholder="请输入您的身份证后6位" v-model="initpass" type="password"></self-input>
+				<self-input label="员工号" placeholder="请输入您的员工号" v-model="staffCode"></self-input>
+				<self-input label="初始密码（身份证后6位）" placeholder="请输入您的身份证后6位" v-model="password" type="password"></self-input>
 			</view>
 			<view v-show="active == 3">
-				<self-input label="新密码" placeholder="请输入新密码" v-model="pass" type="password"></self-input>
-				<self-input label="确认密码" placeholder="再次输入密码" v-model="checkpass" type="password"></self-input>
+				<self-input label="新密码" placeholder="请输入新密码" v-model="newPassword" type="password"></self-input>
+				<self-input label="确认密码" placeholder="再次输入密码" v-model="confirmNewPassword" type="password"></self-input>
 			</view>
 			<self-button :text="active == 3 ? '立即登录' : '下一步' " @handleClick="nextClick" class="nextButton"></self-button>
 			<self-checkbox :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
@@ -33,6 +33,7 @@
 	import selfInput from '@/components/self-input.vue';
 	import selfCheckbox from '@/components/self-checkbox.vue';
 	import selfAgree from '@/components/self-agree.vue';
+	import { getTellCode, workFirst, workSecond, workThree } from '@/api/login';
 	
 	export default{
 		data() {
@@ -45,12 +46,12 @@
 				active: 1,
 				chekck: false,
 				isShow: false,
-				tell: '',
-				code: '',
-				workcode: '',
-				initpass: '',
-				pass: '',
-				checkpass: '',
+				phone: '',
+				smsCode: '',
+				staffCode: '',
+				password: '',
+				newPassword: '',
+				confirmNewPassword: '',
 				number: 60,
 				isBegin: false
 			}
@@ -67,39 +68,50 @@
 		methods: {
 			nextClick() {
 				if(this.active == 1) {
-					if(!this.tell) {
+					if(!this.phone) {
 						uni.showToast({ title: '请输入手机号', icon: 'none' });
 						return
 					}
-					if(!/^\d{11}$/.test(this.tell)) {
+					if(!/^\d{11}$/.test(this.phone)) {
 						uni.showToast({ title: '手机格式错误', icon: 'none' });
 						return
 					}
-					if(!this.code) {
+					if(!this.smsCode) {
 						uni.showToast({ title: '请输入验证码', icon: 'none' });
 						return
 					}
+					// {"phone":"13738050006","smsCode":"1234"}
+					workFirst({"phone": this.phone, "smsCode": this.smsCode}).then(e=> {
+						if(e.success) {
+							this.active = ++this.active
+						}
+					})
 				}
 				if(this.active == 2) {
-					if(!this.workcode) {
+					if(!this.staffCode) {
 						uni.showToast({ title: '请输入员工号', icon: 'none' });
 						return
 					}
-					if(!this.initpass) {
+					if(!this.password) {
 						uni.showToast({ title: '请输入初始密码', icon: 'none' });
 						return
 					}
+					workSecond({ staffCode: this.staffCode, password: this.password }).then(e=> {
+						if(e.success) {
+							this.active = ++this.active
+						}
+					})
 				}
 				if(this.active == 3) {
-					if(!this.pass) {
+					if(!this.newPassword) {
 						uni.showToast({ title: '请输入新密码', icon: 'none' });
 						return
 					}
-					if(!this.checkpass) {
+					if(!this.confirmNewPassword) {
 						uni.showToast({ title: '请再次输入密码', icon: 'none' });
 						return
 					}
-					if(this.pass !== this.checkpass) {
+					if(this.newPassword !== this.confirmNewPassword) {
 						uni.showToast({ title: '两次输入密码不一致', icon: 'none' });
 						return
 					}
@@ -107,11 +119,15 @@
 						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
 						return
 					}
-					console.log('verf', this.tell, this.code, this.workcode, this.initpass, this.pass, this.checkpass, this.chekck )
-					uni.switchTab({ url: '/pages/mineTask/index' })
+					// {"staffCode":"5","newPassword":"123456","confirmNewPassword":"123456"}
+					workThree({"staffCode": this.staffCode,"newPassword": this.newPassword,"confirmNewPassword": this.confirmNewPassword}).then(e=> {
+						uni.switchTab({ url: '/pages/mineTask/index' })
+					})
+					console.log('verf', this.phone, this.smsCode, this.staffCode, this.password, this.newPassword, this.confirmNewPassword, this.chekck )
+					
 					return
 				}
-				this.active = ++this.active
+				
 			},
 			selectHandle() {
 				this.chekck = !this.chekck
@@ -132,6 +148,8 @@
 						this.isBegin = false;
 					}
 				}, 1000)
+				// {"phone":"13738050004"}
+				getTellCode({"phone": this.phone})
 			},
 			toGuestHandle() {
 				uni.navigateTo({ url: '/pages/guestFirst/index' });

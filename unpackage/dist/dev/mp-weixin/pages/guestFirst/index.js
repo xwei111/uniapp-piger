@@ -221,7 +221,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer/GetDate.js */ 46));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer/GetDate.js */ 46));
+var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -238,17 +239,17 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
       { id: 1, label: '个人访客' },
       { id: 2, label: '企业访客' }],
 
-      radioActive: 1,
+      visitorType: 1,
       array: ['观摩', '学习', '请教'],
       index: 0,
       address: ['猪场A', '猪场B', '猪场C'],
       idx: 0,
-      value: '',
-      tell: '',
-      code: '',
-      user: '',
-      sfz: '',
-      company: '',
+      visitDate: '',
+      phone: '',
+      smsCode: '',
+      name: '',
+      idNo: '',
+      companyName: '',
       number: 60,
       isBegin: false,
       accompanying: [],
@@ -277,36 +278,47 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
         break;
       }
     }
-    this.value = _GetDate.default.format(arr);
+    this.visitDate = _GetDate.default.format(arr);
   },
   methods: {
-    nextClick: function nextClick() {
+    nextClick: function nextClick() {var _this = this;
       if (this.active == 1) {
-        if (!this.tell) {
+        if (!this.phone) {
           uni.showToast({ title: '请输入手机号', icon: 'none' });
           return;
         }
-        if (!/^\d{11}$/.test(this.tell)) {
+        if (!/^\d{11}$/.test(this.phone)) {
           uni.showToast({ title: '手机格式错误', icon: 'none' });
           return;
         }
-        if (!this.code) {
+        if (!this.smsCode) {
           uni.showToast({ title: '请输入验证码', icon: 'none' });
           return;
         }
+        (0, _login.guestFirst)({ phone: this.phone, smsCode: this.smsCode }).then(function (e) {
+          if (e.success) {
+            _this.active = ++_this.active;
+          }
+        });
       }
       if (this.active == 2) {
-        if (!this.user) {
+        if (!this.name) {
           uni.showToast({ title: '请输入姓名', icon: 'none' });
           return;
         }
-        if (!this.sfz) {
+        if (!this.idNo) {
           uni.showToast({ title: '请输入身份证', icon: 'none' });
           return;
         }
+        // {"phone":"13738051234","idNo":"330727199011171234","name":"张五"}
+        (0, _login.guestSecond)({ phone: this.phone, idNo: this.idNo, name: this.name }).then(function (e) {
+          if (e.success) {
+            _this.active = ++_this.active;
+          }
+        });
       }
       if (this.active == 3) {
-        if (this.radioActive == 2 && !this.company) {
+        if (this.visitorType == 2 && !this.companyName) {
           uni.showToast({ title: '请输入企业名称', icon: 'none' });
           return;
         }
@@ -314,13 +326,26 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
           uni.showToast({ title: '请阅读用户协议', icon: 'none' });
           return;
         }
-        console.log('login', this.tell, this.code, this.user, this.sfz, this.radioActive, this.company, this.accompanying, this.array[this.index], this.address[this.idx], this.value);
-        uni.navigateTo({
-          url: '/pages/guestInfo/index' });
+        console.log('login', this.phone, this.smsCode, this.name, this.idNo, this.visitorType, this.companyName, this.accompanying, this.array[this.index], this.address[this.idx], this.visitDate);
+        var detail = {
+          visitorType: this.visitorType,
+          visitors: this.accompanying,
+          jsonParams: JSON.stringify({
+            reason: this.array[this.index],
+            companyName: this.companyName,
+            visitDate: this.visitDate,
+            targetLocation: this.address[this.idx],
+            phone: this.phone }),
 
-        return;
+          phone: this.phone };
+
+        (0, _login.guestThree)(detail).then(function (e) {
+          e.success && uni.navigateTo({
+            url: '/pages/guestInfo/index' });
+
+        });
       }
-      this.active = ++this.active;
+
 
     },
     selectHandle: function selectHandle() {
@@ -333,7 +358,7 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
       this.isShow = false;
     },
     changeHandle: function changeHandle(e) {
-      this.radioActive = e.id;
+      this.visitorType = e.id;
     },
     bindPickerChange: function bindPickerChange(e) {
       this.index = e.target.value;
@@ -342,25 +367,32 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
       this.idx = e.target.value;
     },
     bindChange: function bindChange(e) {
-      this.value = e;
+      this.visitDate = e;
     },
-    getCodeHandle: function getCodeHandle() {var _this = this;
+    getCodeHandle: function getCodeHandle() {var _this2 = this;
       if (this.isBegin) return;
       this.isBegin = true;
       setInterval(function () {
-        _this.number = --_this.number;
-        if (_this.number < 0) {
-          _this.number = 60;
-          _this.isBegin = false;
+        _this2.number = --_this2.number;
+        if (_this2.number < 0) {
+          _this2.number = 60;
+          _this2.isBegin = false;
         }
       }, 1000);
+      // {"phone":"13738051234"}
+      (0, _login.guestGetTellCode)({ "phone": this.phone }).then(function (e) {
+        console.log('eeee', e);
+        if (!e.success && e.code == 4107) {
+          uni.showModal({
+            title: '很抱歉',
+            content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
+            showCancel: false,
+            confirmColor: '#02BB00' });
 
-      // uni.showModal({
-      //     title: '很抱歉',
-      //     content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
-      // 	showCancel: false,
-      // 	confirmColor: '#02BB00'
-      // });
+        }
+      });
+
+
     },
     addUserHandle: function addUserHandle() {
       this.accShow = true;
@@ -374,7 +406,7 @@ var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer
         uni.showToast({ title: '请输入身份证', icon: 'none' });
         return;
       }
-      this.accompanying.push({ user: this.othserUser, sfz: this.othserSfz });
+      this.accompanying.push({ name: this.othserUser, idNo: this.othserSfz });
       this.othserUser = '';
       this.othserSfz = '';
       this.accShow = false;
