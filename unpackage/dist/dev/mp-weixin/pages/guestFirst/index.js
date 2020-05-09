@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer/GetDate.js */ 46));
-var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _login = __webpack_require__(/*! @/api/login.js */ 25);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -255,7 +255,8 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequ
       accompanying: [],
       accShow: false,
       othserUser: '',
-      othserSfz: '' };
+      othserSfz: '',
+      type: null };
 
   },
   components: {
@@ -269,7 +270,26 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequ
     selfRadio: selfRadio,
     timer: timer },
 
-  onLoad: function onLoad() {
+  onLoad: function onLoad(options) {
+    if (options && options.detail) {
+      var detail = JSON.parse(options.detail);var
+      type = detail.type,visitorType = detail.visitorType,visitors = detail.visitors,reason = detail.reason,companyName = detail.companyName,visitDate = detail.visitDate,targetLocation = detail.targetLocation,phone = detail.phone,mainVisitors = detail.mainVisitors;
+      this.type = type;
+      if (type && type == 'change') {
+        this.active = 3;
+        this.visitorType = visitorType;
+        this.accompanying = visitors;
+        this.index = this.array.findIndex(function (e) {return e === reason;});
+        this.companyName = companyName;
+        this.visitDate = visitDate;
+        this.idx = this.address.findIndex(function (e) {return e === targetLocation;});
+        this.phone = '13738051234';
+        this.name = mainVisitors[0].name;
+        this.idNo = mainVisitors[0].idNo;
+        return;
+      }
+    }
+
     var time = _GetDate.default.getCurrentTimes();
     var arr = [];
     for (var key in time.detail) {
@@ -326,27 +346,34 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequ
           uni.showToast({ title: '请阅读用户协议', icon: 'none' });
           return;
         }
-        console.log('login', this.phone, this.smsCode, this.name, this.idNo, this.visitorType, this.companyName, this.accompanying, this.array[this.index], this.address[this.idx], this.visitDate);
         var detail = {
           visitorType: this.visitorType,
           visitors: this.accompanying,
-          jsonParams: JSON.stringify({
-            reason: this.array[this.index],
-            companyName: this.companyName,
-            visitDate: this.visitDate,
-            targetLocation: this.address[this.idx],
-            phone: this.phone }),
-
+          reason: this.array[this.index],
+          companyName: this.companyName,
+          visitDate: this.visitDate,
+          targetLocation: this.address[this.idx],
           phone: this.phone };
 
-        (0, _login.guestThree)(detail).then(function (e) {
+        this.type !== 'change' && (0, _login.guestThree)(detail).then(function (e) {
+          detail.mainVisitors = [{
+            name: _this.name,
+            idNo: _this.idNo }];
+
           e.success && uni.navigateTo({
-            url: '/pages/guestInfo/index' });
+            url: "/pages/guestInfo/index?detail=".concat(JSON.stringify(detail)) });
+
+        });
+        this.type === 'change' && (0, _login.changeGuestThree)(detail).then(function (e) {
+          detail.mainVisitors = [{
+            name: _this.name,
+            idNo: _this.idNo }];
+
+          e.success && uni.navigateTo({
+            url: "/pages/guestInfo/index?detail=".concat(JSON.stringify(detail)) });
 
         });
       }
-
-
     },
     selectHandle: function selectHandle() {
       this.chekck = !this.chekck;
@@ -359,6 +386,7 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequ
     },
     changeHandle: function changeHandle(e) {
       this.visitorType = e.id;
+      this.companyName = '';
     },
     bindPickerChange: function bindPickerChange(e) {
       this.index = e.target.value;
@@ -372,16 +400,17 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequ
     getCodeHandle: function getCodeHandle() {var _this2 = this;
       if (this.isBegin) return;
       this.isBegin = true;
-      setInterval(function () {
+      var selfTimer = setInterval(function () {
         _this2.number = --_this2.number;
         if (_this2.number < 0) {
           _this2.number = 60;
           _this2.isBegin = false;
+          clearInterval(selfTimer);
+          selfTimer = null;
         }
       }, 1000);
       // {"phone":"13738051234"}
       (0, _login.guestGetTellCode)({ "phone": this.phone }).then(function (e) {
-        console.log('eeee', e);
         if (!e.success && e.code == 4107) {
           uni.showModal({
             title: '很抱歉',
@@ -391,8 +420,6 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequ
 
         }
       });
-
-
     },
     addUserHandle: function addUserHandle() {
       this.accShow = true;

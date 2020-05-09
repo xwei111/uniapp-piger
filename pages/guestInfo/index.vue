@@ -20,13 +20,13 @@
 								<view>隔离点</view>
 							</view>
 							<view class="info_people_list">
-								<view>成都万城国际酒店</view>
+								<view>{{detail.isolation}}</view>
 								<view class="info_people_card">成都市天城区万里路34号</view>
 							</view>
 						</view>
 						<view class="opentime">
 							<text class="opentime_label">开放时间</text>
-							<text class="opentime_date">2020/05/08 8:00-17:00</text>
+							<text class="opentime_date">{{detail.openTime}}</text>
 						</view>
 						<view class="seeDetail">查看详细《来访须知》</view>
 					</view>
@@ -40,13 +40,13 @@
 						<view class="info_list">
 							<view class="info_list_label">
 								<view>来访人</view>
-								<view class="info_people_num">2人</view>
+								<view class="info_people_num">{{detail.allVisitors.length}}人</view>
 							</view>
 							<view class="info_people_list">
-								<view>李雨珊</view>
-								<view class="info_people_card">330108****0294877</view>
-								<view>张宇</view>
-								<view class="info_people_card">330108****0294877</view>
+								<view v-for="(item, index) in detail.allVisitors" :key="index">
+									<view>{{item.name}}</view>
+									<view class="info_people_card">{{item.idNo}}</view>
+								</view>
 							</view>
 						</view>
 						<view class="info_list">
@@ -54,7 +54,7 @@
 								<view>访客类型</view>
 							</view>
 							<view class="info_people_list">
-								<view>企业 | 浙江天恒科技公司</view>
+								<view>{{detail.visitorType == 1 ? '个人' : '企业 | '}}  {{detail.companyName}}</view>
 							</view>
 						</view>
 						<view class="info_list">
@@ -62,7 +62,7 @@
 								<view>来访事由</view>
 							</view>
 							<view class="info_people_list">
-								<view>维修</view>
+								<view>{{detail.reason}}</view>
 							</view>
 						</view>
 						<view class="info_list">
@@ -70,7 +70,7 @@
 								<view>目的地</view>
 							</view>
 							<view class="info_people_list">
-								<view>猪场A</view>
+								<view>{{detail.targetLocation}}</view>
 							</view>
 						</view>
 						<view class="info_list info_last">
@@ -78,7 +78,7 @@
 								<view>来访时间</view>
 							</view>
 							<view class="info_people_list">
-								<view>2020-05-09 10：00 </view>
+								<view>{{detail.visitDate}}</view>
 							</view>
 						</view>
 					</view>
@@ -99,7 +99,8 @@
 		data() {
 			return {
 				status: 'change',
-				isShow: true
+				isShow: true,
+				detail: {}
 			}
 		},
 		components: {
@@ -107,7 +108,10 @@
 			selfContent,
 			selfButton
 		},
-		onLoad() {
+		onLoad(options) {
+			this.detail = JSON.parse(options.detail)
+			this.detail.allVisitors = [ ...this.detail.mainVisitors, ...this.detail.visitors ]
+			this.status = this.detail.checkStatus && this.detail.checkStatus == 2 ? 'success' : 'change';
 			this.isShow = this.status == 'success' ? false : true
 		},
 		methods: {
@@ -116,7 +120,7 @@
 			},
 			changeClick() {
 				uni.navigateTo({
-					url: '/pages/guestFirst/index?type=change'
+					url: `/pages/guestFirst/index?detail=${JSON.stringify({...this.detail, type: 'change'})}`
 				})
 			}
 		}

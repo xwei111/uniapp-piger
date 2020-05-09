@@ -13,7 +13,7 @@
 	import selfButton from '@/components/self-button.vue';
 	import selfBg from '@/components/self-bg.vue';
 	import selfContent from '@/components/self-content.vue';
-	
+	import { getGuestInfo } from '@/api/login.js';
 	
 	export default {
 		data() {
@@ -33,10 +33,37 @@
 				uni.navigateTo({ url: '/pages/workLogin/index' });
 			},
 			guestHandleClick() {
-				uni.navigateTo({ url: '/pages/guestFirst/index' });
+				getGuestInfo({"phone":"13738051234", openid: '12345678'}).then(e=> {
+					if(e.success) {
+						const { data } = e;
+						if(data.checkStatus === 0) {
+							uni.navigateTo({ url: '/pages/guestFirst/index' });
+						} else {
+							const detail = {
+								visitorType: data.visitorType,
+								visitors: data.visitors,
+								reason: data.reason,
+								companyName: data.companyName,
+								visitDate: data.visitDate,
+								targetLocation: data.targetLocation,
+								phone: data.phone,
+								mainVisitors: [{
+									name: data.name,
+									idNo: data.idNo
+								}],
+								checkStatus: data.checkStatus,
+								isolation: data.isolation ? data.isolation : '',
+								openTime: data.openTime ? data.openTime : ''
+							}
+							uni.navigateTo({
+								url: `/pages/guestInfo/index?detail=${JSON.stringify(detail)}`
+							})
+						}
+					}
+				})
+				
 			},
 			workGetuserinfo(e) {
-				console.log('e', e)
 				if(!e.detail.userInfo) return
 				uni.navigateTo({ url: '/pages/workLogin/index' });
 			},

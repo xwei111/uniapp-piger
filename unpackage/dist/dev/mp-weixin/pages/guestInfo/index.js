@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -231,7 +231,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       status: 'change',
-      isShow: true };
+      isShow: true,
+      detail: {} };
 
   },
   components: {
@@ -239,7 +240,10 @@ __webpack_require__.r(__webpack_exports__);
     selfContent: selfContent,
     selfButton: selfButton },
 
-  onLoad: function onLoad() {
+  onLoad: function onLoad(options) {
+    this.detail = JSON.parse(options.detail);
+    this.detail.allVisitors = [].concat(_toConsumableArray(this.detail.mainVisitors), _toConsumableArray(this.detail.visitors));
+    this.status = this.detail.checkStatus && this.detail.checkStatus == 2 ? 'success' : 'change';
     this.isShow = this.status == 'success' ? false : true;
   },
   methods: {
@@ -248,7 +252,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeClick: function changeClick() {
       uni.navigateTo({
-        url: '/pages/guestFirst/index' });
+        url: "/pages/guestFirst/index?detail=".concat(JSON.stringify(_objectSpread({}, this.detail, { type: 'change' }))) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

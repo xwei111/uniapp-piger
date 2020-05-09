@@ -41,8 +41,16 @@ export const workThree = (params) => {
 		method: 'POST'
 	}).then(res => res)
 }
+// 查询访客信息 /h5/user/wechat/query_visitor_status
+export const getGuestInfo = (params) => {
+	return request({
+		url: `/h5/user/wechat/query_visitor_status`,
+		params: params,
+		method: 'POST'
+	}).then(res => res)
+}
 
-// 访客互殴手机验证码  /h5/user/wechat/first_visitor_phone_step
+// 访客手机验证码  /h5/user/wechat/first_visitor_phone_step
 export const guestGetTellCode = (params) => {
 	return request({
 		url: `/h5/user/wechat/first_visitor_phone_step`,
@@ -68,10 +76,19 @@ export const guestSecond = (params) => {
 	}).then(res => res)
 }
 
-// 访客第二步  /h5/user/wechat/third_visitor_step
+// 访客第3步  /h5/user/wechat/third_visitor_step
 export const guestThree= (params) => {
 	return request({
 		url: `/h5/user/wechat/third_visitor_step`,
+		params: params,
+		method: 'POST'
+	}).then(res => res)
+}
+
+//访客第3步修改 /h5/user/wechat/update_visitor_info
+export const changeGuestThree= (params) => {
+	return request({
+		url: `/h5/user/wechat/update_visitor_info`,
 		params: params,
 		method: 'POST'
 	}).then(res => res)

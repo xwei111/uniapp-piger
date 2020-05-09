@@ -90,7 +90,7 @@
 	import selfRadio from '@/components/self-radio.vue';
 	import timer from '@/components/timer/index.vue';
 	import GetDate from '@/components/timer/GetDate.js';
-	import { guestGetTellCode, guestFirst, guestSecond, guestThree } from '@/api/login.js';
+	import { guestGetTellCode, guestFirst, guestSecond, guestThree, changeGuestThree } from '@/api/login.js';
 	
 	export default{
 		data() {
@@ -139,34 +139,25 @@
 			timer
 		},
 		onLoad(options) {
-			console.log('options-------------', options)
-			const { type } = options
-			this.type = type
-			if(type && type == 'change') {
-				this.active = 3;
-				this.visitorType = 2;
-				this.accompanying = [{
-					user: 'aa',
-					idNo: '222222222'
-				}]
-				this.index = 1;
-				this.companyName = '浙江科技';
-				this.visitDate = '2020-05-08 11:11:10';
-				this.idx = 1;
-				return
-				
-				// const detail = {
-				// 	visitorType: this.visitorType,
-				// 	visitors: this.accompanying,
-				// 	jsonParams: JSON.stringify({
-				// 		reason: this.array[this.index],
-				// 		companyName: this.companyName,
-				// 		visitDate: this.visitDate,
-				// 		targetLocation: this.address[this.idx],
-				// 	}),
-				// }
-				
+			if(options && options.detail) {
+				let detail = JSON.parse(options.detail)
+				const { type, visitorType, visitors, reason, companyName, visitDate, targetLocation, phone, mainVisitors } = detail
+				this.type = type
+				if(type && type == 'change') {
+					this.active = 3;
+					this.visitorType = visitorType;
+					this.accompanying = visitors
+					this.index = this.array.findIndex(e=>e === reason);
+					this.companyName = companyName;
+					this.visitDate = visitDate;
+					this.idx = this.address.findIndex(e=>e === targetLocation);
+					this.phone = '13738051234';
+					this.name = mainVisitors[0].name;
+					this.idNo = mainVisitors[0].idNo;
+					return
+				}
 			}
+		    
 			let time = GetDate.getCurrentTimes();
 			let arr = [];
 			for (let key in time.detail) {
@@ -223,27 +214,34 @@
 						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
 						return
 					}
-					console.log('login', this.phone, this.smsCode, this.name, this.idNo, this.visitorType, this.companyName, this.accompanying, this.array[this.index], this.address[this.idx], this.visitDate)
 					const detail = {
 						visitorType: this.visitorType,
 						visitors: this.accompanying,
-						jsonParams: JSON.stringify({
-							reason: this.array[this.index],
-							companyName: this.companyName,
-							visitDate: this.visitDate,
-							targetLocation: this.address[this.idx],
-							phone: this.phone
-						}),
+						reason: this.array[this.index],
+						companyName: this.companyName,
+						visitDate: this.visitDate,
+						targetLocation: this.address[this.idx],
 						phone: this.phone
 					}
-					guestThree(detail).then(e=> {
+					this.type !== 'change' && guestThree(detail).then(e=> {
+						detail.mainVisitors = [{
+							name: this.name,
+							idNo: this.idNo
+						}]
 						e.success && uni.navigateTo({
-							url: '/pages/guestInfo/index'
+							url: `/pages/guestInfo/index?detail=${JSON.stringify(detail)}`
 						})
 					})
+					this.type === 'change' && changeGuestThree(detail).then(e=> {
+						detail.mainVisitors = [{
+							name: this.name,
+							idNo: this.idNo
+						}]
+						e.success && uni.navigateTo({
+							url: `/pages/guestInfo/index?detail=${JSON.stringify(detail)}`
+						})
+					}) 
 				}
-				
-				
 			},
 			selectHandle() {
 				this.chekck = !this.chekck
@@ -256,6 +254,7 @@
 			},
 			changeHandle(e) {
 				this.visitorType = e.id
+				this.companyName = ''
 			},
 			bindPickerChange(e) {
 				this.index = e.target.value
@@ -280,7 +279,6 @@
 				}, 1000)
 				// {"phone":"13738051234"}
 				guestGetTellCode({"phone": this.phone}).then(e=> {
-					console.log('eeee', e)
 					if(!e.success && e.code == 4107) {
 						uni.showModal({
 						    title: '很抱歉',
