@@ -116,7 +116,7 @@
 			},
 			changeClick() {
 				uni.navigateTo({
-					url: '/pages/guestFirst/index'
+					url: '/pages/guestFirst/index?type=change'
 				})
 			}
 		}

@@ -123,7 +123,8 @@
 				accompanying: [],
 				accShow: false,
 				othserUser: '',
-				othserSfz: ''
+				othserSfz: '',
+				type: null
 			}
 		},
 		components: {
@@ -137,7 +138,35 @@
 			selfRadio,
 			timer
 		},
-		onLoad() {
+		onLoad(options) {
+			console.log('options-------------', options)
+			const { type } = options
+			this.type = type
+			if(type && type == 'change') {
+				this.active = 3;
+				this.visitorType = 2;
+				this.accompanying = [{
+					user: 'aa',
+					idNo: '222222222'
+				}]
+				this.index = 1;
+				this.companyName = '浙江科技';
+				this.visitDate = '2020-05-08 11:11:10';
+				this.idx = 1;
+				return
+				
+				// const detail = {
+				// 	visitorType: this.visitorType,
+				// 	visitors: this.accompanying,
+				// 	jsonParams: JSON.stringify({
+				// 		reason: this.array[this.index],
+				// 		companyName: this.companyName,
+				// 		visitDate: this.visitDate,
+				// 		targetLocation: this.address[this.idx],
+				// 	}),
+				// }
+				
+			}
 			let time = GetDate.getCurrentTimes();
 			let arr = [];
 			for (let key in time.detail) {
@@ -240,11 +269,13 @@
 			getCodeHandle() {
 				if(this.isBegin) return
 				this.isBegin = true;
-				setInterval(()=>{
+				let selfTimer = setInterval(()=>{
 					this.number = --this.number
 					if(this.number < 0) {
 						this.number = 60
 						this.isBegin = false;
+						clearInterval(selfTimer)
+						selfTimer = null
 					}
 				}, 1000)
 				// {"phone":"13738051234"}
@@ -259,8 +290,6 @@
 						});
 					}
 				})
-				
-				
 			},
 			addUserHandle() {
 				this.accShow = true

@@ -124,7 +124,6 @@
 						uni.switchTab({ url: '/pages/mineTask/index' })
 					})
 					console.log('verf', this.phone, this.smsCode, this.staffCode, this.password, this.newPassword, this.confirmNewPassword, this.chekck )
-					
 					return
 				}
 				
@@ -141,11 +140,13 @@
 			getCodeHandle() {
 				if(this.isBegin) return
 				this.isBegin = true;
-				setInterval(()=>{
+				let selfTimer = setInterval(()=>{
 					this.number = --this.number
 					if(this.number < 0) {
 						this.number = 60
 						this.isBegin = false;
+						clearInterval(selfTimer)
+						selfTimer = null
 					}
 				}, 1000)
 				// {"phone":"13738050004"}
