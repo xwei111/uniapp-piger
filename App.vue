@@ -1,7 +1,7 @@
 <script>
 	export default {
 		globalData: {
-			baseUrl: process.env.NODE_ENV === 'development' ? 'http://4bkec15r.xiaomy.net' : 'http://localhost:4000'
+			baseUrl: process.env.NODE_ENV === 'development' ? 'http://4bkec15r.xiaomy.net' : 'http://4bkec15r.xiaomy.net'
 		},
 		onLaunch: function() {
 			
