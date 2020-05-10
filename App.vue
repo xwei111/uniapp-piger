@@ -1,27 +1,40 @@
 <script>
 	export default {
 		globalData: {
-			baseUrl: process.env.NODE_ENV === 'development' ? '/piger' : 'http://localhost:4000'
+			baseUrl: process.env.NODE_ENV === 'development' ? 'http://4bkec15r.xiaomy.net' : 'http://localhost:4000'
 		},
 		onLaunch: function() {
-			// uni.getProvider({
-			// 	service: 'oauth',
-			// 	success: function(provider) {
-			// 		console.log('provider---------', provider)
-			// 		uni.login({
-			// 			provider: 'weixin',
-			// 			success: function(loginRes) {
-			// 				console.log('loginRes-----------', loginRes);
-			// 			}
-			// 		});
-			// 	}
-			// });
+			
 		},
 		onShow: function() {
-			// console.log('App Show')
+			const that = this;
+			let user = uni.getStorageSync('user');
+			if(!user) {
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+						uni.request({
+							url: `${that.globalData.baseUrl}/h5/user/wechat/auth/${loginRes.code}`,
+							success: function(res) {
+								if(res.statusCode === 200) {
+									const { data } = res;
+									if(data.code === 10000) {
+										let openid = data.data;
+										openid && uni.setStorageSync('user', openid );
+									} else {
+										uni.showToast({ title: data.msg, icon: 'none' });
+									}
+								} else {
+									uni.showToast({ title: res.errMsg, icon: 'none' });
+								}
+							}
+						})
+					}
+				});
+			}
+			
 		},
 		onHide: function() {
-			// console.log('App Hide')
 		}
 	}
 </script>

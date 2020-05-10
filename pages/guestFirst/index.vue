@@ -6,7 +6,7 @@
 			<view v-show="active == 1">
 				<self-input label="手机号" placeholder="请输入您的手机号" v-model="phone"></self-input>
 				<self-input label="验证码" placeholder="请输入验证码" v-model="smsCode">
-					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${number}s ` : '获取验证码'}}</view>
+					<view :class="['getCode', isBegin != 1 ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin == 3 ? `${number}s ` : '获取验证码'}}</view>
 				</self-input>
 			</view>
 			<view v-show="active == 2">
@@ -119,7 +119,7 @@
 				idNo: '',
 				companyName: '',
 				number: 60,
-				isBegin: false,
+				isBegin: 1,
 				accompanying: [],
 				accShow: false,
 				othserUser: '',
@@ -266,27 +266,32 @@
 				this.visitDate = e
 			},
 			getCodeHandle() {
-				if(this.isBegin) return
-				this.isBegin = true;
-				let selfTimer = setInterval(()=>{
-					this.number = --this.number
-					if(this.number < 0) {
-						this.number = 60
-						this.isBegin = false;
-						clearInterval(selfTimer)
-						selfTimer = null
-					}
-				}, 1000)
-				// {"phone":"13738051234"}
+				if(this.isBegin != 1) return
+				this.isBegin = 2;
 				guestGetTellCode({"phone": this.phone}).then(e=> {
-					if(!e.success && e.code == 4107) {
-						uni.showModal({
-						    title: '很抱歉',
-						    content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
-							showCancel: false,
-							confirmColor: '#02BB00'
-						});
+					if(e && e.code === 10000) {
+						this.isBegin = 3;
+						let selfTimer = setInterval(()=>{
+							this.number = --this.number
+							if(this.number < 0) {
+								this.number = 60
+								this.isBegin = 1;
+								clearInterval(selfTimer)
+								selfTimer = null
+							}
+						}, 1000)
+					} else {
+						this.isBegin = 1;
+						if(!e.success && e.code == 4107) {
+							uni.showModal({
+							    title: '很抱歉',
+							    content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
+								showCancel: false,
+								confirmColor: '#02BB00'
+							});
+						}
 					}
+					
 				})
 			},
 			addUserHandle() {

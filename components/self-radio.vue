@@ -1,8 +1,8 @@
 <template>
 	<view class="self_radios">
 		<view class="self_radio" v-for="(item, index) in options" :key="index" @click="selectHandle(item)">
-			<view :class="[item.id == selfActive ? 'self_radio_circle_active' : '', 'self_radio_circle']">
-				<view v-show="item.id == selfActive" class="self_radio_round"></view>
+			<view :class="[item.id == active ? 'self_radio_circle_active' : '', 'self_radio_circle']">
+				<view v-if="item.id == active" class="self_radio_round"></view>
 			</view>
 			<text>{{item.label}}</text>
 		</view>
@@ -21,14 +21,8 @@
 				default: 1
 			}
 		},
-		data() {
-			return {
-				selfActive: this.active
-			}
-		}, 
 		methods: {
 			selectHandle(e) {
-				this.selfActive = e.id
 				this.$emit('changeHandle', e)
 			}
 		}

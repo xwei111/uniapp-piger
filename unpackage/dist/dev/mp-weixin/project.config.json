@@ -5,13 +5,13 @@
 	},
 	"setting": {
 		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
+		"es6": false,
+		"postcss": false,
 		"minified": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.2",
-	"appid": "wx87ae949aa9959677",
+	"appid": "wx12e44dfd32c16b63",
 	"projectname": "piger",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

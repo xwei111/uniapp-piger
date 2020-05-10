@@ -3,8 +3,8 @@
 		<self-bg src="/static/home.png"></self-bg>
 		<self-content>
 			<text class='title'>新希望养殖场，欢迎你！</text>
-			<self-button text="我是员工" class="button_top" @handleClick="workHandleClick" @getuserinfo="workGetuserinfo" :isUser="true"></self-button>
-			<self-button text="我是访客" kind="plain" @handleClick="guestHandleClick" @getuserinfo="guestGetuserinfo" :isUser="true"></self-button>
+			<self-button text="我是员工" class="button_top" @handleClick="workHandleClick"></self-button>
+			<self-button text="我是访客" kind="plain" @handleClick="guestHandleClick"></self-button>
 		</self-content>
 	</view>
 </template>
@@ -33,7 +33,7 @@
 				uni.navigateTo({ url: '/pages/workLogin/index' });
 			},
 			guestHandleClick() {
-				getGuestInfo({"phone":"13738051234", openid: '12345678'}).then(e=> {
+				getGuestInfo().then(e=> {
 					if(e.success) {
 						const { data } = e;
 						if(data.checkStatus === 0) {
@@ -64,12 +64,12 @@
 				
 			},
 			workGetuserinfo(e) {
-				if(!e.detail.userInfo) return
-				uni.navigateTo({ url: '/pages/workLogin/index' });
+				// if(!e.detail.userInfo) return
+				// uni.navigateTo({ url: '/pages/workLogin/index' });
 			},
 			guestGetuserinfo(e) {
-				if(!e.detail.userInfo) return
-				uni.navigateTo({ url: '/pages/guestFirst/index' });
+				// if(!e.detail.userInfo) return
+				// uni.navigateTo({ url: '/pages/guestFirst/index' });
 			}
 		}
 	}

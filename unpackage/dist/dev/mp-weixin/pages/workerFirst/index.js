@@ -165,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -176,16 +176,17 @@ var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function se
       { id: 3, text: '设置密码' }],
 
       active: 1,
-      chekck: false,
+      chekck: true,
       isShow: false,
       phone: '',
       smsCode: '',
-      staffCode: '',
+      verifyStaffCode: '',
       password: '',
       newPassword: '',
       confirmNewPassword: '',
       number: 60,
-      isBegin: false };
+      isBegin: 1,
+      staffCode: '' };
 
   },
   components: {
@@ -197,6 +198,10 @@ var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function se
     selfCheckbox: selfCheckbox,
     selfAgree: selfAgree },
 
+  onLoad: function onLoad(options) {var
+    staffCode = options.staffCode;
+    this.staffCode = staffCode;
+  },
   methods: {
     nextClick: function nextClick() {var _this = this;
       if (this.active == 1) {
@@ -213,14 +218,14 @@ var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function se
           return;
         }
         // {"phone":"13738050006","smsCode":"1234"}
-        (0, _login.workFirst)({ "phone": this.phone, "smsCode": this.smsCode }).then(function (e) {
+        (0, _login.workFirst)({ "phone": this.phone, "smsCode": this.smsCode, staffCode: this.staffCode }).then(function (e) {
           if (e.success) {
             _this.active = ++_this.active;
           }
         });
       }
       if (this.active == 2) {
-        if (!this.staffCode) {
+        if (!this.verifyStaffCode) {
           uni.showToast({ title: '请输入员工号', icon: 'none' });
           return;
         }
@@ -228,7 +233,7 @@ var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function se
           uni.showToast({ title: '请输入初始密码', icon: 'none' });
           return;
         }
-        (0, _login.workSecond)({ staffCode: this.staffCode, password: this.password }).then(function (e) {
+        (0, _login.workSecond)({ staffCode: this.staffCode, verifyStaffCode: this.verifyStaffCode, password: this.password }).then(function (e) {
           if (e.success) {
             _this.active = ++_this.active;
           }
@@ -255,7 +260,6 @@ var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function se
         (0, _login.workThree)({ "staffCode": this.staffCode, "newPassword": this.newPassword, "confirmNewPassword": this.confirmNewPassword }).then(function (e) {
           uni.switchTab({ url: '/pages/mineTask/index' });
         });
-        console.log('verf', this.phone, this.smsCode, this.staffCode, this.password, this.newPassword, this.confirmNewPassword, this.chekck);
         return;
       }
 
@@ -270,19 +274,24 @@ var _login = __webpack_require__(/*! @/api/login */ 25);var selfBg = function se
       this.isShow = false;
     },
     getCodeHandle: function getCodeHandle() {var _this2 = this;
-      if (this.isBegin) return;
-      this.isBegin = true;
-      var selfTimer = setInterval(function () {
-        _this2.number = --_this2.number;
-        if (_this2.number < 0) {
-          _this2.number = 60;
-          _this2.isBegin = false;
-          clearInterval(selfTimer);
-          selfTimer = null;
+      if (this.isBegin != 1) return;
+      this.isBegin = 2;
+      (0, _login.getTellCode)({ "phone": this.phone, staffCode: this.staffCode }).then(function (e) {
+        if (e && e.code === 10000) {
+          _this2.isBegin = 3;
+          var selfTimer = setInterval(function () {
+            _this2.number = --_this2.number;
+            if (_this2.number < 0) {
+              _this2.number = 60;
+              _this2.isBegin = 1;
+              clearInterval(selfTimer);
+              selfTimer = null;
+            }
+          }, 1000);
+        } else {
+          _this2.isBegin = 1;
         }
-      }, 1000);
-      // {"phone":"13738050004"}
-      (0, _login.getTellCode)({ "phone": this.phone });
+      });
     },
     toGuestHandle: function toGuestHandle() {
       uni.navigateTo({ url: '/pages/guestFirst/index' });

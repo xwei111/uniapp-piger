@@ -1,4 +1,10 @@
 import request from '@/utils/request.js';
+// 互殴openid
+export const getOpenid = (code) => {
+	return request({
+		url: `/h5/user/wechat/auth/${code}`,
+	}).then(res => res)
+}
 
 // 员工登录
 export const workerLogin = (params) => {

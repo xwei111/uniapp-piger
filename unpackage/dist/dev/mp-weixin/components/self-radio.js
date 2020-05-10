@@ -137,14 +137,8 @@ var _default2 =
       default: 1 } },
 
 
-  data: function data() {
-    return {
-      selfActive: this.active };
-
-  },
   methods: {
     selectHandle: function selectHandle(e) {
-      this.selfActive = e.id;
       this.$emit('changeHandle', e);
     } } };exports.default = _default2;
 

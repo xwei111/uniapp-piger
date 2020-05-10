@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _GetDate = _interopRequireDefault(__webpack_require__(/*! @/components/timer/GetDate.js */ 46));
-var _login = __webpack_require__(/*! @/api/login.js */ 25);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _login = __webpack_require__(/*! @/api/login.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfRadio = function selfRadio() {__webpack_require__.e(/*! require.ensure | components/self-radio */ "components/self-radio").then((function () {return resolve(__webpack_require__(/*! @/components/self-radio.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var timer = function timer() {__webpack_require__.e(/*! require.ensure | components/timer/index */ "components/timer/index").then((function () {return resolve(__webpack_require__(/*! @/components/timer/index.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -251,7 +251,7 @@ var _login = __webpack_require__(/*! @/api/login.js */ 25);function _interopRequ
       idNo: '',
       companyName: '',
       number: 60,
-      isBegin: false,
+      isBegin: 1,
       accompanying: [],
       accShow: false,
       othserUser: '',
@@ -398,27 +398,32 @@ var _login = __webpack_require__(/*! @/api/login.js */ 25);function _interopRequ
       this.visitDate = e;
     },
     getCodeHandle: function getCodeHandle() {var _this2 = this;
-      if (this.isBegin) return;
-      this.isBegin = true;
-      var selfTimer = setInterval(function () {
-        _this2.number = --_this2.number;
-        if (_this2.number < 0) {
-          _this2.number = 60;
-          _this2.isBegin = false;
-          clearInterval(selfTimer);
-          selfTimer = null;
-        }
-      }, 1000);
-      // {"phone":"13738051234"}
+      if (this.isBegin != 1) return;
+      this.isBegin = 2;
       (0, _login.guestGetTellCode)({ "phone": this.phone }).then(function (e) {
-        if (!e.success && e.code == 4107) {
-          uni.showModal({
-            title: '很抱歉',
-            content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
-            showCancel: false,
-            confirmColor: '#02BB00' });
+        if (e && e.code === 10000) {
+          _this2.isBegin = 3;
+          var selfTimer = setInterval(function () {
+            _this2.number = --_this2.number;
+            if (_this2.number < 0) {
+              _this2.number = 60;
+              _this2.isBegin = 1;
+              clearInterval(selfTimer);
+              selfTimer = null;
+            }
+          }, 1000);
+        } else {
+          _this2.isBegin = 1;
+          if (!e.success && e.code == 4107) {
+            uni.showModal({
+              title: '很抱歉',
+              content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
+              showCancel: false,
+              confirmColor: '#02BB00' });
 
+          }
         }
+
       });
     },
     addUserHandle: function addUserHandle() {

@@ -1,10 +1,11 @@
 const { globalData: { baseUrl } } = getApp();
 
-export default async ({url, method = "GET", params}) => {
+export default async ({url, method = "GET", params}) => { 
+	const openid = uni.getStorageSync('user');
 	const [error, response] = await uni.request({
 		url: `${baseUrl}${url}`,
 		method: method,
-		data: params,
+		data: openid ? { openid: openid, ...params } : params,
 		timeout: 3000
 	})
 	if(error) {

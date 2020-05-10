@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1686,6 +1686,166 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ 17:
+/*!**************************************!*\
+  !*** D:/progress/piger/api/login.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.changeGuestThree = exports.guestThree = exports.guestSecond = exports.guestFirst = exports.guestGetTellCode = exports.getGuestInfo = exports.workThree = exports.workSecond = exports.workFirst = exports.getTellCode = exports.workerLogin = exports.getOpenid = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// 互殴openid
+var getOpenid = function getOpenid(code) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/auth/".concat(code) }).
+  then(function (res) {return res;});
+};
+
+// 员工登录
+exports.getOpenid = getOpenid;var workerLogin = function workerLogin(params) {
+  return (0, _request.default)({
+    url: "/h5/user/index/staff_login",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+// 获取手机验证码 
+exports.workerLogin = workerLogin;var getTellCode = function getTellCode(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/first_verify_phone_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+// 员工第一步/h5/user/wechat/first_verify_sms_step
+exports.getTellCode = getTellCode;var workFirst = function workFirst(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/first_verify_sms_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+// 员工第二步/h5/user/wechat/first_verify_sms_step
+exports.workFirst = workFirst;var workSecond = function workSecond(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/second_verify_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+
+// 员工第三步 /h5/user/wechat/third_verify_step
+exports.workSecond = workSecond;var workThree = function workThree(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/third_verify_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+// 查询访客信息 /h5/user/wechat/query_visitor_status
+exports.workThree = workThree;var getGuestInfo = function getGuestInfo(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/query_visitor_status",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+
+// 访客手机验证码  /h5/user/wechat/first_visitor_phone_step
+exports.getGuestInfo = getGuestInfo;var guestGetTellCode = function guestGetTellCode(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/first_visitor_phone_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+
+// 访客第一步  /h5/user/wechat/first_visitor_sms_step
+exports.guestGetTellCode = guestGetTellCode;var guestFirst = function guestFirst(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/first_visitor_sms_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+// 访客第二步  /h5/user/wechat/second_visitor_step
+exports.guestFirst = guestFirst;var guestSecond = function guestSecond(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/second_visitor_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+
+// 访客第3步  /h5/user/wechat/third_visitor_step
+exports.guestSecond = guestSecond;var guestThree = function guestThree(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/third_visitor_step",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};
+
+//访客第3步修改 /h5/user/wechat/update_visitor_info
+exports.guestThree = guestThree;var changeGuestThree = function changeGuestThree(params) {
+  return (0, _request.default)({
+    url: "/h5/user/wechat/update_visitor_info",
+    params: params,
+    method: 'POST' }).
+  then(function (res) {return res;});
+};exports.changeGuestThree = changeGuestThree;
+
+/***/ }),
+
+/***/ 18:
+/*!******************************************!*\
+  !*** D:/progress/piger/utils/request.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _getApp = getApp(),baseUrl = _getApp.globalData.baseUrl;var _default = /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(
+
+  function _callee(_ref) {var url, _ref$method, method, params, openid, _yield$uni$request, _yield$uni$request2, error, response, statusCode, errMsg, _response$data, code, data, msg, success;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:url = _ref.url, _ref$method = _ref.method, method = _ref$method === void 0 ? "GET" : _ref$method, params = _ref.params;
+            openid = uni.getStorageSync('user');_context.next = 4;return (
+              uni.request({
+                url: "".concat(baseUrl).concat(url),
+                method: method,
+                data: openid ? _objectSpread({ openid: openid }, params) : params,
+                timeout: 3000 }));case 4:_yield$uni$request = _context.sent;_yield$uni$request2 = _slicedToArray(_yield$uni$request, 2);error = _yield$uni$request2[0];response = _yield$uni$request2[1];if (!
+
+            error) {_context.next = 13;break;}
+            uni.showToast({ title: error.errMsg, icon: 'none' });return _context.abrupt("return",
+            null);case 13:
+
+            statusCode = response.statusCode, errMsg = response.errMsg, _response$data = response.data, code = _response$data.code, data = _response$data.data, msg = _response$data.msg, success = _response$data.success;if (!(
+            statusCode == 200)) {_context.next = 23;break;}if (!(
+            code == 10000)) {_context.next = 19;break;}return _context.abrupt("return",
+            { data: data, success: success, msg: msg, code: code });case 19:
+
+            uni.showToast({ title: msg, icon: 'none' });return _context.abrupt("return",
+            { data: data, success: success, msg: msg, code: code });case 21:_context.next = 25;break;case 23:
+
+
+            uni.showToast({ title: errMsg, icon: 'none' });return _context.abrupt("return",
+            null);case 25:case "end":return _context.stop();}}}, _callee);}));return function (_x) {return _ref2.apply(this, arguments);};}();exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 19:
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 20);
 
 /***/ }),
 
@@ -7221,7 +7381,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7242,14 +7402,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7325,7 +7485,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7719,160 +7879,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 25:
-/*!**************************************!*\
-  !*** D:/progress/piger/api/login.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.changeGuestThree = exports.guestThree = exports.guestSecond = exports.guestFirst = exports.guestGetTellCode = exports.getGuestInfo = exports.workThree = exports.workSecond = exports.workFirst = exports.getTellCode = exports.workerLogin = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 26));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-// 员工登录
-var workerLogin = function workerLogin(params) {
-  return (0, _request.default)({
-    url: "/h5/user/index/staff_login",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-// 获取手机验证码 
-exports.workerLogin = workerLogin;var getTellCode = function getTellCode(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/first_verify_phone_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-// 员工第一步/h5/user/wechat/first_verify_sms_step
-exports.getTellCode = getTellCode;var workFirst = function workFirst(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/first_verify_sms_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-// 员工第二步/h5/user/wechat/first_verify_sms_step
-exports.workFirst = workFirst;var workSecond = function workSecond(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/second_verify_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-
-// 员工第三步 /h5/user/wechat/third_verify_step
-exports.workSecond = workSecond;var workThree = function workThree(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/third_verify_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-// 查询访客信息 /h5/user/wechat/query_visitor_status
-exports.workThree = workThree;var getGuestInfo = function getGuestInfo(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/query_visitor_status",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-
-// 访客手机验证码  /h5/user/wechat/first_visitor_phone_step
-exports.getGuestInfo = getGuestInfo;var guestGetTellCode = function guestGetTellCode(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/first_visitor_phone_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-
-// 访客第一步  /h5/user/wechat/first_visitor_sms_step
-exports.guestGetTellCode = guestGetTellCode;var guestFirst = function guestFirst(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/first_visitor_sms_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-// 访客第二步  /h5/user/wechat/second_visitor_step
-exports.guestFirst = guestFirst;var guestSecond = function guestSecond(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/second_visitor_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-
-// 访客第3步  /h5/user/wechat/third_visitor_step
-exports.guestSecond = guestSecond;var guestThree = function guestThree(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/third_visitor_step",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};
-
-//访客第3步修改 /h5/user/wechat/update_visitor_info
-exports.guestThree = guestThree;var changeGuestThree = function changeGuestThree(params) {
-  return (0, _request.default)({
-    url: "/h5/user/wechat/update_visitor_info",
-    params: params,
-    method: 'POST' }).
-  then(function (res) {return res;});
-};exports.changeGuestThree = changeGuestThree;
-
-/***/ }),
-
-/***/ 26:
-/*!******************************************!*\
-  !*** D:/progress/piger/utils/request.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _getApp = getApp(),baseUrl = _getApp.globalData.baseUrl;var _default = /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(
-
-  function _callee(_ref) {var url, _ref$method, method, params, _yield$uni$request, _yield$uni$request2, error, response, statusCode, errMsg, _response$data, code, data, msg, success;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:url = _ref.url, _ref$method = _ref.method, method = _ref$method === void 0 ? "GET" : _ref$method, params = _ref.params;_context.next = 3;return (
-              uni.request({
-                url: "".concat(baseUrl).concat(url),
-                method: method,
-                data: params,
-                timeout: 3000 }));case 3:_yield$uni$request = _context.sent;_yield$uni$request2 = _slicedToArray(_yield$uni$request, 2);error = _yield$uni$request2[0];response = _yield$uni$request2[1];if (!
-
-            error) {_context.next = 12;break;}
-            uni.showToast({ title: error.errMsg, icon: 'none' });return _context.abrupt("return",
-            null);case 12:
-
-            statusCode = response.statusCode, errMsg = response.errMsg, _response$data = response.data, code = _response$data.code, data = _response$data.data, msg = _response$data.msg, success = _response$data.success;if (!(
-            statusCode == 200)) {_context.next = 22;break;}if (!(
-            code == 10000)) {_context.next = 18;break;}return _context.abrupt("return",
-            { data: data, success: success, msg: msg, code: code });case 18:
-
-            uni.showToast({ title: msg, icon: 'none' });return _context.abrupt("return",
-            { data: data, success: success, msg: msg, code: code });case 20:_context.next = 24;break;case 22:
-
-
-            uni.showToast({ title: errMsg, icon: 'none' });return _context.abrupt("return",
-            null);case 24:case "end":return _context.stop();}}}, _callee);}));return function (_x) {return _ref2.apply(this, arguments);};}();exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 27:
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 28);
-
-/***/ }),
-
-/***/ 28:
+/***/ 20:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -7903,7 +7910,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 29);
+module.exports = __webpack_require__(/*! ./runtime */ 21);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -7920,7 +7927,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 29:
+/***/ 21:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/

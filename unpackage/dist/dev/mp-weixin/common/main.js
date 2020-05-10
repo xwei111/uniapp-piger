@@ -87,31 +87,45 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   globalData: {
-    baseUrl:  true ? '/piger' : undefined },
+    baseUrl:  true ? 'http://4bkec15r.xiaomy.net' : undefined },
 
   onLaunch: function onLaunch() {
-    // uni.getProvider({
-    // 	service: 'oauth',
-    // 	success: function(provider) {
-    // 		console.log('provider---------', provider)
-    // 		uni.login({
-    // 			provider: 'weixin',
-    // 			success: function(loginRes) {
-    // 				console.log('loginRes-----------', loginRes);
-    // 			}
-    // 		});
-    // 	}
-    // });
+
   },
   onShow: function onShow() {
-    // console.log('App Show')
+    var that = this;
+    var user = uni.getStorageSync('user');
+    if (!user) {
+      uni.login({
+        provider: 'weixin',
+        success: function success(loginRes) {
+          uni.request({
+            url: "".concat(that.globalData.baseUrl, "/h5/user/wechat/auth/").concat(loginRes.code),
+            success: function success(res) {
+              if (res.statusCode === 200) {var
+                data = res.data;
+                if (data.code === 10000) {
+                  var openid = data.data;
+                  openid && uni.setStorageSync('user', openid);
+                } else {
+                  uni.showToast({ title: data.msg, icon: 'none' });
+                }
+              } else {
+                uni.showToast({ title: res.errMsg, icon: 'none' });
+              }
+            } });
+
+        } });
+
+    }
+
   },
   onHide: function onHide() {
-    // console.log('App Hide')
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 8 */

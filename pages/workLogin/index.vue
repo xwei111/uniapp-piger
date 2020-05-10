@@ -55,6 +55,10 @@
 					uni.showToast({ title: '请输入密码', icon: 'none' });
 					return
 				}
+				if(!this.chekck) {
+					uni.showToast({ title: '请阅读用户协议', icon: 'none' });
+					return
+				}
 				// {"staffCode":"5","password":"123456"}
 				workerLogin({"staffCode": this.staffCode,"password": this.password}).then(e=>{
 					if(e) {
@@ -66,7 +70,7 @@
 							this.status = 'default'
 							const { data } = e
 							if(data.userInfo.firstLogin === 0) {
-								uni.navigateTo({ url: '/pages/workerFirst/index' })
+								uni.navigateTo({ url: `/pages/workerFirst/index?staffCode=${this.staffCode}` })
 							} else if(data.userInfo.firstLogin === 1) {
 								uni.switchTab({ url: '/pages/mineTask/index' })
 							}

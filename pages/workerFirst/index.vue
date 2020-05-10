@@ -6,11 +6,11 @@
 			<view v-show="active == 1">
 				<self-input label="手机号" placeholder="请输入您的手机号" v-model="phone"></self-input>
 				<self-input label="验证码" placeholder="请输入验证码" v-model="smsCode">
-					<view :class="['getCode', isBegin ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin ? `${number}s ` : '获取验证码'}}</view>
+					<view :class="['getCode', isBegin != 1 ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin == 3 ? `${number}s ` : '获取验证码'}}</view>
 				</self-input>
 			</view>
 			<view v-show="active == 2">
-				<self-input label="员工号" placeholder="请输入您的员工号" v-model="staffCode"></self-input>
+				<self-input label="员工号" placeholder="请输入您的员工号" v-model="verifyStaffCode"></self-input>
 				<self-input label="初始密码（身份证后6位）" placeholder="请输入您的身份证后6位" v-model="password" type="password"></self-input>
 			</view>
 			<view v-show="active == 3">
@@ -44,16 +44,17 @@
 					{ id: 3, text: '设置密码' }
 				],
 				active: 1,
-				chekck: false,
+				chekck: true,
 				isShow: false,
 				phone: '',
 				smsCode: '',
-				staffCode: '',
+				verifyStaffCode: '',
 				password: '',
 				newPassword: '',
 				confirmNewPassword: '',
 				number: 60,
-				isBegin: false
+				isBegin: 1,
+				staffCode: ''
 			}
 		},
 		components: {
@@ -64,6 +65,10 @@
 			selfInput,
 			selfCheckbox,
 			selfAgree
+		},
+		onLoad(options) {
+			const { staffCode }= options;
+			this.staffCode = staffCode;
 		},
 		methods: {
 			nextClick() {
@@ -81,14 +86,14 @@
 						return
 					}
 					// {"phone":"13738050006","smsCode":"1234"}
-					workFirst({"phone": this.phone, "smsCode": this.smsCode}).then(e=> {
+					workFirst({"phone": this.phone, "smsCode": this.smsCode, staffCode: this.staffCode }).then(e=> {
 						if(e.success) {
 							this.active = ++this.active
 						}
 					})
 				}
 				if(this.active == 2) {
-					if(!this.staffCode) {
+					if(!this.verifyStaffCode) {
 						uni.showToast({ title: '请输入员工号', icon: 'none' });
 						return
 					}
@@ -96,7 +101,7 @@
 						uni.showToast({ title: '请输入初始密码', icon: 'none' });
 						return
 					}
-					workSecond({ staffCode: this.staffCode, password: this.password }).then(e=> {
+					workSecond({ staffCode: this.staffCode, verifyStaffCode: this.verifyStaffCode, password: this.password }).then(e=> {
 						if(e.success) {
 							this.active = ++this.active
 						}
@@ -123,7 +128,6 @@
 					workThree({"staffCode": this.staffCode,"newPassword": this.newPassword,"confirmNewPassword": this.confirmNewPassword}).then(e=> {
 						uni.switchTab({ url: '/pages/mineTask/index' })
 					})
-					console.log('verf', this.phone, this.smsCode, this.staffCode, this.password, this.newPassword, this.confirmNewPassword, this.chekck )
 					return
 				}
 				
@@ -138,19 +142,24 @@
 				this.isShow = false
 			},
 			getCodeHandle() {
-				if(this.isBegin) return
-				this.isBegin = true;
-				let selfTimer = setInterval(()=>{
-					this.number = --this.number
-					if(this.number < 0) {
-						this.number = 60
-						this.isBegin = false;
-						clearInterval(selfTimer)
-						selfTimer = null
+				if(this.isBegin != 1) return
+				this.isBegin = 2;
+				getTellCode({"phone": this.phone, staffCode: this.staffCode}).then(e=> {
+					if(e &&e.code === 10000) {
+						this.isBegin = 3;
+						let selfTimer = setInterval(()=>{
+							this.number = --this.number
+							if(this.number < 0) {
+								this.number = 60
+								this.isBegin = 1;
+								clearInterval(selfTimer)
+								selfTimer = null
+							}
+						}, 1000)
+					} else {
+						this.isBegin = 1;
 					}
-				}, 1000)
-				// {"phone":"13738050004"}
-				getTellCode({"phone": this.phone})
+				})
 			},
 			toGuestHandle() {
 				uni.navigateTo({ url: '/pages/guestFirst/index' });
