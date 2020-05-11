@@ -164,8 +164,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _login = __webpack_require__(/*! @/api/login */ 17);
+var _ver = __webpack_require__(/*! @/utils/ver.js */ 200);var selfBg = function selfBg() {__webpack_require__.e(/*! require.ensure | components/self-bg */ "components/self-bg").then((function () {return resolve(__webpack_require__(/*! @/components/self-bg.vue */ 105));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfContent = function selfContent() {__webpack_require__.e(/*! require.ensure | components/self-content */ "components/self-content").then((function () {return resolve(__webpack_require__(/*! @/components/self-content.vue */ 112));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSteps = function selfSteps() {__webpack_require__.e(/*! require.ensure | components/self-steps */ "components/self-steps").then((function () {return resolve(__webpack_require__(/*! @/components/self-steps.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfButton = function selfButton() {__webpack_require__.e(/*! require.ensure | components/self-button */ "components/self-button").then((function () {return resolve(__webpack_require__(/*! @/components/self-button.vue */ 98));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfInput = function selfInput() {__webpack_require__.e(/*! require.ensure | components/self-input */ "components/self-input").then((function () {return resolve(__webpack_require__(/*! @/components/self-input.vue */ 85));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfCheckbox = function selfCheckbox() {__webpack_require__.e(/*! require.ensure | components/self-checkbox */ "components/self-checkbox").then((function () {return resolve(__webpack_require__(/*! @/components/self-checkbox.vue */ 119));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfAgree = function selfAgree() {__webpack_require__.e(/*! require.ensure | components/self-agree */ "components/self-agree").then((function () {return resolve(__webpack_require__(/*! @/components/self-agree.vue */ 126));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -176,7 +176,6 @@ var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function se
       { id: 3, text: '设置密码' }],
 
       active: 1,
-      chekck: true,
       isShow: false,
       phone: '',
       smsCode: '',
@@ -209,7 +208,7 @@ var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function se
           uni.showToast({ title: '请输入手机号', icon: 'none' });
           return;
         }
-        if (!/^\d{11}$/.test(this.phone)) {
+        if (!(0, _ver.verTell)(this.phone)) {
           uni.showToast({ title: '手机格式错误', icon: 'none' });
           return;
         }
@@ -252,10 +251,6 @@ var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function se
           uni.showToast({ title: '两次输入密码不一致', icon: 'none' });
           return;
         }
-        if (!this.chekck) {
-          uni.showToast({ title: '请阅读用户协议', icon: 'none' });
-          return;
-        }
         // {"staffCode":"5","newPassword":"123456","confirmNewPassword":"123456"}
         (0, _login.workThree)({ "staffCode": this.staffCode, "newPassword": this.newPassword, "confirmNewPassword": this.confirmNewPassword }).then(function (e) {
           uni.switchTab({ url: '/pages/mineTask/index' });
@@ -264,9 +259,6 @@ var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function se
       }
 
     },
-    selectHandle: function selectHandle() {
-      this.chekck = !this.chekck;
-    },
     agreeHandle: function agreeHandle() {
       this.isShow = true;
     },
@@ -274,6 +266,14 @@ var _login = __webpack_require__(/*! @/api/login */ 17);var selfBg = function se
       this.isShow = false;
     },
     getCodeHandle: function getCodeHandle() {var _this2 = this;
+      if (!this.phone) {
+        uni.showToast({ title: '请输入手机号', icon: 'none' });
+        return;
+      }
+      if (!(0, _ver.verTell)(this.phone)) {
+        uni.showToast({ title: '手机格式错误', icon: 'none' });
+        return;
+      }
       if (this.isBegin != 1) return;
       this.isBegin = 2;
       (0, _login.getTellCode)({ "phone": this.phone, staffCode: this.staffCode }).then(function (e) {

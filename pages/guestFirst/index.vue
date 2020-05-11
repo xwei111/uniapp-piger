@@ -47,8 +47,9 @@
 					<self-input label=" 姓名" v-model="othserUser"></self-input>
 					<self-input label="身份证号" v-model="othserSfz"></self-input>
 				</view>
-				<view class="addUser" v-if="accShow" @click="addHandle" >
-					<text>加入该访客</text>
+				<view class="addUser" v-if="accShow"  >
+					<text @click="addHandle">加入该访客</text>
+					<text @click="cancleHandle">取消</text>
 				</view>
 				
 				<self-input label="目的地">
@@ -72,7 +73,7 @@
 				
 			</view>
 			<self-button :text="active == 3 ? '提交' : '下一步' " @handleClick="nextClick" class="nextButton"></self-button>
-			<self-checkbox :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
+			<self-checkbox v-if="active === 1" :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
 			<view class="isGuest" @click="toWorkHandle">我是员工</view>
 		</self-content>
 		<self-agree :isShow="isShow" @closeHandle="closeHandle"></self-agree>
@@ -91,6 +92,7 @@
 	import timer from '@/components/timer/index.vue';
 	import GetDate from '@/components/timer/GetDate.js';
 	import { guestGetTellCode, guestFirst, guestSecond, guestThree, changeGuestThree } from '@/api/login.js';
+	import { verTell, verSfz } from '@/utils/ver.js';
 	
 	export default{
 		data() {
@@ -100,7 +102,7 @@
 					{ id: 2, text: '完善个人信息' },
 					{ id: 3, text: '完善来访信息' }
 				],
-				active: 1,
+				active: 3,
 				chekck: false,
 				isShow: false,
 				options: [
@@ -175,12 +177,16 @@
 						uni.showToast({ title: '请输入手机号', icon: 'none' });
 						return
 					}
-					if(!/^\d{11}$/.test(this.phone)) {
+					if(!verTell(this.phone)) {
 						uni.showToast({ title: '手机格式错误', icon: 'none' });
 						return
 					}
 					if(!this.smsCode) {
 						uni.showToast({ title: '请输入验证码', icon: 'none' });
+						return
+					}
+					if(!this.chekck) {
+						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
 						return
 					}
 					guestFirst({ phone: this.phone, smsCode: this.smsCode }).then(e=>{
@@ -198,6 +204,10 @@
 						uni.showToast({ title: '请输入身份证', icon: 'none' });
 						return
 					}
+					if(!verSfz(this.idNo)) {
+						uni.showToast({ title: '身份证格式错误', icon: 'none' });
+						return
+					}
 					// {"phone":"13738051234","idNo":"330727199011171234","name":"张五"}
 					guestSecond({ phone: this.phone, idNo: this.idNo, name: this.name }).then(e=>{
 						if(e.success) {
@@ -208,10 +218,6 @@
 				if(this.active == 3) {
 					if(this.visitorType == 2 && !this.companyName) {
 						uni.showToast({ title: '请输入企业名称', icon: 'none' });
-						return
-					}
-					if(!this.chekck) {
-						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
 						return
 					}
 					const detail = {
@@ -266,6 +272,14 @@
 				this.visitDate = e
 			},
 			getCodeHandle() {
+				if(!this.phone) {
+					uni.showToast({ title: '请输入手机号', icon: 'none' });
+					return
+				}
+				if(!verTell(this.phone)) {
+					uni.showToast({ title: '手机格式错误', icon: 'none' });
+					return
+				}
 				if(this.isBegin != 1) return
 				this.isBegin = 2;
 				guestGetTellCode({"phone": this.phone}).then(e=> {
@@ -306,7 +320,16 @@
 					uni.showToast({ title: '请输入身份证', icon: 'none' });
 					return
 				}
+				if(!verSfz(this.othserSfz)) {
+					uni.showToast({ title: '身份证格式错误', icon: 'none' });
+					return
+				}
 				this.accompanying.push({name: this.othserUser, idNo: this.othserSfz})
+				this.othserUser = '';
+				this.othserSfz = '';
+				this.accShow = false
+			},
+			cancleHandle() {
 				this.othserUser = '';
 				this.othserSfz = '';
 				this.accShow = false

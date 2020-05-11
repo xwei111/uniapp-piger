@@ -90,7 +90,8 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   globalData: {
-    baseUrl:  true ? 'http://4bkec15r.xiaomy.net' : undefined },
+    baseUrl:  true ? 'http://4bkec15r.xiaomy.net' : undefined,
+    userInfo: {} },
 
   onLaunch: function onLaunch() {
 

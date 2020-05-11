@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTaskCenter = function selfTaskCenter() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-center */ "components/taskmodel/self-task-center").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-center.vue */ 177));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTaskCenter = function selfTaskCenter() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-center */ "components/taskmodel/self-task-center").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-center.vue */ 189));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -204,7 +204,20 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     },
     workHandle: function workHandle(e) {
       console.log('e', e);
+    },
+    comeHandle: function comeHandle() {
+      // 已入场不能在入场
+      uni.navigateTo({
+        url: '/pages/comePig/index' });
+
+    },
+    leaveHandle: function leaveHandle() {
+      // 已离场不能在离场
+      uni.navigateTo({
+        url: '/pages/leavePig/index' });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

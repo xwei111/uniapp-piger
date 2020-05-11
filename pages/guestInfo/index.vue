@@ -198,6 +198,7 @@
 					width: 136rpx;
 					text-align: right;
 					margin-right: 30rpx;
+					white-space: nowrap;
 					.info_people_num {
 						color: $primary-color;
 					}

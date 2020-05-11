@@ -114,6 +114,7 @@
   width: 136rpx;
   text-align: right;
   margin-right: 30rpx;
+  white-space: nowrap;
 }
 .info_box .info_content .info_list .info_list_label .info_people_num.data-v-78d13994 {
   color: #0fbb87;

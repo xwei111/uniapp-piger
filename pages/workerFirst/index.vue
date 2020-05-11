@@ -18,7 +18,6 @@
 				<self-input label="确认密码" placeholder="再次输入密码" v-model="confirmNewPassword" type="password"></self-input>
 			</view>
 			<self-button :text="active == 3 ? '立即登录' : '下一步' " @handleClick="nextClick" class="nextButton"></self-button>
-			<self-checkbox :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
 			<view class="isGuest" @click="toGuestHandle">我是访客</view>
 		</self-content>
 		<self-agree :isShow="isShow" @closeHandle="closeHandle"></self-agree>
@@ -34,6 +33,7 @@
 	import selfCheckbox from '@/components/self-checkbox.vue';
 	import selfAgree from '@/components/self-agree.vue';
 	import { getTellCode, workFirst, workSecond, workThree } from '@/api/login';
+	import { verTell, verSfz } from '@/utils/ver.js';
 	
 	export default{
 		data() {
@@ -44,7 +44,6 @@
 					{ id: 3, text: '设置密码' }
 				],
 				active: 1,
-				chekck: true,
 				isShow: false,
 				phone: '',
 				smsCode: '',
@@ -77,7 +76,7 @@
 						uni.showToast({ title: '请输入手机号', icon: 'none' });
 						return
 					}
-					if(!/^\d{11}$/.test(this.phone)) {
+					if(!verTell(this.phone)) {
 						uni.showToast({ title: '手机格式错误', icon: 'none' });
 						return
 					}
@@ -120,10 +119,6 @@
 						uni.showToast({ title: '两次输入密码不一致', icon: 'none' });
 						return
 					}
-					if(!this.chekck) {
-						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
-						return
-					}
 					// {"staffCode":"5","newPassword":"123456","confirmNewPassword":"123456"}
 					workThree({"staffCode": this.staffCode,"newPassword": this.newPassword,"confirmNewPassword": this.confirmNewPassword}).then(e=> {
 						uni.switchTab({ url: '/pages/mineTask/index' })
@@ -132,9 +127,6 @@
 				}
 				
 			},
-			selectHandle() {
-				this.chekck = !this.chekck
-			},
 			agreeHandle() {
 				this.isShow = true
 			},
@@ -142,6 +134,14 @@
 				this.isShow = false
 			},
 			getCodeHandle() {
+				if(!this.phone) {
+					uni.showToast({ title: '请输入手机号', icon: 'none' });
+					return
+				}
+				if(!verTell(this.phone)) {
+					uni.showToast({ title: '手机格式错误', icon: 'none' });
+					return
+				}
 				if(this.isBegin != 1) return
 				this.isBegin = 2;
 				getTellCode({"phone": this.phone, staffCode: this.staffCode}).then(e=> {

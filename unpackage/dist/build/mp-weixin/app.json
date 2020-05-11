@@ -7,7 +7,9 @@
     "pages/guestInfo/index",
     "pages/mineTask/index",
     "pages/taskCenter/index",
-    "pages/mine/index"
+    "pages/mine/index",
+    "pages/comePig/index",
+    "pages/leavePig/index"
   ],
   "subPackages": [],
   "window": {
