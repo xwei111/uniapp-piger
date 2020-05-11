@@ -31,6 +31,14 @@
 		{
 			"path": "pages/mine/index",
 			"style": {}
+		},
+		{
+			"path": "pages/comePig/index",
+			"style": {}
+		},
+		{
+			"path": "pages/leavePig/index",
+			"style": {}
 		}
 	],
 	"globalStyle": {

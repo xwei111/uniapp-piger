@@ -10,12 +10,12 @@
 		</view>
 		<!-- apply -->
 		<view class="taskCenter_apply">
-			<view class="taskCenter_apply_content">
+			<view class="taskCenter_apply_content" @click="comeHandle">
 				<image class="taskCenter_apply_content_ig" src="/static/img1.png"></image>
 				<view class="taskCenter_apply_content_text">我要进场</view>
 				<view class="taskCenter_apply_content_btn taskCenter_apply_btn1">发起申请</view>
 			</view>
-			<view class="taskCenter_apply_content">
+			<view class="taskCenter_apply_content" @click="leaveHandle">
 				<image class="taskCenter_apply_content_ig" src="/static/img2.png"></image>
 				<view class="taskCenter_apply_content_text">我要离开</view>
 				<view class="taskCenter_apply_content_btn taskCenter_apply_btn2">发起申请</view>
@@ -72,6 +72,18 @@
 			},
 			workHandle(e) {
 				console.log('e', e)
+			},
+			comeHandle() {
+				// 已入场不能在入场
+				uni.navigateTo({
+					url: '/pages/comePig/index'
+				})
+			},
+			leaveHandle() {
+				// 已离场不能在离场
+				uni.navigateTo({
+					url: '/pages/leavePig/index'
+				})
 			}
 		}
 	}
@@ -177,7 +189,7 @@
 			width: 100%;
 			min-height: 600rpx;
 			box-sizing: border-box;
-			padding: 0 40rpx;
+			padding: 0 40rpx 1rpx 40rpx;
 		}
 	}
 </style>
