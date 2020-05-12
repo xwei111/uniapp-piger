@@ -216,4 +216,10 @@
 	  border: 1px solid #aaa;
 	  border-radius: 3px;
 	} */
+	.rui-picker{
+		font-size:34rpx;
+		font-family:PingFangSC-Regular,PingFang SC;
+		font-weight:400;
+		color:rgba(178,178,178,1);
+	}
 </style>

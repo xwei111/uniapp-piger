@@ -40,6 +40,22 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	/*每个页面公共css */
+	.fill_content{
+		width: 100%;
+		height:94rpx;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #fff;
+		font-size:34rpx;
+		font-family:PingFangSC-Regular,PingFang SC;
+		font-weight:400;
+		color:rgba(178,178,178,1);
+		box-sizing: border-box;
+		padding-left: 30rpx;
+		line-height: 94rpx;
+		z-index: 9;
+	}
 </style>

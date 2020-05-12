@@ -22,7 +22,7 @@
 			},
 			placeholder: {
 				type: String,
-				default: ''
+				default: '请输入'
 			},
 			status: {
 				type: String,

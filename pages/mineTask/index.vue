@@ -60,6 +60,9 @@
 				this.color != 'blue' && uni.hideTabBar()
 			}, 1000)
 		},
+		onHide() {
+			this.active = 1;
+		},
 		methods: {
 			selectHandle(e) {
 				this.active = e.id

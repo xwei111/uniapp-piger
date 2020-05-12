@@ -22,23 +22,33 @@
 		},
 		{
 			"path": "pages/mineTask/index",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我的任务"
+			}
 		},
 		{
 			"path": "pages/taskCenter/index",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "任务中心"
+			}
 		},
 		{
 			"path": "pages/mine/index",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我"
+			}
 		},
 		{
 			"path": "pages/comePig/index",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "进场申请"
+			}
 		},
 		{
 			"path": "pages/leavePig/index",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "离场申请"
+			}
 		}
 	],
 	"globalStyle": {

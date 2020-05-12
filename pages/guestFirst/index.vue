@@ -102,7 +102,7 @@
 					{ id: 2, text: '完善个人信息' },
 					{ id: 3, text: '完善来访信息' }
 				],
-				active: 3,
+				active: 1,
 				chekck: false,
 				isShow: false,
 				options: [
@@ -380,23 +380,6 @@
 	.radio {
 		padding: 30rpx 0;
 	}
-	.fill_content{
-		width: 100%;
-		height:94rpx;
-		position: absolute;
-		top: 0;
-		left: 0;
-		background: #fff;
-		font-size:34rpx;
-		font-family:PingFangSC-Regular,PingFang SC;
-		font-weight:400;
-		color:rgba(178,178,178,1);
-		box-sizing: border-box;
-		padding-left: 30rpx;
-		line-height: 94rpx;
-		z-index: 9;
-	}
-	
 	.addUser {
 		font-size:34rpx;
 		font-family:PingFangSC-Regular,PingFang SC;
