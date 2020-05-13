@@ -1,10 +1,10 @@
 <template>
-	<view>
+	<view class="main_box">
 		<view class="default_bg"></view>
 		<view class="main_content">
-			<selfTabs :list="tags" :active="active" @selectHandle="selectHandle"></selfTabs>
+			<self-tabs :list="tags" :active="active" @selectHandle="selectHandle" style="width: 100%;"></self-tabs>
 			<self-search v-if="list&&list.length" @searchHandle="searchHandle"></self-search>
-			<scroll-view class="scroll_task" scroll-y="true">
+			<scroll-view class="scroll_task" scroll-y="true" :scroll-top="scrollTop" @scroll="scroll">
 				<view class="task_content" v-if="list&&list.length">
 					<self-task-mine 
 						v-for="(item, index) in list" 
@@ -42,9 +42,11 @@
 				active: 1,
 				list: [
 					{title: '车辆洗消', people: '吴小军', pros: '一洗-采样', car: "浙A099JK", ig: '/static/img3.png'},
+					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', car: "华东区", ig: '/static/img4.png'},
 					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', car: "华东区", ig: '/static/img4.png'}
 				],
-				color: null
+				color: null,
+				scrollTop: 0
 			}
 		},
 		components: {
@@ -65,6 +67,7 @@
 		},
 		methods: {
 			selectHandle(e) {
+				this.scrollTop = 0
 				this.active = e.id
 			},
 			searchHandle(val){
@@ -80,9 +83,11 @@
 				console.log('e', e)
 			},
 			colorDetailHandle(e) {
-				console.log('e', e)
 				this.color != 'blue' && uni.showTabBar()
 				this.color = null
+			},
+			scroll(e) {
+				this.scrollTop = e.detail.scrollTop
 			}
 		}
 	}
@@ -98,14 +103,15 @@
 	.main_content {
 		position: relative;
 		z-index: 9;
+		overflow: hidden;
 	}
 	.scroll_task {
-		width: 100%;
-		height: 900rpx;
+		flex: 1;
+		overflow: hidden;
 		.task_content {
 			width: 100%;
 			box-sizing: border-box;
-			padding: 24rpx 44rpx 0 44rpx;
+			padding: 24rpx 44rpx calc(var(--window-bottom) + 24rpx) 44rpx;
 		}
 	}
 	

@@ -16,15 +16,21 @@
 			</view>
 		</view>
 		<view class="mine_content">
-			<view class="mine_content_warning">
+			<view :class="[
+					'mine_content_warning',
+					number > 0 ? 'mine_content_warning_have' : 'mine_content_warning_none'
+				]"
+				@click="toWarningHandle"
+			>
 				<view class="mine_content_warning_top">
 					<image class="mine_content_warning_ig" src="../../static/red.png"></image>
 					<text>报警信息</text>
 				</view>
-				<view class="mine_content_warning_info">当前共0条消息待处理</view>
+				<view class="mine_content_warning_info">当前共{{number}}条消息待处理</view>
+				<text v-if="number > 0" class="mine_content_warning_done">请立即处理！</text>
 			</view>
 			<view class="mine_content_message">
-				<view class="mine_content_message_list">
+				<view class="mine_content_message_list" @click="toGuestHandle">
 					<image class="mine_content_warning_ig" src="../../static/guest.png"></image>
 					<text>访客邀请</text>
 				</view>
@@ -39,6 +45,21 @@
 </template>
 
 <script>
+	export default{
+		data() {
+			return {
+				number: 1
+			}
+		},
+		methods: {
+			toWarningHandle() {
+				uni.navigateTo({ url: '/pages/mineWarning/index' })
+			},
+			toGuestHandle() {
+				uni.navigateTo({ url: '/pages/invitaGuest/index' })
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -117,7 +138,7 @@
 			width:656rpx;
 			height: 153rpx;
 			background:rgba(255,255,255,1);
-			box-shadow:0rpx 2rpx 10rpx 0rpx rgba(215,215,215,0.5);
+			
 			border-radius:26rpx;
 			box-sizing: border-box;
 			padding-left: 37rpx;
@@ -125,6 +146,14 @@
 			flex-direction: column;
 			justify-content: center;
 			margin-bottom: 40rpx;
+			position: relative;
+			&.mine_content_warning_have {
+				box-shadow:0rpx 2rpx 10rpx 0rpx rgba(215,215,215,0.5);
+				border:5rpx solid rgba(255,189,189,0.53);
+			}
+			&.mine_content_warning_none {
+				box-shadow:0rpx 2rpx 10rpx 0rpx rgba(215,215,215,0.5);
+			}
 			.mine_content_warning_top {
 				font-size:32rpx;
 				font-family:PingFangSC-Regular,PingFang SC;
@@ -140,6 +169,15 @@
 				font-weight:400;
 				color:rgba(168,168,168,1);
 				padding-left: 64rpx;
+			}
+			.mine_content_warning_done {
+				position: absolute;
+				top: 33rpx;
+				right: 10rpx;
+				font-size:28rpx;
+				font-family:PingFangSC-Regular,PingFang SC;
+				font-weight:400;
+				color:rgba(229,33,33,1);
 			}
 		}
 		.mine_content_message {

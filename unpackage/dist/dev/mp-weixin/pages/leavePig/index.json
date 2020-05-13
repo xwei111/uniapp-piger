@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "离场申请",
+  "usingComponents": {
+    "self-bg": "/components/self-bg",
+    "self-content": "/components/self-content",
+    "self-input": "/components/self-input",
+    "timer": "/components/timer/index",
+    "self-button": "/components/self-button"
+  }
 }

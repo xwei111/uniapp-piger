@@ -41,7 +41,7 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
   line-height: 48rpx;
-  margin: 24rpx 0;
+  margin: 24rpx 0 0 0;
 }
 .self_input_box .self_inputs.data-v-0b76800c {
   display: -webkit-box;
@@ -63,6 +63,7 @@
   -webkit-justify-content: center;
           justify-content: center;
   position: relative;
+  margin-top: 24rpx;
 }
 .self_input_box .self_inputs .self_input.data-v-0b76800c {
   -webkit-box-flex: 1;

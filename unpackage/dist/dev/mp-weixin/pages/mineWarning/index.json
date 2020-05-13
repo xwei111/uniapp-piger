@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "报警信息",
+  "usingComponents": {
+    "self-tabs": "/components/self-tabs",
+    "self-warning-box": "/components/self-warning-box"
+  }
+}

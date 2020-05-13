@@ -1,12 +1,13 @@
 <template>
 	<view class="self_input_box">
-		<text class="self_input_label" v-show="label">{{label}}</text>
+		<text class="self_input_label" v-if="label">{{label}}</text>
 		<view :class="[
 			'self_inputs',
-			status == 'error' ? 'self_inputs-error' : ''
+			status == 'error' ? 'self_inputs-error' : '',
+			disabled ? 'self_inputs_disabled' : ''
 		]">
 			<slot name="prefix"></slot>
-			<input ref="input" class="self_input" :placeholder="placeholder" @input="onInput" :value="value" :type="type" />
+			<input ref="input" class="self_input" :placeholder="placeholder" @input="onInput" :value="value" :type="type" :disabled="disabled" />
 			<slot name="suffix"></slot>
 			<slot name="fill"></slot>
 		</view>
@@ -35,6 +36,10 @@
 			type: {
 				type: String,
 				default: 'text'
+			},
+			disabled: {
+				type: Boolean,
+				default: false
 			}
 		},
 		methods: {
@@ -58,7 +63,7 @@
 			font-weight: 400;
 			color: rgba(0, 0, 0, 0.7);
 			line-height: 48rpx;
-			margin: 24rpx 0;
+			margin: 24rpx 0 0 0;
 		}
 
 		.self_inputs {
@@ -74,6 +79,7 @@
 			align-items: center;
 			justify-content: center;
 			position: relative;
+			margin-top: 24rpx;
 
 			.self_input {
 				flex: 1;
@@ -82,6 +88,10 @@
 
 			&.self_inputs-error {
 				border-color: #f00;
+			}
+			&.self_inputs_disabled {
+				border: none;
+				background-color: #F5F5F5;
 			}
 		}
 

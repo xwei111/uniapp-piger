@@ -45,6 +45,17 @@
 	body {
 		background-color: #f7f7f7;
 	}
+	.main_box {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding-top: var(--window-top);
+	}
 	.mian_background {
 		background-color: #f7f7f7;
 	}

@@ -59,7 +59,7 @@
 						</picker>
 					</view>
 				</self-input>
-				<self-input label="来访时间" placeholder="请输入您的企业名">
+				<self-input label="来访时间">
 					<view slot="fill" class="fill_content">
 						<timer
 							fields="second"
@@ -146,7 +146,7 @@
 					{ id: 2, text: '完善个人信息' },
 					{ id: 3, text: '完善来访信息' }
 				],
-				active: 3,
+				active: 1,
 				chekck: false,
 				isShow: false,
 				options: [

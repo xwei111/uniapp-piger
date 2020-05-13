@@ -9,7 +9,9 @@
     "pages/taskCenter/index",
     "pages/mine/index",
     "pages/comePig/index",
-    "pages/leavePig/index"
+    "pages/leavePig/index",
+    "pages/mineWarning/index",
+    "pages/warningDetail/index"
   ],
   "subPackages": [],
   "window": {
@@ -45,6 +47,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap63.json"
+  "usingComponents": {}
 }

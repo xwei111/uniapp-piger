@@ -167,7 +167,8 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);var selfButton = func
   },
   methods: {
     workHandleClick: function workHandleClick() {
-      uni.navigateTo({ url: '/pages/workLogin/index' });
+      // uni.navigateTo({ url: '/pages/workLogin/index' });
+      uni.switchTab({ url: '/pages/mineTask/index' });
     },
     guestHandleClick: function guestHandleClick() {
       (0, _login.getGuestInfo)().then(function (e) {
@@ -184,6 +185,12 @@ var _login = __webpack_require__(/*! @/api/login.js */ 17);var selfButton = func
               visitDate: data.visitDate,
               targetLocation: data.targetLocation,
               phone: data.phone,
+              whence: data.whence,
+              lastTouchTime: data.lastTouchTime,
+              lastHighRishTime: data.lastHighRishTime,
+              arriveWay: data.arriveWay,
+              personalEffects: data.personalEffects,
+              otherEffects: data.otherEffects,
               mainVisitors: [{
                 name: data.name,
                 idNo: data.idNo }],

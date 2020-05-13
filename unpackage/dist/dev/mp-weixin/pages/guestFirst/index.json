@@ -8,6 +8,7 @@
     "self-checkbox": "/components/self-checkbox",
     "self-agree": "/components/self-agree",
     "self-radio": "/components/self-radio",
-    "timer": "/components/timer/index"
+    "timer": "/components/timer/index",
+    "self-higinfo": "/components/self-higinfo"
   }
 }

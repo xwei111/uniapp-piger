@@ -56,6 +56,9 @@
 			}
 		},
 		watch: {
+			value(val) {
+				this.curValue = val;
+			},
 			disabled(val){
 				this.curDisabled = val;
 			},

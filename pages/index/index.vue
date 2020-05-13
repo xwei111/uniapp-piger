@@ -30,7 +30,8 @@
 		},
 		methods: {
 			workHandleClick() {
-				uni.navigateTo({ url: '/pages/workLogin/index' });
+				// uni.navigateTo({ url: '/pages/workLogin/index' });
+				uni.switchTab({ url: '/pages/mineTask/index' })
 			},
 			guestHandleClick() {
 				getGuestInfo().then(e=> {

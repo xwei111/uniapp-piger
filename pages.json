@@ -49,6 +49,26 @@
 			"style": {
 				"navigationBarTitleText": "离场申请"
 			}
+		}, {
+			"path": "pages/mineWarning/index",
+			"style": {
+				"navigationBarTitleText": "报警信息"
+			}
+		}, { 
+			"path": "pages/dowarning/index",
+			"style": {
+				"navigationBarTitleText": "处理报警"
+			}
+		}, { 
+			"path": "pages/warningDetail/index",
+			"style": {
+				"navigationBarTitleText": "报警详情"
+			}
+		}, { 
+			"path": "pages/invitaGuest/index",
+			"style": {
+				"navigationBarTitleText": "访客邀请"
+			}
 		}
 	],
 	"globalStyle": {

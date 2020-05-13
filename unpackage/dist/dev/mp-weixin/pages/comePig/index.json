@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "进场申请",
+  "usingComponents": {
+    "self-input": "/components/self-input",
+    "timer": "/components/timer/index",
+    "self-button": "/components/self-button",
+    "self-higinfo": "/components/self-higinfo",
+    "self-checkbox": "/components/self-checkbox"
+  }
 }
