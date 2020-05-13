@@ -47,6 +47,12 @@
 								visitDate: data.visitDate,
 								targetLocation: data.targetLocation,
 								phone: data.phone,
+								whence: data.whence,
+								lastTouchTime: data.lastTouchTime,
+								lastHighRishTime: data.lastHighRishTime,
+								arriveWay: data.arriveWay,
+								personalEffects: data.personalEffects,
+								otherEffects: data.otherEffects,
 								mainVisitors: [{
 									name: data.name,
 									idNo: data.idNo

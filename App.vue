@@ -42,6 +42,19 @@
 
 <style lang="scss">
 	/*每个页面公共css */
+	body {
+		background-color: #f7f7f7;
+	}
+	.mian_background {
+		background-color: #f7f7f7;
+	}
+	.main_content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding-top: 40rpx;
+	}
 	.fill_content{
 		width: 100%;
 		height:94rpx;

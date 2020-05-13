@@ -3,9 +3,9 @@
 		<view class="default_bg"></view>
 		<view class="main_content">
 			<selfTabs :list="tags" :active="active" @selectHandle="selectHandle"></selfTabs>
-			<self-search @searchHandle="searchHandle"></self-search>
+			<self-search v-if="list&&list.length" @searchHandle="searchHandle"></self-search>
 			<scroll-view class="scroll_task" scroll-y="true">
-				<view class="task_content" v-if="list.length">
+				<view class="task_content" v-if="list&&list.length">
 					<self-task-mine 
 						v-for="(item, index) in list" 
 						:key="index" 

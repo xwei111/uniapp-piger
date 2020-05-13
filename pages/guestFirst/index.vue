@@ -70,7 +70,50 @@
 						></timer>
 					</view>
 				</self-input>
-				
+				<self-input label="当前所在地">
+					<view slot="fill" class="fill_content">
+						<picker @change="whenceChange" :value="whenceIdx" :range="whences">
+							<view class="uni-input">{{whences[whenceIdx]}}</view>
+						</picker>
+					</view>
+				</self-input>
+				<self-input label="上次接触猪只时间">
+					<view slot="fill" class="fill_content">
+						<timer
+							fields="second"
+							start="2010-00-00 00:00:00"
+							end="2999-12-30 23:59:59"
+							:value="lastTouchTime"
+							@change="lastTouchTimeChange"
+						></timer>
+					</view>
+				</self-input>
+				<self-input label="上次接触高风险场所日期">
+					<view slot="fill" class="fill_content">
+						<timer
+							fields="second"
+							start="2010-00-00 00:00:00"
+							end="2999-12-30 23:59:59"
+							:value="lastHighRishTime"
+							@change="lastHighRishTimeChange"
+						></timer>
+					</view>
+				</self-input>
+				<self-higinfo></self-higinfo>
+				<self-input label="到达隔离点交通方式">
+					<view slot="fill" class="fill_content">
+						<picker @change="arriveWayChange" :value="arriveWayIdx" :range="arriveWays">
+							<view class="uni-input">{{arriveWays[arriveWayIdx]}}</view>
+						</picker>
+					</view>
+				</self-input>
+				<view class="otherPeople">
+					<view class="otherPeople_title">携带个人物品</view>
+					<view v-for="(item, index) in personalEffectList" :key="index" class="personalEffect_box" >
+						<self-checkbox :chekck="personalEffects.indexOf(item) > -1" @selectHandle="thingsHandle" :label="item"></self-checkbox>
+					</view>
+					<self-input v-if="personalEffects.indexOf('其他') > -1" placeholder="请输入其他物品" v-model="otherEffects"></self-input>
+				</view>
 			</view>
 			<self-button :text="active == 3 ? '提交' : '下一步' " @handleClick="nextClick" class="nextButton"></self-button>
 			<self-checkbox v-if="active === 1" :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
@@ -89,6 +132,7 @@
 	import selfCheckbox from '@/components/self-checkbox.vue';
 	import selfAgree from '@/components/self-agree.vue';
 	import selfRadio from '@/components/self-radio.vue';
+	import selfHiginfo from '@/components/self-higinfo.vue';
 	import timer from '@/components/timer/index.vue';
 	import GetDate from '@/components/timer/GetDate.js';
 	import { guestGetTellCode, guestFirst, guestSecond, guestThree, changeGuestThree } from '@/api/login.js';
@@ -102,7 +146,7 @@
 					{ id: 2, text: '完善个人信息' },
 					{ id: 3, text: '完善来访信息' }
 				],
-				active: 1,
+				active: 3,
 				chekck: false,
 				isShow: false,
 				options: [
@@ -114,7 +158,16 @@
 				index: 0,
 				address: ['猪场A', '猪场B', '猪场C'],
 				idx: 0,
+				whences: ['杭州', '舟山', '绍兴'],
+				whenceIdx: 0,
+				arriveWays: ['打车', '步行', '自驾'],
+				arriveWayIdx: 0,
 				visitDate: '',
+				lastTouchTime: '',
+				lastHighRishTime: '',
+				personalEffectList: ['手机', '眼镜', '其他'],
+				otherEffects: '',
+				personalEffects: [],
 				phone: '',
 				smsCode: '',
 				name: '',
@@ -138,12 +191,13 @@
 			selfCheckbox,
 			selfAgree,
 			selfRadio,
-			timer
+			timer,
+			selfHiginfo
 		},
 		onLoad(options) {
 			if(options && options.detail) {
 				let detail = JSON.parse(options.detail)
-				const { type, visitorType, visitors, reason, companyName, visitDate, targetLocation, phone, mainVisitors } = detail
+				const { type, visitorType, visitors, reason, companyName, visitDate, targetLocation, phone, mainVisitors, whence, lastTouchTime, lastHighRishTime, arriveWay, personalEffects, otherEffects } = detail
 				this.type = type
 				if(type && type == 'change') {
 					this.active = 3;
@@ -153,13 +207,19 @@
 					this.companyName = companyName;
 					this.visitDate = visitDate;
 					this.idx = this.address.findIndex(e=>e === targetLocation);
+					this.whenceIdx = this.whences.findIndex(e=>e === whence);
+					this.arriveWayIdx = this.arriveWays.findIndex(e=>e === arriveWay)
+					this.lastTouchTime = lastTouchTime;
+					this.lastHighRishTime = lastHighRishTime;
+					this.personalEffects = personalEffects,
+					this.otherEffects = otherEffects;
 					this.phone = '13738051234';
 					this.name = mainVisitors[0].name;
 					this.idNo = mainVisitors[0].idNo;
 					return
 				}
 			}
-		    
+			
 			let time = GetDate.getCurrentTimes();
 			let arr = [];
 			for (let key in time.detail) {
@@ -220,6 +280,10 @@
 						uni.showToast({ title: '请输入企业名称', icon: 'none' });
 						return
 					}
+					if(this.personalEffects.indexOf('其他') > -1 && !this.otherEffects) {
+						uni.showToast({ title: '请输入其他物品', icon: 'none' });
+						return
+					}
 					const detail = {
 						visitorType: this.visitorType,
 						visitors: this.accompanying,
@@ -227,7 +291,13 @@
 						companyName: this.companyName,
 						visitDate: this.visitDate,
 						targetLocation: this.address[this.idx],
-						phone: this.phone
+						phone: this.phone,
+						whence: this.whences[this.whenceIdx],
+						lastTouchTime: this.lastTouchTime,
+						lastHighRishTime: this.lastHighRishTime,
+						arriveWay: this.arriveWays[this.arriveWayIdx],
+						personalEffects: this.personalEffects,
+						otherEffects: this.otherEffects
 					}
 					this.type !== 'change' && guestThree(detail).then(e=> {
 						detail.mainVisitors = [{
@@ -252,6 +322,17 @@
 			selectHandle() {
 				this.chekck = !this.chekck
 			},
+			thingsHandle(e) {
+				let index = this.personalEffects.indexOf(e)
+				if( index < 0) {
+					this.personalEffects.push(e)
+				} else {
+					if(e === '其他') {
+						this.otherEffects = ''
+					}
+					this.personalEffects.splice(index, 1);
+				}
+			},
 			agreeHandle() {
 				this.isShow = true
 			},
@@ -268,8 +349,20 @@
 			addressChange(e) {
 				this.idx = e.target.value
 			},
+			whenceChange(e) {
+				this.whenceIdx = e.target.value
+			},
+			arriveWayChange(e) {
+				this.arriveWayIdx = e.target.value
+			},
 			bindChange(e) {
 				this.visitDate = e
+			},
+			lastTouchTimeChange(e) {
+				this.lastTouchTime = e
+			},
+			lastHighRishTimeChange(e) {
+				this.lastHighRishTime = e
 			},
 			getCodeHandle() {
 				if(!this.phone) {
@@ -451,5 +544,8 @@
 				}
 			}
 		}
+	}
+	.personalEffect_box {
+		margin-bottom: 15rpx;
 	}
 </style>

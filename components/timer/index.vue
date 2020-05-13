@@ -1,6 +1,6 @@
 <template>
-	<picker class='rui-picker rui-class' mode="multiSelector" :range="times" :value="timesIndex" :disabled="curDisabled" @change='changeDate' @cancel="cancelDate" @columnchange="columnchangeDate">
-	  {{curValue}}
+	<picker class='rui-picker rui-class' mode="multiSelector" :range="times" :value="timesIndex" :disabled="disabled" @change='changeDate' @cancel="cancelDate" @columnchange="columnchangeDate">
+	  {{curValue ? curValue : '请选择'}}
 	</picker>
 </template>
 
@@ -56,9 +56,6 @@
 			}
 		},
 		watch: {
-			value(val) {
-				this.curValue = val;
-			},
 			disabled(val){
 				this.curDisabled = val;
 			},
@@ -80,7 +77,11 @@
 			}
 		},
 		created() {
-			if(this.value === ''){
+			let value;
+			if(this.value) {
+				value = this.value;
+				this.curValue = this.value
+			} else {
 				let time = GetDate.getCurrentTimes();
 				let arr = [];
 				for (let key in time.detail) {
@@ -89,37 +90,36 @@
 						break;
 					}
 				}
-				this.value = GetDate.format(arr);
-				this.curValue = GetDate.format(arr);
+				value = GetDate.format(arr);
 			}
 			switch (this.fields){
 				case 'year':
-				  if (this.value.length !== 4) {GetDate.error('时间粒度和时间格式不一致');this.curDisabled = true;return false;}
+				  if (value.length !== 4) {GetDate.error('时间粒度和时间格式不一致');this.curDisabled = true;return false;}
 				  if (this.start.length !== 4) { GetDate.error('时间粒度和开始时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.end.length !== 4) { GetDate.error('时间粒度和结束时间格式不一致'); this.curDisabled = true; return false;}
 				  break;
 				case 'month':
-				  if (this.value.length !== 7) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
+				  if (value.length !== 7) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.start.length !== 7) { GetDate.error('时间粒度和开始时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.end.length !== 7) { GetDate.error('时间粒度和结束时间格式不一致'); this.curDisabled = true; return false;}
 				  break;
 				case 'day':
-				  if (this.value.length !== 10) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
+				  if (value.length !== 10) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.start.length !== 10) { GetDate.error('时间粒度和开始时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.end.length !== 10) { GetDate.error('时间粒度和结束时间格式不一致'); this.curDisabled = true; return false;}
 				  break;
 				case 'hour':
-				  if (this.value.length !== 13) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
+				  if (value.length !== 13) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.start.length !== 13) { GetDate.error('时间粒度和开始时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.end.length !== 13) { GetDate.error('时间粒度和结束时间格式不一致'); this.curDisabled = true; return false;}
 				  break;
 				case 'minute':
-				  if (this.value.length !== 16) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
+				  if (value.length !== 16) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.start.length !== 16) { GetDate.error('时间粒度和开始时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.end.length !== 16) { GetDate.error('时间粒度和结束时间格式不一致'); this.curDisabled = true; return false;}
 				  break;
 				case 'second':
-				  if (this.value.length !== 19) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
+				  if (value.length !== 19) { GetDate.error('时间粒度和时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.start.length !== 19) { GetDate.error('时间粒度和开始时间格式不一致'); this.curDisabled = true; return false;}
 				  if (this.end.length !== 19) { GetDate.error('时间粒度和结束时间格式不一致'); this.curDisabled = true; return false;}
 				  break;
@@ -127,14 +127,14 @@
 				  GetDate.error('时间粒度不存在')
 				  break;
 			  }
-			  let values = this.value.split(' ');
-			  let targets = GetDate.getCurrentStringValue(this.value);
-			  if (GetDate.getTimes(this.value) < GetDate.getTimes(this.start)){
+			  let values = value.split(' ');
+			  let targets = GetDate.getCurrentStringValue(value);
+			  if (GetDate.getTimes(value) < GetDate.getTimes(this.start)){
 				GetDate.error('默认时间不能小于开始时间')
 				this.curDisabled = true
 				return false;
 			  }
-			  if (GetDate.getTimes(this.value) > GetDate.getTimes(this.end)) {
+			  if (GetDate.getTimes(value) > GetDate.getTimes(this.end)) {
 				GetDate.error('默认时间不能大于开始时间')
 				this.curDisabled = true
 				return false;
@@ -142,8 +142,8 @@
 			  let times = GetDate.getDateTimes({
 					start: this.start.substring(0, 4),
 					end: this.end.substring(0, 4),
-					curyear: this.value.substring(0, 4),
-					curmonth: this.value.substring(5, 7),
+					curyear: value.substring(0, 4),
+					curmonth: value.substring(5, 7),
 					fields: this.fields
 			  })
 			  let timesIndex = GetDate.getTimeIndex(times, targets);

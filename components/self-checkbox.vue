@@ -4,7 +4,10 @@
 			<image v-show="chekck" class="self_check_ig" src="/static/check.png"></image>
 			<image v-show="!chekck" class="self_check_ig" src="/static/nock.png"></image>
 		</view>
-		<view class="self_check_agree">
+		<view class="self_check_agree" v-if="label">
+			{{label}}
+		</view>
+		<view class="self_check_agree" v-if="!label">
 			我已阅读并同意
 			<text class="self_check_agree_text" @click.stop="agreeHandle">《用户协议》</text>
 		</view>
@@ -17,11 +20,15 @@
 			chekck: {
 				type: Boolean,
 				default: false
+			},
+			label: {
+				type: String,
+				default: ''
 			}
 		},
 		methods:{
 			selectHandle() {
-				this.$emit('selectHandle')
+				this.$emit('selectHandle', this.label)
 			},
 			agreeHandle() {
 				this.$emit(('agreeHandle'))
