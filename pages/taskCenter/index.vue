@@ -39,18 +39,19 @@
 </template>
 
 <script>
-	import selfTaskCenter from '@/components/taskmodel/self-task-center.vue'
+	import selfTaskCenter from '@/components/taskmodel/self-task-center.vue';
+	
 	export default {
 		data() {
 			return {
 				dataSource: [
-					{ ig: '/static/img3.png', color: '#0FBB87', title: '车辆洗消', sign: true },
-					{ ig: '/static/img4.png', color: '#FF8D67', title: '区域任务', sign: false },
-					{ ig: '/static/img5.png', color: '#FEA0D6', title: '猪只任务', sign: false },
-					{ ig: '/static/img6.png', color: '#FEBA59', title: '饲料任务', sign: false },
-					{ ig: '/static/img7.png', color: '#88BFFE', title: '物资任务', sign: false },
-					{ ig: '/static/img8.png', color: '#C09DFF', title: '食材任务', sign: false },
-					{ ig: '/static/img9.png', color: '#BBA887', title: '粪肥任务', sign: false }
+					{ title: '车辆洗消', sign: true, kind: 'car' },
+					{ title: '区域任务', sign: false, kind: 'region' },
+					{ title: '猪只任务', sign: false, kind: 'piger' },
+					{ title: '饲料任务', sign: false, kind: 'feed' },
+					{ title: '物资任务', sign: false, kind: 'material' },
+					{ title: '食材任务', sign: false, kind: 'food' },
+					{ title: '粪肥任务', sign: false, kind: 'fertilizer' }
 				]
 			}
 		},
@@ -62,10 +63,26 @@
 				console.log('e', e.target.value)
 			},
 			cancleSignHandle(e) {
-				console.log('e', e)
+				if(!e.sign) return
+				e.sign = false;
+				this.dataSource = this._sort(this.dataSource);
 			},
 			signHandle(e) {
-				console.log('e', e)
+				if(e.sign) return
+				e.sign = true;
+				this.dataSource = this._sort(this.dataSource);
+			},
+			_sort(data) {
+				let arr1 = [];
+				let arr2 = [];
+				data.map(e=>{
+					if(e.sign) {
+						arr1.push(e)
+					} else {
+						arr2.push(e)
+					}
+				})
+				return [...arr1, ...arr2]
 			},
 			detailHandle(e) {
 				console.log('e', e)

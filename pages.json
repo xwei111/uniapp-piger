@@ -69,6 +69,16 @@
 			"style": {
 				"navigationBarTitleText": "访客邀请"
 			}
+		}, {
+			"path": "pages/allTask/carWashTwo",
+			"style": {
+				"navigationBarTitleText": "车辆二洗"
+			}
+		}, {
+			"path": "pages/allTask/carWashThree",
+			"style": {
+				"navigationBarTitleText": "车辆三洗"
+			}
 		}
 	],
 	"globalStyle": {

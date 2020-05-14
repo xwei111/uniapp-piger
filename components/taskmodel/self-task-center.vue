@@ -1,9 +1,9 @@
 <template>
 	<view class="self_task_center">
-		<view class="self_task_center_border" :style="{'background-color': dataSource.color}"></view>
+		<view class="self_task_center_border" :style="{'background-color': tasktype[dataSource.kind] ? tasktype[dataSource.kind].color : ''}"></view>
 		<view class="self_task_center_content">
 			<view class="self_task_center_content_left">
-				<image class="self_task_center_content_left_ig" :src="dataSource.ig"></image>
+				<image class="self_task_center_content_left_ig" :src="tasktype[dataSource.kind] ? tasktype[dataSource.kind].ig : ''"></image>
 				<text>{{dataSource.title}}</text>
 			</view>
 			<view class="self_task_center_content_right">
@@ -24,16 +24,18 @@
 </template>
 
 <script>
+	import { tasktype } from '@/utils/consts.js';
+	
 	export default {
 		props: {
 			dataSource: {
 				type: Object,
-				default: () => ({
-					ig: '',
-					color: '',
-					title: '',
-					sign: false
-				})
+				default: () => ({})
+			}
+		},
+		data() {
+			return {
+				tasktype: tasktype
 			}
 		},
 		methods: {

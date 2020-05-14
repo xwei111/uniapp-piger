@@ -41,9 +41,9 @@
 				],
 				active: 1,
 				list: [
-					{title: '车辆洗消', people: '吴小军', pros: '一洗-采样', car: "浙A099JK", ig: '/static/img3.png'},
-					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', car: "华东区", ig: '/static/img4.png'},
-					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', car: "华东区", ig: '/static/img4.png'}
+					{title: '车辆洗消', people: '吴小军', pros: '一洗-采样', kind: 'car'},
+					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'region'},
+					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'piger'}
 				],
 				color: null,
 				scrollTop: 0
@@ -81,6 +81,7 @@
 			},
 			completeHandle(e) {
 				console.log('e', e)
+				uni.navigateTo({ url: `/pages/allTask/carWashThree?detail=${JSON.stringify(e)}` })
 			},
 			colorDetailHandle(e) {
 				this.color != 'blue' && uni.showTabBar()

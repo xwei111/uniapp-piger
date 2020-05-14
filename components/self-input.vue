@@ -58,12 +58,13 @@
 		.self_input_label {
 			display: block;
 			height: 48rpx;
-			font-size: 34rpx;
+			font-size: 32rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
 			color: rgba(0, 0, 0, 0.7);
 			line-height: 48rpx;
 			margin: 24rpx 0 0 0;
+			padding-left: 20rpx;
 		}
 
 		.self_inputs {

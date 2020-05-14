@@ -21,6 +21,7 @@
 <script>
 	import selfTabs from '@/components/self-tabs.vue';
 	import selfWarningBox from '@/components/self-warning-box.vue';
+	import selfEmpty from '@/components/self-empty.vue';
 	
 	const list1 = [
 		{title: '司机下车', detail: '销售淘汰猪', people: '张三', type: 'red', tell: '13776767676', status: 1},
@@ -47,7 +48,8 @@
 		},
 		components: {
 			selfTabs,
-			selfWarningBox
+			selfWarningBox,
+			selfEmpty
 		},
 		methods: {
 			selectHandle(e) {
