@@ -11,7 +11,18 @@
     "pages/comePig/index",
     "pages/leavePig/index",
     "pages/mineWarning/index",
-    "pages/warningDetail/index"
+    "pages/dowarning/index",
+    "pages/warningDetail/index",
+    "pages/invitaGuest/index",
+    "pages/allTask/carWashTwo",
+    "pages/allTask/carWashThree",
+    "pages/allTask/feed",
+    "pages/allTask/material",
+    "pages/allTask/materialRecord",
+    "pages/allTask/disinfect",
+    "pages/allTask/materialTransfer",
+    "pages/allTask/guestApproval",
+    "pages/startTask/breedingPig"
   ],
   "subPackages": [],
   "window": {

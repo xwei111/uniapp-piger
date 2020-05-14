@@ -1,7 +1,7 @@
 <template>
 	<view class="main_box">
-		<self-tabs :list="tags" :active="active" @selectHandle="selectHandle" style="width: 100%;"></self-tabs>
-		<scroll-view class="scroll_task" scroll-y="true" :scroll-top="scrollTop" @scroll="scroll">
+		<self-tabs class="mine_tabs" :list="tags" :active="active" @selectHandle="selectHandle" style="width: 100%;"></self-tabs>
+		<scroll-view class="scroll_task" scroll-y="true" :scroll-top="scrollTop" @scroll="scroll" :style="{height:scrollviewHigh +'px'}">
 			<view class="task_content" v-if="list&&list.length">
 				<self-warning-box 
 					v-for="(item, index) in list" 
@@ -43,7 +43,11 @@
 				],
 				active: 1,
 				list: list1,
-				scrollTop: 0
+				scrollTop: 0,
+				old: {
+					scrollTop: 0
+				},
+				scrollviewHigh: 0
 			}
 		},
 		components: {
@@ -53,7 +57,10 @@
 		},
 		methods: {
 			selectHandle(e) {
-				this.scrollTop = 0
+				this.scrollTop = this.old.scrollTop
+				this.$nextTick(function() {
+					this.scrollTop = 0
+				});
 				this.active = e.id
 				this.list = e.id == 1 ? list1 : list2
 			},
@@ -68,16 +75,31 @@
 				uni.navigateTo({ url: `/pages/dowarning/index?detail=${JSON.stringify(e)}` })
 			},
 			scroll(e) {
-				this.scrollTop = e.detail.scrollTop
+				this.old.scrollTop = e.detail.scrollTop
 			}
+		},
+		onReady() {
+			let _this = this
+			uni.getSystemInfo({
+				success(res) {
+					_this.phoneHeight = res.windowHeight
+					console.log(res.windowHeight)
+					// 计算组件的高度
+					let view = uni.createSelectorQuery().select(".mine_tabs")
+					console.log('view', view.style)
+					view.boundingClientRect(data => {
+						_this.navHeight = data.height
+						console.log(_this.navHeight)
+						_this.scrollviewHigh = _this.phoneHeight - _this.navHeight
+					}).exec()
+				}
+			})
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.scroll_task {
-		flex: 1;
-		overflow: hidden;
 		.task_content {
 			width: 100%;
 			box-sizing: border-box;

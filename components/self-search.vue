@@ -60,6 +60,7 @@
 			font-family:PingFangSC-Regular,PingFang SC;
 			font-weight:400;
 			color:rgba(34,34,34,1);
+			margin-left: 30rpx;
 		}
 	}
 </style>

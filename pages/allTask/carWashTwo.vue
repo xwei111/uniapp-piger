@@ -1,4 +1,5 @@
 <template>
+	<!-- 车辆二洗 -->
 	<view class="mian_background main_content">
 		<self-task-box :detail="detail">
 			<view slot="basic">

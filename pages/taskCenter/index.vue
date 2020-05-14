@@ -89,6 +89,18 @@
 			},
 			workHandle(e) {
 				console.log('e', e)
+				uni.showActionSheet({
+				    itemList: ['引种猪任务', '销售淘汰猪', '死猪处理', '其他任务', ],
+				    success: function (res) {
+				        console.log('res', res);
+						if(res.tapIndex === 0) {
+							uni.navigateTo({ url: `/pages/startTask/breedingPig?detail=${JSON.stringify(e)}` })
+						}
+				    },
+				    fail: function (res) {
+				        console.log(res.errMsg);
+				    }
+				});
 			},
 			comeHandle() {
 				// 已入场不能在入场

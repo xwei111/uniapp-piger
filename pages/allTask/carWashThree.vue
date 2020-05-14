@@ -1,4 +1,5 @@
 <template>
+	<!-- 车辆三洗 -->
 	<view class="mian_background main_content">
 		<self-task-box :detail="detail">
 			<view slot="basic">
@@ -63,7 +64,7 @@
 		data() {
 			return {
 				detail: {},
-				currentPro: '车辆二洗',
+				currentPro: '车辆三洗',
 				carNo: '浙A 123',
 				carUser: '王五',
 				dataSource1: [

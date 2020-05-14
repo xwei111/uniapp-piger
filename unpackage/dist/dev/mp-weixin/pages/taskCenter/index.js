@@ -130,7 +130,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTaskCenter = function selfTaskCenter() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-center */ "components/taskmodel/self-task-center").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-center.vue */ 203));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTaskCenter = function selfTaskCenter() {Promise.all(/*! require.ensure | components/taskmodel/self-task-center */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/taskmodel/self-task-center")]).then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-center.vue */ 250));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 
 
@@ -176,13 +177,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dataSource: [
-      { ig: '/static/img3.png', color: '#0FBB87', title: '车辆洗消', sign: true },
-      { ig: '/static/img4.png', color: '#FF8D67', title: '区域任务', sign: false },
-      { ig: '/static/img5.png', color: '#FEA0D6', title: '猪只任务', sign: false },
-      { ig: '/static/img6.png', color: '#FEBA59', title: '饲料任务', sign: false },
-      { ig: '/static/img7.png', color: '#88BFFE', title: '物资任务', sign: false },
-      { ig: '/static/img8.png', color: '#C09DFF', title: '食材任务', sign: false },
-      { ig: '/static/img9.png', color: '#BBA887', title: '粪肥任务', sign: false }] };
+      { title: '车辆洗消', sign: true, kind: 'car' },
+      { title: '区域任务', sign: false, kind: 'region' },
+      { title: '猪只任务', sign: false, kind: 'piger' },
+      { title: '饲料任务', sign: false, kind: 'feed' },
+      { title: '物资任务', sign: false, kind: 'material' },
+      { title: '食材任务', sign: false, kind: 'food' },
+      { title: '粪肥任务', sign: false, kind: 'fertilizer' }] };
 
 
   },
@@ -194,16 +195,44 @@ __webpack_require__.r(__webpack_exports__);
       console.log('e', e.target.value);
     },
     cancleSignHandle: function cancleSignHandle(e) {
-      console.log('e', e);
+      if (!e.sign) return;
+      e.sign = false;
+      this.dataSource = this._sort(this.dataSource);
     },
     signHandle: function signHandle(e) {
-      console.log('e', e);
+      if (e.sign) return;
+      e.sign = true;
+      this.dataSource = this._sort(this.dataSource);
+    },
+    _sort: function _sort(data) {
+      var arr1 = [];
+      var arr2 = [];
+      data.map(function (e) {
+        if (e.sign) {
+          arr1.push(e);
+        } else {
+          arr2.push(e);
+        }
+      });
+      return [].concat(arr1, arr2);
     },
     detailHandle: function detailHandle(e) {
       console.log('e', e);
     },
     workHandle: function workHandle(e) {
       console.log('e', e);
+      uni.showActionSheet({
+        itemList: ['引种猪任务', '销售淘汰猪', '死猪处理', '其他任务'],
+        success: function success(res) {
+          console.log('res', res);
+          if (res.tapIndex === 0) {
+            uni.navigateTo({ url: "/pages/startTask/breedingPig?detail=".concat(JSON.stringify(e)) });
+          }
+        },
+        fail: function fail(res) {
+          console.log(res.errMsg);
+        } });
+
     },
     comeHandle: function comeHandle() {
       // 已入场不能在入场

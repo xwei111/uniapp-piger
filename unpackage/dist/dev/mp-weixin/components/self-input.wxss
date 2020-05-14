@@ -36,12 +36,13 @@
 .self_input_box .self_input_label.data-v-0b76800c {
   display: block;
   height: 48rpx;
-  font-size: 34rpx;
+  font-size: 32rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
   line-height: 48rpx;
   margin: 24rpx 0 0 0;
+  padding-left: 20rpx;
 }
 .self_input_box .self_inputs.data-v-0b76800c {
   display: -webkit-box;
@@ -73,5 +74,9 @@
 }
 .self_input_box .self_inputs.self_inputs-error.data-v-0b76800c {
   border-color: #f00;
+}
+.self_input_box .self_inputs.self_inputs_disabled.data-v-0b76800c {
+  border: none;
+  background-color: #F5F5F5;
 }
 

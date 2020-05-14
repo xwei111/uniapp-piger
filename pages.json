@@ -72,12 +72,47 @@
 		}, {
 			"path": "pages/allTask/carWashTwo",
 			"style": {
-				"navigationBarTitleText": "车辆二洗"
+				"navigationBarTitleText": "任务详情"
 			}
 		}, {
 			"path": "pages/allTask/carWashThree",
 			"style": {
-				"navigationBarTitleText": "车辆三洗"
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/feed",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, { 
+			"path": "pages/allTask/material",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/materialRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/disinfect",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/materialTransfer",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/guestApproval",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/startTask/breedingPig",
+			"style": {
+				"navigationBarTitleText": "发起任务"
 			}
 		}
 	],

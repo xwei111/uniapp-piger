@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "任务详情",
+  "usingComponents": {
+    "self-task-box": "/components/self-task-box",
+    "self-input": "/components/self-input",
+    "self-button-radio": "/components/self-button-radio",
+    "self-button": "/components/self-button",
+    "timer": "/components/timer/index",
+    "self-up-load": "/components/self-upLoad",
+    "self-material-box": "/components/self-material-box"
+  }
+}

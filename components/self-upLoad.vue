@@ -1,19 +1,21 @@
 <template>
 	<view class="self_upload">
 		<text class="self_input_label" v-if="label">{{label}}</text>
-		<view class="self_upload_box" @click="uploadHanlde">
-			<image class="self_upload_box_ig" src="/static/pic.png"></image>
-			<text>+ 添加</text>
-		</view>
-		<view class="self_upload_img" v-for="(item, index) in lists" :key="index">
-			<text>{{item.tempFiles[0].name}}</text>
-			<view class="self_upload_img_box">
-				<text class="self_upload_see" @click="seeHandle(item)">预览</text>
-				<view class="self_upload_img_box" @click="deleteHandle(item)">
+		<view class="self_upload_Box_ig">
+			<view class="self_upload_Box" v-for="(item, index) in lists" :key="index">
+				<view @click="seeHandle(item)" class="self_upload_img_box">
+					<image class="self_upload_img" :src="item.tempFilePaths[0]" ></image>
+				</view>
+				<view class="self_upload_delete" @click="deleteHandle(item)">
 					<icon type="clear" size="14"/>
 				</view>
 			</view>
 		</view>
+		<view class="self_upload_box" @click="uploadHanlde">
+			<image class="self_upload_box_ig" src="/static/pic.png"></image>
+			<text>+ 添加</text>
+		</view>
+		
 	</view>
 </template>
 
@@ -98,24 +100,32 @@
 			}
 			margin-bottom: 20rpx;
 		}
-		.self_upload_img {
-			padding: 10rpx 20rpx;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			font-size: 22rpx;
-			background-color: #f7f7f7;
-			margin-bottom: 10rpx;
-			border-radius: 10rpx;
-			color: #333;
-			.self_upload_img_box {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				.self_upload_see {
-					margin-right: 20rpx;
+		.self_upload_Box_ig {
+			overflow: hidden;
+			.self_upload_Box {
+				float: left;
+				width: 100rpx;
+				height: 100rpx;
+				background: #f7f7f7;
+				padding: 20rpx;
+				border-radius: 20rpx;
+				margin: 20rpx;
+				position: relative;
+				.self_upload_img_box {
+					width: 100%;
+					height: 100%;
+					.self_upload_img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.self_upload_delete {
+					position: absolute;
+					top: -15rpx;
+					right: -10rpx;
 				}
 			}
 		}
+		
 	}
 </style>

@@ -130,7 +130,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTabs = function selfTabs() {__webpack_require__.e(/*! require.ensure | components/self-tabs */ "components/self-tabs").then((function () {return resolve(__webpack_require__(/*! @/components/self-tabs.vue */ 168));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSearch = function selfSearch() {__webpack_require__.e(/*! require.ensure | components/self-search */ "components/self-search").then((function () {return resolve(__webpack_require__(/*! @/components/self-search.vue */ 175));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskMine = function selfTaskMine() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-mine */ "components/taskmodel/self-task-mine").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-mine.vue */ 182));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskColor = function selfTaskColor() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-color */ "components/taskmodel/self-task-color").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-color.vue */ 189));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfEmpty = function selfEmpty() {__webpack_require__.e(/*! require.ensure | components/self-empty */ "components/self-empty").then((function () {return resolve(__webpack_require__(/*! @/components/self-empty.vue */ 196));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var selfTabs = function selfTabs() {__webpack_require__.e(/*! require.ensure | components/self-tabs */ "components/self-tabs").then((function () {return resolve(__webpack_require__(/*! @/components/self-tabs.vue */ 214));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfSearch = function selfSearch() {__webpack_require__.e(/*! require.ensure | components/self-search */ "components/self-search").then((function () {return resolve(__webpack_require__(/*! @/components/self-search.vue */ 221));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskMine = function selfTaskMine() {Promise.all(/*! require.ensure | components/taskmodel/self-task-mine */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/taskmodel/self-task-mine")]).then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-mine.vue */ 228));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfTaskColor = function selfTaskColor() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-color */ "components/taskmodel/self-task-color").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-color.vue */ 236));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var selfEmpty = function selfEmpty() {__webpack_require__.e(/*! require.ensure | components/self-empty */ "components/self-empty").then((function () {return resolve(__webpack_require__(/*! @/components/self-empty.vue */ 243));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -173,12 +175,16 @@ __webpack_require__.r(__webpack_exports__);
 
       active: 1,
       list: [
-      { title: '车辆洗消', people: '吴小军', pros: '一洗-采样', car: "浙A099JK", ig: '/static/img3.png' },
-      { title: '区域任务', people: '黄小仙', pros: '一洗-采样', car: "华东区", ig: '/static/img4.png' },
-      { title: '区域任务', people: '黄小仙', pros: '一洗-采样', car: "华东区", ig: '/static/img4.png' }],
+      { title: '车辆洗消', people: '吴小军', pros: '一洗-采样', kind: 'car' },
+      { title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'region' },
+      { title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'piger' }],
 
       color: null,
-      scrollTop: 0 };
+      scrollTop: 0,
+      old: {
+        scrollTop: 0 },
+
+      scrollviewHigh: 0 };
 
   },
   components: {
@@ -188,10 +194,10 @@ __webpack_require__.r(__webpack_exports__);
     selfEmpty: selfEmpty,
     selfTaskColor: selfTaskColor },
 
-  onLoad: function onLoad() {var _this = this;
+  onLoad: function onLoad() {var _this2 = this;
     setTimeout(function () {
-      _this.color = 'red';
-      _this.color != 'blue' && uni.hideTabBar();
+      _this2.color = 'red';
+      _this2.color != 'blue' && uni.hideTabBar();
     }, 1000);
   },
   onHide: function onHide() {
@@ -199,7 +205,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectHandle: function selectHandle(e) {
-      this.scrollTop = 0;
+      this.scrollTop = this.old.scrollTop;
+      this.$nextTick(function () {
+        this.scrollTop = 0;
+      });
       this.active = e.id;
     },
     searchHandle: function searchHandle(val) {
@@ -213,14 +222,33 @@ __webpack_require__.r(__webpack_exports__);
     },
     completeHandle: function completeHandle(e) {
       console.log('e', e);
+      uni.navigateTo({ url: "/pages/allTask/guestApproval?detail=".concat(JSON.stringify(e)) });
     },
     colorDetailHandle: function colorDetailHandle(e) {
       this.color != 'blue' && uni.showTabBar();
       this.color = null;
     },
     scroll: function scroll(e) {
-      this.scrollTop = e.detail.scrollTop;
-    } } };exports.default = _default;
+      this.old.scrollTop = e.detail.scrollTop;
+    } },
+
+  onReady: function onReady() {
+    var _this = this;
+    uni.getSystemInfo({
+      success: function success(res) {
+        _this.phoneHeight = res.windowHeight;
+        console.log(res.windowHeight);
+        // 计算组件的高度
+        var view = uni.createSelectorQuery().select(".main_box_content");
+        console.log('view', view.style);
+        view.boundingClientRect(function (data) {
+          _this.navHeight = data.height;
+          console.log(_this.navHeight);
+          _this.scrollviewHigh = _this.phoneHeight - _this.navHeight;
+        }).exec();
+      } });
+
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

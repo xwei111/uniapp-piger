@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "访客邀请",
+  "usingComponents": {
+    "self-input": "/components/self-input",
+    "self-button": "/components/self-button",
+    "timer": "/components/timer/index"
+  }
+}

@@ -186,6 +186,9 @@ var _default =
   methods: {
     toWarningHandle: function toWarningHandle() {
       uni.navigateTo({ url: '/pages/mineWarning/index' });
+    },
+    toGuestHandle: function toGuestHandle() {
+      uni.navigateTo({ url: '/pages/invitaGuest/index' });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

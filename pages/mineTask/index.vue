@@ -1,24 +1,26 @@
 <template>
 	<view class="main_box">
-		<view class="default_bg"></view>
-		<view class="main_content">
-			<self-tabs :list="tags" :active="active" @selectHandle="selectHandle" style="width: 100%;"></self-tabs>
-			<self-search v-if="list&&list.length" @searchHandle="searchHandle"></self-search>
-			<scroll-view class="scroll_task" scroll-y="true" :scroll-top="scrollTop" @scroll="scroll">
-				<view class="task_content" v-if="list&&list.length">
-					<self-task-mine 
-						v-for="(item, index) in list" 
-						:key="index" 
-						:dataSource="item"
-						@backHandle="backHandle"
-						@detailHandle="detailHandle"
-						@completeHandle="completeHandle"
-					>
-					</self-task-mine>
-				</view>
-				<self-empty v-if="!list.length"></self-empty>
-			</scroll-view>
+		<view class="main_box_content">
+			<view class="default_bg"></view>
+			<view class="main_content">
+				<self-tabs :list="tags" :active="active" @selectHandle="selectHandle" style="width: 100%;"></self-tabs>
+				<self-search v-if="list&&list.length" @searchHandle="searchHandle"></self-search>
+			</view>
 		</view>
+		<scroll-view class="scroll_task" scroll-y="true" :scroll-top="scrollTop" @scroll="scroll" :style="{height:scrollviewHigh +'px'}">
+			<view class="task_content" v-if="list&&list.length">
+				<self-task-mine 
+					v-for="(item, index) in list" 
+					:key="index" 
+					:dataSource="item"
+					@backHandle="backHandle"
+					@detailHandle="detailHandle"
+					@completeHandle="completeHandle"
+				>
+				</self-task-mine>
+			</view>
+			<self-empty v-if="!list.length"></self-empty>
+		</scroll-view>
 		<self-task-color v-if="color" :color="color" @detailHandle="colorDetailHandle"></self-task-color>
 	</view>
 </template>
@@ -46,7 +48,11 @@
 					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'piger'}
 				],
 				color: null,
-				scrollTop: 0
+				scrollTop: 0,
+				old: {
+					scrollTop: 0
+				},
+				scrollviewHigh: 0
 			}
 		},
 		components: {
@@ -67,7 +73,10 @@
 		},
 		methods: {
 			selectHandle(e) {
-				this.scrollTop = 0
+				this.scrollTop = this.old.scrollTop
+				this.$nextTick(function() {
+					this.scrollTop = 0
+				});
 				this.active = e.id
 			},
 			searchHandle(val){
@@ -81,15 +90,32 @@
 			},
 			completeHandle(e) {
 				console.log('e', e)
-				uni.navigateTo({ url: `/pages/allTask/carWashThree?detail=${JSON.stringify(e)}` })
+				uni.navigateTo({ url: `/pages/allTask/guestApproval?detail=${JSON.stringify(e)}` })
 			},
 			colorDetailHandle(e) {
 				this.color != 'blue' && uni.showTabBar()
 				this.color = null
 			},
 			scroll(e) {
-				this.scrollTop = e.detail.scrollTop
+				this.old.scrollTop = e.detail.scrollTop
 			}
+		},
+		onReady() {
+			let _this = this
+			uni.getSystemInfo({
+				success(res) {
+					_this.phoneHeight = res.windowHeight
+					console.log(res.windowHeight)
+					// 计算组件的高度
+					let view = uni.createSelectorQuery().select(".main_box_content")
+					console.log('view', view.style)
+					view.boundingClientRect(data => {
+						_this.navHeight = data.height
+						console.log(_this.navHeight)
+						_this.scrollviewHigh = _this.phoneHeight - _this.navHeight
+					}).exec()
+				}
+			})
 		}
 	}
 </script>
@@ -107,12 +133,10 @@
 		overflow: hidden;
 	}
 	.scroll_task {
-		flex: 1;
-		overflow: hidden;
 		.task_content {
 			width: 100%;
 			box-sizing: border-box;
-			padding: 24rpx 44rpx calc(var(--window-bottom) + 24rpx) 44rpx;
+			padding: 24rpx 44rpx;
 		}
 	}
 	

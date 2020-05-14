@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "处理报警",
+  "usingComponents": {
+    "self-input": "/components/self-input",
+    "self-button": "/components/self-button"
+  }
+}

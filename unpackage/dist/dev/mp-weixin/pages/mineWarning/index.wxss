@@ -24,12 +24,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.scroll_task.data-v-6cfcff59 {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
-  overflow: hidden;
-}
 .scroll_task .task_content.data-v-6cfcff59 {
   width: 100%;
   -webkit-box-sizing: border-box;
