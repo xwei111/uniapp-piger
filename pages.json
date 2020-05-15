@@ -9,6 +9,10 @@
 			"style": {}
 		},
 		{
+			"path": "pages/guestLogin/index",
+			"style": {}
+		},
+		{
 			"path": "pages/workerFirst/index",
 			"style": {}
 		},
@@ -36,6 +40,16 @@
 			"path": "pages/mine/index",
 			"style": {
 				"navigationBarTitleText": "我"
+			}
+		},
+		{ 
+			"path": "pages/guestHome/index",
+			"style": {}
+		},
+		{
+			"path": "pages/guestLeave/index",
+			"style": {
+				"navigationBarTitleText": "我要离场"
 			}
 		},
 		{

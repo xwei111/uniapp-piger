@@ -33,7 +33,38 @@
 					}
 				});
 			}
+			// uni.connectSocket({
+			//     url: 'ws://localhost:3000',
+			// 	success: (e) => console.log('success', e),
+			// 	fail: (e) => console.log('fail', e),
+			// 	complete: (e) => console.log('complete', e)
+			// });
+			// uni.onSocketOpen(function (res) {
+			//   console.log('WebSocket连接已打开！');
+			//   uni.sendSocketMessage({
+			//     data: msg
+			//   });
+			// });
+			// uni.onSocketError(function (res) {
+			//   console.log('WebSocket连接打开失败，请检查！');
+			// });
+			// uni.onSocketMessage(function (res) {
+			//   console.log('收到服务器内容：' + res.data);
+			// });
+			// uni.onSocketClose(function (res) {
+			//   uni.connectSocket({url: 'ws://localhost:3000'});
+			// });
 			
+			// setTimeout(()=>{
+			// 	this.$message.showModel({
+			// 		color: 'origin',
+			// 		callBack: ()=> {
+			// 			uni.navigateTo({
+			// 				url: '/pages/mineWarning/index'
+			// 			})
+			// 		}
+			// 	})
+			// }, 5000)
 		},
 		onHide: function() {
 		}

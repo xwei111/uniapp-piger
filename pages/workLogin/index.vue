@@ -5,7 +5,7 @@
 		<self-content>
 			<self-input label="员工号" placeholder="请输入您的员工号" :status="status" v-model="staffCode" ></self-input>
 			<self-input label="密码" placeholder="请输入密码" :status="status" v-model="password" type="password"></self-input>
-			<self-button text="下一步" @handleClick="loginClick" class="nextButton"></self-button>
+			<self-button text="登录" @handleClick="loginClick" class="nextButton"></self-button>
 			<self-checkbox :chekck="chekck" @selectHandle="selectHandle" @agreeHandle="agreeHandle"></self-checkbox>
 			<view class="isGuest">
 				<text class="address_text" @click="toGuestHandle">我是访客</text>

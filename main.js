@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App'
+import Message from '@/components/taskmodel/taskColor.js';
+Vue.prototype.$message = Message
 
 Vue.config.productionTip = false
 

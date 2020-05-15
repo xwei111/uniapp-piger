@@ -3,12 +3,6 @@
 		<self-bg src="/static/bg.png"></self-bg>
 		<self-content>
 			<self-steps :lists="lists" :active="active"></self-steps>
-			<view v-show="active == 1">
-				<self-input label="手机号" placeholder="请输入您的手机号" v-model="phone"></self-input>
-				<self-input label="验证码" placeholder="请输入验证码" v-model="smsCode">
-					<view :class="['getCode', isBegin != 1 ? 'disCode' : '' ]" slot="suffix" @click="getCodeHandle">{{isBegin == 3 ? `${number}s ` : '获取验证码'}}</view>
-				</self-input>
-			</view>
 			<view v-show="active == 2">
 				<self-input label="姓名" placeholder="请输入您的姓名" v-model="name"></self-input>
 				<self-input label="身份证号" placeholder="请输入您的身份证号" v-model="idNo"></self-input>
@@ -137,16 +131,16 @@
 	import GetDate from '@/components/timer/GetDate.js';
 	import { guestGetTellCode, guestFirst, guestSecond, guestThree, changeGuestThree } from '@/api/login.js';
 	import { verTell, verSfz } from '@/utils/ver.js';
+	const { globalData: { userInfo:{ phone } } } = getApp();
 	
 	export default{
 		data() {
 			return {
 				lists: [
-					{ id: 1, text: '验证手机号' },
 					{ id: 2, text: '完善个人信息' },
 					{ id: 3, text: '完善来访信息' }
 				],
-				active: 1,
+				active: 2,
 				chekck: false,
 				isShow: false,
 				options: [
@@ -168,8 +162,7 @@
 				personalEffectList: ['手机', '眼镜', '其他'],
 				otherEffects: '',
 				personalEffects: [],
-				phone: '',
-				smsCode: '',
+				phone: phone,
 				name: '',
 				idNo: '',
 				companyName: '',
@@ -201,21 +194,21 @@
 				this.type = type
 				if(type && type == 'change') {
 					this.active = 3;
-					this.visitorType = visitorType;
-					this.accompanying = visitors
+					this.visitorType = visitorType ? visitorType : 1;
+					this.accompanying = visitors ? visitors : []
 					this.index = this.array.findIndex(e=>e === reason);
 					this.companyName = companyName;
-					this.visitDate = visitDate;
+					this.visitDate = visitDate ? visitDate : '';
 					this.idx = this.address.findIndex(e=>e === targetLocation);
 					this.whenceIdx = this.whences.findIndex(e=>e === whence);
 					this.arriveWayIdx = this.arriveWays.findIndex(e=>e === arriveWay)
-					this.lastTouchTime = lastTouchTime;
-					this.lastHighRishTime = lastHighRishTime;
-					this.personalEffects = personalEffects,
+					this.lastTouchTime = lastTouchTime ? lastTouchTime : '';
+					this.lastHighRishTime = lastHighRishTime ? lastHighRishTime : '';
+					this.personalEffects = personalEffects ? personalEffects : [],
 					this.otherEffects = otherEffects;
-					this.phone = '13738051234';
-					this.name = mainVisitors[0].name;
-					this.idNo = mainVisitors[0].idNo;
+					this.phone = phone;
+					this.name = mainVisitors ? mainVisitors[0].name : '';
+					this.idNo = mainVisitors ? mainVisitors[0].idNo : '';
 					return
 				}
 			}
@@ -232,29 +225,6 @@
 		},
 		methods: {
 			nextClick() {
-				if(this.active == 1) {
-					if(!this.phone) {
-						uni.showToast({ title: '请输入手机号', icon: 'none' });
-						return
-					}
-					if(!verTell(this.phone)) {
-						uni.showToast({ title: '手机格式错误', icon: 'none' });
-						return
-					}
-					if(!this.smsCode) {
-						uni.showToast({ title: '请输入验证码', icon: 'none' });
-						return
-					}
-					if(!this.chekck) {
-						uni.showToast({ title: '请阅读用户协议', icon: 'none' });
-						return
-					}
-					guestFirst({ phone: this.phone, smsCode: this.smsCode }).then(e=>{
-						if(e.success) {
-							this.active = ++this.active
-						}
-					})
-				}
 				if(this.active == 2) {
 					if(!this.name) {
 						uni.showToast({ title: '请输入姓名', icon: 'none' });
@@ -363,43 +333,6 @@
 			},
 			lastHighRishTimeChange(e) {
 				this.lastHighRishTime = e
-			},
-			getCodeHandle() {
-				if(!this.phone) {
-					uni.showToast({ title: '请输入手机号', icon: 'none' });
-					return
-				}
-				if(!verTell(this.phone)) {
-					uni.showToast({ title: '手机格式错误', icon: 'none' });
-					return
-				}
-				if(this.isBegin != 1) return
-				this.isBegin = 2;
-				guestGetTellCode({"phone": this.phone}).then(e=> {
-					if(e && e.code === 10000) {
-						this.isBegin = 3;
-						let selfTimer = setInterval(()=>{
-							this.number = --this.number
-							if(this.number < 0) {
-								this.number = 60
-								this.isBegin = 1;
-								clearInterval(selfTimer)
-								selfTimer = null
-							}
-						}, 1000)
-					} else {
-						this.isBegin = 1;
-						if(!e.success && e.code == 4107) {
-							uni.showModal({
-							    title: '很抱歉',
-							    content: '暂无找到该手机号关联的邀请请联系邀请人核实信息',
-								showCancel: false,
-								confirmColor: '#02BB00'
-							});
-						}
-					}
-					
-				})
 			},
 			addUserHandle() {
 				this.accShow = true

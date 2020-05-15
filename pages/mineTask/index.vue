@@ -21,7 +21,6 @@
 			</view>
 			<self-empty v-if="!list.length"></self-empty>
 		</scroll-view>
-		<self-task-color v-if="color" :color="color" @detailHandle="colorDetailHandle"></self-task-color>
 	</view>
 </template>
 
@@ -29,7 +28,6 @@
 	import selfTabs from '@/components/self-tabs.vue';
 	import selfSearch from '@/components/self-search.vue';
 	import selfTaskMine from '@/components/taskmodel/self-task-mine.vue';
-	import selfTaskColor from '@/components/taskmodel/self-task-color.vue'
 	import selfEmpty from '@/components/self-empty.vue';
 	
 	export default {
@@ -47,7 +45,6 @@
 					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'region'},
 					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'piger'}
 				],
-				color: null,
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
@@ -59,14 +56,10 @@
 			selfTabs,
 			selfSearch,
 			selfTaskMine,
-			selfEmpty,
-			selfTaskColor
+			selfEmpty
 		},
 		onLoad() {
-			setTimeout(()=> {
-				this.color = 'red'
-				this.color != 'blue' && uni.hideTabBar()
-			}, 1000)
+			
 		},
 		onHide() {
 			this.active = 1;
@@ -78,6 +71,7 @@
 					this.scrollTop = 0
 				});
 				this.active = e.id
+				// this.$refs.test.showModel('red')
 			},
 			searchHandle(val){
 				console.log('val', val)
@@ -93,8 +87,7 @@
 				uni.navigateTo({ url: `/pages/allTask/guestApproval?detail=${JSON.stringify(e)}` })
 			},
 			colorDetailHandle(e) {
-				this.color != 'blue' && uni.showTabBar()
-				this.color = null
+				
 			},
 			scroll(e) {
 				this.old.scrollTop = e.detail.scrollTop

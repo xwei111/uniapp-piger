@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view v-if="color">
 		<view v-if="color=='blue'" class="self_task_color_blue" @click="detailHandle">
 			<image class="self_task_color_blue_ig" src="/static/blue.png"></image>
 			<view class="self_task_color_blue_text">隔离区发现违规行为，请点击查看！</view>
@@ -30,16 +30,26 @@
 </template>
 
 <script>
+	// 调用方式
+	// this.$message.showModel({
+	// 	color: 'origin',
+	// 	callBack: ()=> {
+	// 		uni.navigateTo({
+	// 			url: '/pages/mineWarning/index'
+	// 		})
+	// 	}
+	// })
 	export default {
-		props : {
-			color: {
-				type: String,
-				default: 'red'
+		data() {
+			return {
+				color: null,
+				callBack: null
 			}
 		},
 		methods: {
 			detailHandle() {
-				this.$emit('detailHandle', this.color)
+				this.color = null
+				this.callBack && this.callBack()
 			}
 		}
 	}

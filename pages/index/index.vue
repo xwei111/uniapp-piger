@@ -18,6 +18,7 @@
 	export default {
 		data() {
 			return {
+				
 			}
 		},
 		components:{
@@ -30,44 +31,11 @@
 		},
 		methods: {
 			workHandleClick() {
-				// uni.navigateTo({ url: '/pages/workLogin/index' });
-				uni.switchTab({ url: '/pages/mineTask/index' })
+				uni.navigateTo({ url: '/pages/workLogin/index' });
+				// uni.switchTab({ url: '/pages/mineTask/index' })
 			},
 			guestHandleClick() {
-				getGuestInfo().then(e=> {
-					if(e.success) {
-						const { data } = e;
-						if(data.checkStatus === 0) {
-							uni.navigateTo({ url: '/pages/guestFirst/index' });
-						} else {
-							const detail = {
-								visitorType: data.visitorType,
-								visitors: data.visitors,
-								reason: data.reason,
-								companyName: data.companyName,
-								visitDate: data.visitDate,
-								targetLocation: data.targetLocation,
-								phone: data.phone,
-								whence: data.whence,
-								lastTouchTime: data.lastTouchTime,
-								lastHighRishTime: data.lastHighRishTime,
-								arriveWay: data.arriveWay,
-								personalEffects: data.personalEffects,
-								otherEffects: data.otherEffects,
-								mainVisitors: [{
-									name: data.name,
-									idNo: data.idNo
-								}],
-								checkStatus: data.checkStatus,
-								isolation: data.isolation ? data.isolation : '',
-								openTime: data.openTime ? data.openTime : ''
-							}
-							uni.navigateTo({
-								url: `/pages/guestInfo/index?detail=${JSON.stringify(detail)}`
-							})
-						}
-					}
-				})
+				uni.navigateTo({ url: '/pages/guestLogin/index' })
 				
 			},
 			workGetuserinfo(e) {
