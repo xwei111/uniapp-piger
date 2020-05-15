@@ -31,7 +31,7 @@
   background-color: rgba(196, 87, 100, 0.5);
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 9999;
 }
 .self_task_color.self_task_color_red.data-v-41025810 {
   background-color: rgba(196, 87, 100, 0.5);

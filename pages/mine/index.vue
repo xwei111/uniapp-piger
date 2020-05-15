@@ -1,4 +1,5 @@
 <template>
+	<!-- 我 -->
 	<view>
 		<view class="mine_top">
 			<image class="mine_top_ig" src="../../static/mineBg.png"></image>
@@ -41,6 +42,7 @@
 				</view>
 			</view>
 		</view>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

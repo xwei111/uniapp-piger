@@ -1,4 +1,5 @@
 <template>
+	<!-- 我的任务 -->
 	<view class="main_box">
 		<view class="main_box_content">
 			<view class="default_bg"></view>
@@ -21,6 +22,7 @@
 			</view>
 			<self-empty v-if="!list.length"></self-empty>
 		</scroll-view>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 
@@ -71,7 +73,6 @@
 					this.scrollTop = 0
 				});
 				this.active = e.id
-				// this.$refs.test.showModel('red')
 			},
 			searchHandle(val){
 				console.log('val', val)

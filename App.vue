@@ -1,11 +1,16 @@
 <script>
 	export default {
 		globalData: {
-			baseUrl: process.env.NODE_ENV === 'development' ? 'http://4bkec15r.xiaomy.net' : 'http://4bkec15r.xiaomy.net',
+			baseUrl: process.env.NODE_ENV === 'development' ? 'http://p14jr06b.xiaomy.net' : 'http://p14jr06b.xiaomy.net',
 			userInfo: {}
 		},
 		onLaunch: function() {
-			
+			setTimeout(()=>{
+				this.$store.commit('switchModal', 'red')
+			}, 3000)
+			setTimeout(()=>{
+				this.$store.commit('switchModal', 'red')
+			}, 8000)
 		},
 		onShow: function() {
 			const that = this;
@@ -54,17 +59,6 @@
 			// uni.onSocketClose(function (res) {
 			//   uni.connectSocket({url: 'ws://localhost:3000'});
 			// });
-			
-			// setTimeout(()=>{
-			// 	this.$message.showModel({
-			// 		color: 'origin',
-			// 		callBack: ()=> {
-			// 			uni.navigateTo({
-			// 				url: '/pages/mineWarning/index'
-			// 			})
-			// 		}
-			// 	})
-			// }, 5000)
 		},
 		onHide: function() {
 		}

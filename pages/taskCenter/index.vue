@@ -1,4 +1,5 @@
 <template>
+	<!-- 任务中心 -->
 	<view class="taskCenter">
 		<!-- top -->
 		<view class="taskCenter_top">
@@ -35,6 +36,7 @@
 			>
 			</self-task-center>
 		</view>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

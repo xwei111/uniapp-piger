@@ -1,4 +1,5 @@
 <template>
+	<!-- 申请进场 -->
 	<view class="mian_background main_content">
 		<view class="come_box">
 			<view class="user_box">
@@ -77,6 +78,7 @@
 			</view>
 		</view>
 		<self-button text="提交" @handleClick="okClick" class="nextButton"></self-button>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

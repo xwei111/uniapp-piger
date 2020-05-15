@@ -1,5 +1,5 @@
 <template>
-	<!-- 车辆二洗 -->
+	<!-- 引种猪任务 -->
 	<view class="mian_background main_content">
 		<self-start-task :detail="detail">
 			<view slot="task">
@@ -85,6 +85,7 @@
 			</view>
 		</self-start-task>
 		<self-button text="提交" @handleClick="okClick" class="nextButton"></self-button>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

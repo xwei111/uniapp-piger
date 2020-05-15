@@ -1,4 +1,5 @@
 <template>
+	<!-- 离场申请 -->
 	<view>
 		<self-bg src="/static/bg.png"></self-bg>
 		<self-content>
@@ -34,6 +35,7 @@
 			</self-input>
 			<self-button text="提交" @handleClick="okClick" class="nextButton"></self-button>
 		</self-content>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

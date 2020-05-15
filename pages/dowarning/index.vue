@@ -1,4 +1,5 @@
 <template>
+	<!-- 处理报警 -->
 	<view class="mian_background main_content" >
 		<view class="dowar_box">
 			<view :class="[
@@ -24,6 +25,7 @@
 			<self-input label="消毒方式" v-model="region"></self-input>
 		</view>
 		<self-button text="提交" @handleClick="okClick" class="nextButton"></self-button>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

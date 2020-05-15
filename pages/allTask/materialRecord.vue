@@ -38,6 +38,7 @@
 			</view>
 		</self-task-box>
 		<self-button text="提交" @handleClick="okClick" class="nextButton"></self-button>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

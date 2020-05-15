@@ -36,11 +36,11 @@
 				<view class="centerList_info">
 					<view class="centerList_info_child">
 						<text class="centerList_info_child_title">目的地</text>
-						<text>猪场A</text>
+						<text>{{detail.targetLocation}}</text>
 					</view>
 					<view class="centerList_info_child">
 						<text class="centerList_info_child_title">接待人</text>
-						<text>王五</text>
+						<text>{{detail.receiver}}</text>
 					</view>
 				</view>
 				<view class="centerList_seeDetail" @click="seeHandle">
@@ -67,58 +67,57 @@
 			selfTaskCenter
 		},
 		onLoad() {
-			this.detail = {
-				visitorType: 2,
-				visitors: [{name: '小明', idNo: '410999999999999999'}],
-				reason: '学习',
-				companyName: '浙江科技',
-				visitDate: '2020-10-11 10:01:02',
-				targetLocation: '猪场C',
-				phone: '17687878787',
-				whence: '绍兴',
-				lastTouchTime: '2020-10-11 10:01:02',
-				lastHighRishTime: '2020-10-11 10:01:02',
-				arriveWay: '打车',
-				personalEffects: ['手机', '眼镜', '其他'],
-				otherEffects: '毛衣毛裤',
-				mainVisitors: [{
-					name: '校尉',
-					idNo: '410999999191919191'
-				}],
-				checkStatus: this.checkStatus,
-				isolation: '测试地址',
-				openTime: '2020-01-01 10：09：08'
-			};
-			// getGuestInfo().then(e=> {
-			// 	if(e.success) {
-			// 		const { data } = e;
-			// 		if(data.checkStatus != 0) {
-			// 			this.detail = {
-			// 				visitorType: data.visitorType,
-			// 				visitors: data.visitors,
-			// 				reason: data.reason,
-			// 				companyName: data.companyName,
-			// 				visitDate: data.visitDate,
-			// 				targetLocation: data.targetLocation,
-			// 				phone: data.phone,
-			// 				whence: data.whence,
-			// 				lastTouchTime: data.lastTouchTime,
-			// 				lastHighRishTime: data.lastHighRishTime,
-			// 				arriveWay: data.arriveWay,
-			// 				personalEffects: data.personalEffects,
-			// 				otherEffects: data.otherEffects,
-			// 				mainVisitors: [{
-			// 					name: data.name,
-			// 					idNo: data.idNo
-			// 				}],
-			// 				checkStatus: data.checkStatus,
-			// 				isolation: data.isolation ? data.isolation : '',
-			// 				openTime: data.openTime ? data.openTime : ''
-			// 			};
-			// 			this.checkStatus = data.checkStatus;
-			// 		}
-			// 	}
-			// })
+			// this.detail = {
+			// 	visitorType: 2,
+			// 	visitors: [{name: '小明', idNo: '410999999999999999'}],
+			// 	reason: '学习',
+			// 	companyName: '浙江科技',
+			// 	visitDate: '2020-10-11 10:01:02',
+			// 	targetLocation: '猪场C',
+			// 	phone: '17687878787',
+			// 	whence: '绍兴',
+			// 	lastTouchTime: '2020-10-11 10:01:02',
+			// 	lastHighRishTime: '2020-10-11 10:01:02',
+			// 	arriveWay: '打车',
+			// 	personalEffects: ['手机', '眼镜', '其他'],
+			// 	otherEffects: '毛衣毛裤',
+			// 	mainVisitors: [{
+			// 		name: '校尉',
+			// 		idNo: '410999999191919191'
+			// 	}],
+			// 	checkStatus: this.checkStatus,
+			// 	isolation: '测试地址',
+			// 	openTime: '2020-01-01 10：09：08'
+			// };
+			getGuestInfo().then(e=> {
+				if(e.success) {
+					const { data } = e;
+					this.detail = {
+						visitorType: data.visitorType,
+						visitors: data.visitors ? data.visitors : [],
+						reason: data.reason,
+						companyName: data.companyName,
+						visitDate: data.visitDate,
+						targetLocation: data.targetLocation,
+						phone: data.phone,
+						whence: data.whence,
+						lastTouchTime: data.lastTouchTime,
+						lastHighRishTime: data.lastHighRishTime,
+						arriveWay: data.arriveWay,
+						personalEffects: data.personalEffects ? data.personalEffects : [],
+						otherEffects: data.otherEffects,
+						mainVisitors: [{
+							name: data.name,
+							idNo: data.idNo
+						}],
+						checkStatus: data.checkStatus,
+						isolation: data.isolation ? data.isolation : '',
+						openTime: data.openTime ? data.openTime : '',
+						receiver: data.receiver
+					};
+					this.checkStatus = data.checkStatus;
+				}
+			})
 		},
 		methods: {
 			comeHandle() {

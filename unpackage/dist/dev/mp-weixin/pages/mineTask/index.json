@@ -4,7 +4,6 @@
     "self-tabs": "/components/self-tabs",
     "self-search": "/components/self-search",
     "self-task-mine": "/components/taskmodel/self-task-mine",
-    "self-empty": "/components/self-empty",
-    "self-task-color": "/components/taskmodel/self-task-color"
+    "self-empty": "/components/self-empty"
   }
 }

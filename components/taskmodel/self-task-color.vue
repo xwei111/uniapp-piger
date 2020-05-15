@@ -41,15 +41,16 @@
 	// })
 	export default {
 		data() {
-			return {
-				color: null,
-				callBack: null
+			return {}
+		},
+		computed: {
+			color() {
+				return this.$store.state.color
 			}
 		},
 		methods: {
 			detailHandle() {
-				this.color = null
-				this.callBack && this.callBack()
+				this.$store.commit('switchModal', null)
 			}
 		}
 	}
@@ -63,7 +64,7 @@
 		background-color: rgba(196,87,100,0.5);
 		bottom: 0;
 		left: 0;
-		z-index: 999;
+		z-index: 9999;
 		&.self_task_color_red {
 			background-color: rgba(196,87,100,0.5);
 		}

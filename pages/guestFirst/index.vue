@@ -131,7 +131,7 @@
 	import GetDate from '@/components/timer/GetDate.js';
 	import { guestGetTellCode, guestFirst, guestSecond, guestThree, changeGuestThree } from '@/api/login.js';
 	import { verTell, verSfz } from '@/utils/ver.js';
-	const { globalData: { userInfo:{ phone } } } = getApp();
+	
 	
 	export default{
 		data() {
@@ -162,7 +162,7 @@
 				personalEffectList: ['手机', '眼镜', '其他'],
 				otherEffects: '',
 				personalEffects: [],
-				phone: phone,
+				phone: '',
 				name: '',
 				idNo: '',
 				companyName: '',
@@ -188,6 +188,8 @@
 			selfHiginfo
 		},
 		onLoad(options) {
+			const { globalData: { userInfo:{ phone } } } = getApp();
+			this.phone = phone
 			if(options && options.detail) {
 				let detail = JSON.parse(options.detail)
 				const { type, visitorType, visitors, reason, companyName, visitDate, targetLocation, phone, mainVisitors, whence, lastTouchTime, lastHighRishTime, arriveWay, personalEffects, otherEffects } = detail
@@ -204,7 +206,7 @@
 					this.arriveWayIdx = this.arriveWays.findIndex(e=>e === arriveWay)
 					this.lastTouchTime = lastTouchTime ? lastTouchTime : '';
 					this.lastHighRishTime = lastHighRishTime ? lastHighRishTime : '';
-					this.personalEffects = personalEffects ? personalEffects : [],
+					this.personalEffects = personalEffects ? JSON.parse(personalEffects) : [],
 					this.otherEffects = otherEffects;
 					this.phone = phone;
 					this.name = mainVisitors ? mainVisitors[0].name : '';
@@ -238,7 +240,6 @@
 						uni.showToast({ title: '身份证格式错误', icon: 'none' });
 						return
 					}
-					// {"phone":"13738051234","idNo":"330727199011171234","name":"张五"}
 					guestSecond({ phone: this.phone, idNo: this.idNo, name: this.name }).then(e=>{
 						if(e.success) {
 							this.active = ++this.active
@@ -266,7 +267,7 @@
 						lastTouchTime: this.lastTouchTime,
 						lastHighRishTime: this.lastHighRishTime,
 						arriveWay: this.arriveWays[this.arriveWayIdx],
-						personalEffects: this.personalEffects,
+						personalEffects: JSON.stringify(this.personalEffects),
 						otherEffects: this.otherEffects
 					}
 					this.type !== 'change' && guestThree(detail).then(e=> {

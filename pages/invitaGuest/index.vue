@@ -1,4 +1,5 @@
 <template>
+	<!-- 访客邀请 -->
 	<view class="mian_background main_content" >
 		<view class="dowar_box">
 			<self-input label="访客姓名" v-model="name"></self-input>
@@ -33,6 +34,7 @@
 			<self-input label="接待人手机号" v-model="acceptPhone"></self-input>
 		</view>
 		<self-button text="提交" @handleClick="okClick" class="nextButton"></self-button>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

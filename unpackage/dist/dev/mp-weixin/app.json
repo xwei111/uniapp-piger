@@ -2,12 +2,15 @@
   "pages": [
     "pages/index/index",
     "pages/workLogin/index",
+    "pages/guestLogin/index",
     "pages/workerFirst/index",
     "pages/guestFirst/index",
     "pages/guestInfo/index",
     "pages/mineTask/index",
     "pages/taskCenter/index",
     "pages/mine/index",
+    "pages/guestHome/index",
+    "pages/guestLeave/index",
     "pages/comePig/index",
     "pages/leavePig/index",
     "pages/mineWarning/index",
@@ -58,5 +61,7 @@
     ]
   },
   "permission": {},
-  "usingComponents": {}
+  "usingComponents": {
+    "self-task-color": "/components/taskmodel/self-task-color"
+  }
 }

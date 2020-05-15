@@ -32,6 +32,7 @@
 				smsCode: '',
 				chekck: false,
 				isShow: false,
+				number: 60,
 			}
 		},
 		components: {
@@ -111,10 +112,9 @@
 				}
 				const { globalData: { userInfo } } = getApp();
 				userInfo.phone = this.phone;
-				uni.navigateTo({ url: '/pages/guestHome/index' })
-				// guestFirst({ phone: this.phone, smsCode: this.smsCode }).then(e=>{
-				// 	e.success && uni.navigateTo({ url: '/pages/guestHome/index' })
-				// })
+				guestFirst({ phone: this.phone, smsCode: this.smsCode }).then(e=>{
+					e && e.success && uni.navigateTo({ url: '/pages/guestHome/index' })
+				})
 			}
 		}
 	}

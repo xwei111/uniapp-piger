@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我要离场",
+  "usingComponents": {
+    "self-input": "/components/self-input",
+    "self-button": "/components/self-button",
+    "timer": "/components/timer/index"
+  }
+}

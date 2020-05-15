@@ -1,4 +1,5 @@
 <template>
+	<!-- 我-警报信息 -->
 	<view class="main_box">
 		<self-tabs class="mine_tabs" :list="tags" :active="active" @selectHandle="selectHandle" style="width: 100%;"></self-tabs>
 		<scroll-view class="scroll_task" scroll-y="true" :scroll-top="scrollTop" @scroll="scroll" :style="{height:scrollviewHigh +'px'}">
@@ -15,6 +16,7 @@
 			</view>
 			<self-empty v-if="!list.length"></self-empty>
 		</scroll-view>
+		<selfTaskColor></selfTaskColor>
 	</view>
 </template>
 

@@ -8,7 +8,12 @@
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 4);var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
+var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var selfTaskColor = function selfTaskColor() {__webpack_require__.e(/*! require.ensure | components/taskmodel/self-task-color */ "components/taskmodel/self-task-color").then((function () {return resolve(__webpack_require__(/*! @/components/taskmodel/self-task-color.vue */ 12));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+
+
+_vue.default.component('selfTaskColor', selfTaskColor);
+_vue.default.prototype.$store = _index.default;
 
 _vue.default.config.productionTip = false;
 
@@ -90,11 +95,16 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   globalData: {
-    baseUrl:  true ? 'http://4bkec15r.xiaomy.net' : undefined,
+    baseUrl:  true ? 'http://p14jr06b.xiaomy.net' : undefined,
     userInfo: {} },
 
-  onLaunch: function onLaunch() {
-
+  onLaunch: function onLaunch() {var _this = this;
+    setTimeout(function () {
+      _this.$store.commit('switchModal', 'red');
+    }, 3000);
+    setTimeout(function () {
+      _this.$store.commit('switchModal', 'red');
+    }, 8000);
   },
   onShow: function onShow() {
     var that = this;
@@ -122,7 +132,27 @@ __webpack_require__.r(__webpack_exports__);
         } });
 
     }
-
+    // uni.connectSocket({
+    //     url: 'ws://localhost:3000',
+    // 	success: (e) => console.log('success', e),
+    // 	fail: (e) => console.log('fail', e),
+    // 	complete: (e) => console.log('complete', e)
+    // });
+    // uni.onSocketOpen(function (res) {
+    //   console.log('WebSocket连接已打开！');
+    //   uni.sendSocketMessage({
+    //     data: msg
+    //   });
+    // });
+    // uni.onSocketError(function (res) {
+    //   console.log('WebSocket连接打开失败，请检查！');
+    // });
+    // uni.onSocketMessage(function (res) {
+    //   console.log('收到服务器内容：' + res.data);
+    // });
+    // uni.onSocketClose(function (res) {
+    //   uni.connectSocket({url: 'ws://localhost:3000'});
+    // });
   },
   onHide: function onHide() {
   } };exports.default = _default;
