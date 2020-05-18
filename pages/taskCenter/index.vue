@@ -47,14 +47,46 @@
 		data() {
 			return {
 				dataSource: [
-					{ title: '车辆洗消', sign: true, kind: 'car' },
-					{ title: '区域任务', sign: false, kind: 'region' },
-					{ title: '猪只任务', sign: false, kind: 'piger' },
-					{ title: '饲料任务', sign: false, kind: 'feed' },
-					{ title: '物资任务', sign: false, kind: 'material' },
-					{ title: '食材任务', sign: false, kind: 'food' },
-					{ title: '粪肥任务', sign: false, kind: 'fertilizer' }
-				]
+					{ title: '人员中转任务', sign: false, kind: 'region', key: 'peopleTrans'  },
+					{ title: '隔离点日常任务', sign: false, kind: 'material', key: 'quarantineDaily'  },
+					{ title: '车辆日常任务', sign: false, kind: 'car', key: 'carDaily'  },
+					{ title: '人员日常采样任务', sign: false, kind: 'material', key: 'samplingDaily'  },
+					{ title: '物资厂采样', sign: false, kind: 'material', key: 'materSialampling' },
+					{ title: '非中转物资', sign: false, kind: 'material', key: 'notMater' },
+					{ title: '引种猪任务', sign: false, kind: 'piger', key: 'breedingPig' },
+					{ title: '车辆洗消', sign: true, kind: 'car', key: 'carWash' },
+					{ title: '断奶猪', sign: true, kind: 'piger', key: 'weaningPig' },
+					{ title: '商品淘汰猪', sign: true, kind: 'piger', key: 'eliminatePig' },
+					{ title: '粪肥任务', sign: false, kind: 'fertilizer', key: 'fertilizer' },
+					{ title: '饲料厂采样', sign: false, kind: 'feed', key: 'feedSample' },
+					{ title: '打料任务', sign: false, kind: 'feed', key: 'punching' },
+					{ title: '发起食材到货', sign: false, kind: 'food', key: 'food' },
+					{ title: '食材中转', sign: false, kind: 'food', key: 'foodTrans' },
+					{ title: '中转物资到货发起', sign: false, kind: 'material', key: 'transMater' },
+					{ title: '中转物资入场', sign: false, kind: 'material', key: 'comTransMater' },
+					{ title: '物资入库任务', sign: false, kind: 'material', key: 'materCom' },
+				],
+				taskUrl: {
+					peopleTrans: '/pages/startTask/peopleTrans',
+					quarantineDaily: '/pages/startTask/quarantineDaily',
+					carDaily: '/pages/startTask/carDaily',
+					samplingDaily: '/pages/startTask/samplingDaily',
+					materSialampling: '/pages/startTask/materSialampling',
+					notMater: '/pages/startTask/notMater',
+					breedingPig: '/pages/startTask/breedingPig',
+					carWash: '/pages/startTask/carWash',
+					weaningPig: '/pages/startTask/weaningPig',
+					eliminatePig: '/pages/startTask/eliminatePig',
+					fertilizer: '/pages/startTask/fertilizer',
+					feedSample: '/pages/startTask/feedSample',
+					punching: '/pages/startTask/punching',
+					food: '/pages/startTask/food',
+					foodTrans: '/pages/startTask/foodTrans',
+					transMater: '/pages/startTask/transMater',
+					comTransMater: '/pages/startTask/comTransMater',
+					materCom: '/pages/startTask/materCom'
+				},
+				
 			}
 		},
 		components: {
@@ -91,18 +123,7 @@
 			},
 			workHandle(e) {
 				console.log('e', e)
-				uni.showActionSheet({
-				    itemList: ['引种猪任务', '销售淘汰猪', '死猪处理', '其他任务', ],
-				    success: function (res) {
-				        console.log('res', res);
-						if(res.tapIndex === 0) {
-							uni.navigateTo({ url: `/pages/startTask/breedingPig?detail=${JSON.stringify(e)}` })
-						}
-				    },
-				    fail: function (res) {
-				        console.log(res.errMsg);
-				    }
-				});
+				uni.navigateTo({ url: `${this.taskUrl[e.key]}?detail=${JSON.stringify(e)}` })
 			},
 			comeHandle() {
 				// 已入场不能在入场

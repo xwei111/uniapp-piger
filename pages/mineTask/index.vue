@@ -43,15 +43,24 @@
 				],
 				active: 1,
 				list: [
-					{title: '车辆洗消', people: '吴小军', pros: '一洗-采样', kind: 'car'},
-					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'region'},
-					{title: '区域任务', people: '黄小仙', pros: '一洗-采样', kind: 'piger'}
+					{title: '人员流程', people: '憨憨', pros: '隔离点-消毒', kind: 'region', key: 'peopleDisinfect'},
+					{title: '人员流程', people: '憨憨', pros: '隔离点-采样', kind: 'region', key: 'peopleSample'},
+					{title: '人员流程', people: '憨憨', pros: '隔离点-采样结果', kind: 'region', key: 'peopleSampleResult'},
+					{title: '人员流程', people: '憨憨', pros: '入场申请审核', kind: 'region', key: 'admissionAudit'},
+					{title: '人员流程', people: '憨憨', pros: '访客邀请审核', kind: 'region', key: 'guestInviate'}
 				],
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
 				},
-				scrollviewHigh: 0
+				scrollviewHigh: 0,
+				taskUrl: {
+					peopleDisinfect: '/pages/allTask/people/disinfect',
+					peopleSample: '/pages/allTask/people/sample',
+					peopleSampleResult: '/pages/allTask/people/sampleResult',
+					admissionAudit: '/pages/allTask/people/admissionAudit',
+					guestInviate: '/pages/allTask/people/guestInviate'
+				}
 			}
 		},
 		components: {
@@ -85,7 +94,8 @@
 			},
 			completeHandle(e) {
 				console.log('e', e)
-				uni.navigateTo({ url: `/pages/allTask/guestApproval?detail=${JSON.stringify(e)}` })
+				uni.navigateTo({ url: `${this.taskUrl[e.key]}?detail=${JSON.stringify(e)}` })
+				// uni.navigateTo({ url: `/pages/allTask/guestApproval?detail=${JSON.stringify(e)}` })
 			},
 			colorDetailHandle(e) {
 				

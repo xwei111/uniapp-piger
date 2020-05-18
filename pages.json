@@ -42,7 +42,7 @@
 				"navigationBarTitleText": "我"
 			}
 		},
-		{ 
+		{
 			"path": "pages/guestHome/index",
 			"style": {}
 		},
@@ -68,65 +68,130 @@
 			"style": {
 				"navigationBarTitleText": "报警信息"
 			}
-		}, { 
+		}, {
 			"path": "pages/dowarning/index",
 			"style": {
 				"navigationBarTitleText": "处理报警"
 			}
-		}, { 
+		}, {
 			"path": "pages/warningDetail/index",
 			"style": {
 				"navigationBarTitleText": "报警详情"
 			}
-		}, { 
-			"path": "pages/invitaGuest/index",
+		}, {
+			"path": "pages/startTask/peopleTrans",
 			"style": {
-				"navigationBarTitleText": "访客邀请"
+				"navigationBarTitleText": "发起任务"
 			}
 		}, {
-			"path": "pages/allTask/carWashTwo",
+			"path": "pages/startTask/quarantineDaily",
 			"style": {
-				"navigationBarTitleText": "任务详情"
+				"navigationBarTitleText": "发起任务"
 			}
 		}, {
-			"path": "pages/allTask/carWashThree",
+			"path": "pages/startTask/carDaily",
 			"style": {
-				"navigationBarTitleText": "任务详情"
+				"navigationBarTitleText": "发起任务"
 			}
 		}, {
-			"path": "pages/allTask/feed",
+			"path": "pages/startTask/samplingDaily",
 			"style": {
-				"navigationBarTitleText": "任务详情"
-			}
-		}, { 
-			"path": "pages/allTask/material",
-			"style": {
-				"navigationBarTitleText": "任务详情"
+				"navigationBarTitleText": "发起任务"
 			}
 		}, {
-			"path": "pages/allTask/materialRecord",
+			"path": "pages/startTask/materSialampling",
 			"style": {
-				"navigationBarTitleText": "任务详情"
+				"navigationBarTitleText": "发起任务"
 			}
 		}, {
-			"path": "pages/allTask/disinfect",
+			"path": "pages/startTask/notMater",
 			"style": {
-				"navigationBarTitleText": "任务详情"
-			}
-		}, {
-			"path": "pages/allTask/materialTransfer",
-			"style": {
-				"navigationBarTitleText": "任务详情"
-			}
-		}, {
-			"path": "pages/allTask/guestApproval",
-			"style": {
-				"navigationBarTitleText": "任务详情"
+				"navigationBarTitleText": "发起任务"
 			}
 		}, {
 			"path": "pages/startTask/breedingPig",
 			"style": {
 				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/carWash",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/weaningPig",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/eliminatePig",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/fertilizer",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/feedSample",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/punching",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/food",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/foodTrans",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/transMater",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/comTransMater",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/startTask/materCom",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
+			"path": "pages/allTask/people/disinfect",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/sample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/sampleResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/admissionAudit",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/guestInviate",
+			"style": {
+				"navigationBarTitleText": "任务详情"
 			}
 		}
 	],

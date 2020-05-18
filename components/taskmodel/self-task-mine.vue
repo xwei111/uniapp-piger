@@ -14,7 +14,7 @@
 					<text class="self_task_mine_progress_content_key">当前流程</text>
 					<text class="self_task_mine_progress_content_value">{{dataSource.pros}}</text>
 				</view>
-				<view class="self_task_mine_progress_content">
+				<view class="self_task_mine_progress_content" v-if="dataSource.car">
 					<text class="self_task_mine_progress_content_key">车牌号</text>
 					<text class="self_task_mine_progress_content_value">{{dataSource.car}}</text>
 				</view>

@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "任务中心",
   "usingComponents": {
     "self-button": "/components/self-button",
     "self-bg": "/components/self-bg",

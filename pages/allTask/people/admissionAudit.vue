@@ -5,15 +5,12 @@
 			<view slot="basic">
 				<self-input label="人员类型" v-model="userKind" disabled></self-input>
 				<self-input label="姓名" v-model="name" disabled></self-input>
-				<self-input label="手机号" v-model="phone" disabled></self-input>
-				<self-input label="身份证号" v-model="idNo" disabled></self-input>
-				<self-input label="目的地" v-model="address" disabled></self-input>
-				<self-input label="来访时间" v-model="comeTime" disabled></self-input>
 				<self-input label="当前所在地" v-model="currentAdd" disabled></self-input>
 				<self-input label="上次接触猪只时间" v-model="lastPigTime" disabled></self-input>
 				<self-input label="上次接触高风险场所时间" v-model="lastDangerTime" disabled></self-input>
 				<self-higinfo></self-higinfo>
-				<self-input label="到达隔离点交通方式" v-model="waykind" disabled></self-input>
+				<self-input label="来访原因" v-model="comeReason" disabled></self-input>
+				<self-input label="预计到达时间" v-model="comeTime" disabled></self-input>
 				<view class="otherPeople">
 					<view class="otherPeople_title">携带个人物品</view>
 					<view v-for="(item, index) in personalEffects" :key="index" class="personalEffect_box" >
@@ -21,19 +18,8 @@
 					</view>
 					<self-input v-if="personalEffects.indexOf('其他') > -1" placeholder="请输入其他物品" v-model="otherEffects" disabled></self-input>
 				</view>
-				<view v-if="accompanying.length" class="otherPeople">
-					<view class="otherPeople_title">随行人员</view>
-					<view v-for="(item, index) in accompanying" :key="index" class="otherPeople_box" >
-						<view class="otherPeople_box_list">
-							<text class="otherPeople_box_list_name">姓名</text>
-							<text class="otherPeople_box_list_sfz">{{item.name}}</text>
-						</view>
-						<view class="otherPeople_box_list">
-							<text class="otherPeople_box_list_name">身份证号</text>
-							<text class="otherPeople_box_list_sfz">{{item.idNo}}</text>
-						</view>
-					</view>
-				</view>
+				<self-input label="到达隔离点交通方式" v-model="waykind" disabled></self-input>
+				<self-input label="审核人" v-model="okp" disabled></self-input>
 			</view>
 			<view slot="task">
 				<self-button-radio label="审核结果" :dataSource="dataSource1" :active="active1" @selectHandle="selectHandle1"></self-button-radio>
@@ -57,11 +43,10 @@
 		data() {
 			return {
 				detail: {},
-				userKind: '访客',
+				userKind: '员工',
 				name: '王五',
-				phone: '13781818181',
-				idNo: '410889999999999999',
-				address: '猪场A',
+				comeReason: '休班返厂',
+				okp: '李七',
 				comeTime: '2020-04-19',
 				currentAdd: '梧州',
 				lastPigTime: '无',
@@ -70,10 +55,6 @@
 				personalEffectList: ['手机', '眼镜', '其他'],
 				otherEffects: '外衣',
 				personalEffects: ['手机', '眼镜', '其他'],
-				accompanying: [
-					{ name: '小白', idNo: '401999999999999999' },
-					{ name: '小黑', idNo: '401999999999999999' }
-				],
 				dataSource1: [
 					{ id: 1, title: '通过' },
 					{ id: 2, title: '不通过' }

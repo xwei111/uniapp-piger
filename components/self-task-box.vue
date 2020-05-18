@@ -4,7 +4,7 @@
 		<view class="self_task_mine_info">
 			<image class="self_task_mine_info_logo" :src="tasktype[detail.kind] ? tasktype[detail.kind].ig : ''"></image>
 			<view >
-				<view class="self_task_mine_info_title">{{detail.title}}</view>
+				<view class="self_task_mine_info_title">{{detail.pros}}</view>
 				<view class="self_task_mine_info_user">发起人: {{detail.people}}</view>
 			</view>
 		</view>

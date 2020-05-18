@@ -1,5 +1,5 @@
 <template>
-	<!-- 饲料车打料前    -->
+	<!-- 饲料车打料前图片上传    -->
 	<view class="mian_background main_content">
 		<self-task-box :detail="detail">
 			<view slot="basic">

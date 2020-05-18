@@ -8,11 +8,13 @@
 			</view>
 		</view>
 		<!-- 基本信息 -->
-		<view class="self_task_basic">任务概要</view>
+		<view class="self_task_basic" v-if="$slots.task">任务概要</view>
 		<slot name="task"></slot>
 		<!-- 任务处理 -->
-		<view class="self_task_basic self_task_basic_car">车辆资源</view>
+		<view class="self_task_basic self_task_basic_car" v-if="$slots.car">车辆资源</view>
 		<slot name="car"></slot>
+		
+		<slot></slot>
 	</view>
 </template>
 
