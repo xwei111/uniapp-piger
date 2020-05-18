@@ -5,12 +5,13 @@
 			userInfo: {}
 		},
 		onLaunch: function() {
-			setTimeout(()=>{
-				this.$store.commit('switchModal', 'red')
-			}, 3000)
-			setTimeout(()=>{
-				this.$store.commit('switchModal', 'red')
-			}, 8000)
+			// 消息警报
+			// setTimeout(()=>{
+			// 	this.$store.commit('switchModal', 'red')
+			// }, 3000)
+			// setTimeout(()=>{
+			// 	this.$store.commit('switchModal', 'red')
+			// }, 8000)
 		},
 		onShow: function() {
 			const that = this;
