@@ -47,7 +47,10 @@
 					{title: '人员流程', people: '憨憨', pros: '隔离点-采样', kind: 'region', key: 'peopleSample'},
 					{title: '人员流程', people: '憨憨', pros: '隔离点-采样结果', kind: 'region', key: 'peopleSampleResult'},
 					{title: '人员流程', people: '憨憨', pros: '入场申请审核', kind: 'region', key: 'admissionAudit'},
-					{title: '人员流程', people: '憨憨', pros: '访客邀请审核', kind: 'region', key: 'guestInviate'}
+					{title: '人员流程', people: '憨憨', pros: '访客邀请确认', kind: 'region', key: 'guestInviate'},
+					{title: '人员流程', people: '憨憨', pros: '采样确认', kind: 'region', key: 'sampleSure'},
+					{title: '人员流程', people: '憨憨', pros: '洗澡确认', kind: 'region', key: 'washSure'},
+					{title: '人员流程', people: '憨憨', pros: '进入隔离点', kind: 'region', key: 'inDisinfect'}
 				],
 				scrollTop: 0,
 				old: {
@@ -59,7 +62,10 @@
 					peopleSample: '/pages/allTask/people/sample',
 					peopleSampleResult: '/pages/allTask/people/sampleResult',
 					admissionAudit: '/pages/allTask/people/admissionAudit',
-					guestInviate: '/pages/allTask/people/guestInviate'
+					guestInviate: '/pages/allTask/people/guestInviate',
+					sampleSure: '/pages/allTask/people/sampleSure',
+					washSure: '/pages/allTask/people/washSure',
+					inDisinfect: '/pages/allTask/people/inDisinfect'
 				}
 			}
 		},

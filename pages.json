@@ -193,6 +193,21 @@
 			"style": {
 				"navigationBarTitleText": "任务详情"
 			}
+		}, {
+			"path": "pages/allTask/people/sampleSure",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/washSure",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/inDisinfect",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
 		}
 	],
 	"globalStyle": {

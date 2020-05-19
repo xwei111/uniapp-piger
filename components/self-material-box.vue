@@ -42,7 +42,7 @@
 			font-weight: 400;
 			color: rgba(0, 0, 0, 0.7);
 			line-height: 48rpx;
-			margin: 24rpx 0 0 0;
+			margin: 24rpx 0 24rpx 0;
 			padding-left: 20rpx;
 		}
 		.self_mater_list {
