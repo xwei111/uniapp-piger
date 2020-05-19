@@ -43,6 +43,7 @@
 				],
 				active: 1,
 				list: [
+					// // 人员流程
 					// {title: '人员流程', people: '憨憨', pros: '隔离点-消毒', kind: 'region', key: 'peopleDisinfect'},
 					// {title: '人员流程', people: '憨憨', pros: '隔离点-采样', kind: 'region', key: 'peopleSample'},
 					// {title: '人员流程', people: '憨憨', pros: '隔离点-采样结果', kind: 'region', key: 'peopleSampleResult'},
@@ -64,8 +65,51 @@
 					// {title: '人员流程', people: '憨憨', pros: '人员橙黄绿进出登记', kind: 'region', key: 'peopleColorRecord'},
 					// {title: '人员流程', people: '憨憨', pros: '离场审批', kind: 'region', key: 'leaveApproval'},
 					// {title: '人员流程', people: '憨憨', pros: '离开场区记录', kind: 'region', key: 'leaveRecord'},
-					{title: '车辆消洗流程', people: '憨憨', pros: '车辆一洗操作记录', kind: 'car', key: 'carWashRecordOne'},
-					{title: '车辆消洗流程', people: '憨憨', pros: '车辆一洗检查记录', kind: 'car', key: 'carWashCheckOne'},
+					
+					// // 车辆消洗流程
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆一洗操作记录', kind: 'car', key: 'carWashRecordOne'},
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆一洗检查记录', kind: 'car', key: 'carWashCheckOne'},
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆二洗操作记录', kind: 'car', key: 'carWashRecordTwo'},
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆二洗检查记录', kind: 'car', key: 'carWashCheckTwo'},
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆二洗采样表', kind: 'car', key: 'carWashTwoSample'},
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆二洗采样结果', kind: 'car', key: 'carWashTwoResult'},
+					// {title: '车辆消洗流程', people: '憨憨', pros: '车辆三洗', kind: 'car', key: 'carWashThree'},
+					
+					// // 中转物资流程
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-消毒', kind: 'material', key: 'transferDisinfect'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-采样结果', kind: 'material', key: 'transferSample'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-物资采样记录', kind: 'material', key: 'materialRecord'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-物资登记单', kind: 'material', key: 'materialRegister'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-物资采样结果', kind: 'material', key: 'materialResult'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-物资转移待转区', kind: 'material', key: 'materialTran'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-使用前消毒', kind: 'material', key: 'materialDisinfect'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-转运登记', kind: 'material', key: 'tranRegister'},
+					// {title: '中转物资流程', people: '憨憨', pros: '中转占-靠场消毒', kind: 'material', key: 'sitDIsinfect'},
+					// {title: '中转物资流程', people: '憨憨', pros: '物资-到场登记', kind: 'material', key: 'localRegister'},
+					// {title: '中转物资流程', people: '憨憨', pros: '2-物资入库登记', kind: 'material', key: 'wareRegister'},
+					// {title: '中转物资流程', people: '憨憨', pros: '物资-内部中转车消毒', kind: 'material', key: 'tranCarDisinfect'},
+					// {title: '中转物资流程', people: '憨憨', pros: '物资-场内转运登记', kind: 'material', key: 'transRegister'},
+					// {title: '中转物资流程', people: '憨憨', pros: '1类物资-入库登记', kind: 'material', key: 'firstmaterRegister'},
+					
+					// // 饲料车任务
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料场采样视频上传', kind: 'feed', key: 'feedUploadVideo'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车2洗表', kind: 'feed', key: 'feedCarWashTwoTable'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车2洗检查', kind: 'feed', key: 'feedCarWashTwoCheck'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-靠场消洗', kind: 'feed', key: 'feedSitWash'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-周次消毒', kind: 'feed', key: 'feedWeakDis'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-周次采样', kind: 'feed', key: 'feedWeakSample'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-周次采样结果', kind: 'feed', key: 'feedWeakResult'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-打料前图片上传', kind: 'feed', key: 'beforePunchingUp'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-打料前管理确认', kind: 'feed', key: 'beforePunchingSure'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-打料后图片上传', kind: 'feed', key: 'afterPunchingUp'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-打料后采样记录', kind: 'feed', key: 'afterPunchingRecord'},
+					// {title: '饲料车任务', people: '憨憨', pros: '饲料车-打料后采样结果', kind: 'feed', key: 'afterPunchingResult'},
+					
+					// 引种猪任务
+					{title: '引种猪任务', people: '憨憨', pros: '人员隔离点采样', kind: 'piger', key: 'disPeopleSample'},
+					{title: '引种猪任务', people: '憨憨', pros: '隔离点采样结果录入', kind: 'piger', key: 'disResultRegis'},
+					{title: '引种猪任务', people: '憨憨', pros: '车辆采样表', kind: 'piger', key: 'carSample'},
+					{title: '引种猪任务', people: '憨憨', pros: '车辆采样结果', kind: 'piger', key: 'carSampleResult'},
 				],
 				scrollTop: 0,
 				old: {
@@ -73,6 +117,7 @@
 				},
 				scrollviewHigh: 0,
 				taskUrl: {
+					// 人员流程
 					peopleDisinfect: '/pages/allTask/people/disinfect',
 					peopleSample: '/pages/allTask/people/sample',
 					peopleSampleResult: '/pages/allTask/people/sampleResult',
@@ -94,8 +139,47 @@
 					peopleColorRecord: '/pages/allTask/people/peopleColorRecord',
 					leaveApproval: '/pages/allTask/people/leaveApproval',
 					leaveRecord: '/pages/allTask/people/leaveRecord',
+					// 车辆消洗流程
 					carWashRecordOne: '/pages/allTask/carWash/carWashRecordOne',
-					carWashCheckOne: '/pages/allTask/carWash/carWashCheckOne'
+					carWashCheckOne: '/pages/allTask/carWash/carWashCheckOne',
+					carWashRecordTwo: '/pages/allTask/carWash/carWashRecordTwo',
+					carWashCheckTwo: '/pages/allTask/carWash/carWashCheckTwo',
+					carWashTwoSample: '/pages/allTask/carWash/carWashTwoSample',
+					carWashTwoResult: '/pages/allTask/carWash/carWashTwoResult',
+					carWashThree: '/pages/allTask/carWash/carWashThree',
+					// 中转物资流程
+					transferDisinfect: '/pages/allTask/transfer/transferDisinfect',
+					transferSample: '/pages/allTask/transfer/transferSample',
+					materialRecord: '/pages/allTask/transfer/materialRecord',
+					materialRegister: '/pages/allTask/transfer/materialRegister',
+					materialResult: '/pages/allTask/transfer/materialResult',
+					materialTran: '/pages/allTask/transfer/materialTran',
+					materialDisinfect: '/pages/allTask/transfer/materialDisinfect',
+					tranRegister: '/pages/allTask/transfer/tranRegister',
+					sitDIsinfect: '/pages/allTask/transfer/sitDIsinfect',
+					localRegister: '/pages/allTask/transfer/localRegister',
+					wareRegister: '/pages/allTask/transfer/wareRegister',
+					tranCarDisinfect: '/pages/allTask/transfer/tranCarDisinfect',
+					transRegister: '/pages/allTask/transfer/transRegister',
+					firstmaterRegister: '/pages/allTask/transfer/firstmaterRegister',
+					// 饲料车任务
+					feedUploadVideo: '/pages/allTask/feed/feedUploadVideo',
+					feedCarWashTwoTable: '/pages/allTask/feed/feedCarWashTwoTable',
+					feedCarWashTwoCheck: '/pages/allTask/feed/feedCarWashTwoCheck',
+					feedSitWash: '/pages/allTask/feed/feedSitWash',
+					feedWeakDis: '/pages/allTask/feed/feedWeakDis',
+					feedWeakSample: '/pages/allTask/feed/feedWeakSample',
+					feedWeakResult: '/pages/allTask/feed/feedWeakResult',
+					beforePunchingUp: '/pages/allTask/feed/beforePunchingUp',
+					beforePunchingSure: '/pages/allTask/feed/beforePunchingSure',
+					afterPunchingUp: '/pages/allTask/feed/afterPunchingUp',
+					afterPunchingRecord: '/pages/allTask/feed/afterPunchingRecord',
+					afterPunchingResult: '/pages/allTask/feed/afterPunchingResult',
+					// 引种猪任务
+					disPeopleSample: '/pages/allTask/inPiger/disPeopleSample',
+					disResultRegis: '/pages/allTask/inPiger/disResultRegis',
+					carSample: '/pages/allTask/inPiger/carSample',
+					carSampleResult: '/pages/allTask/inPiger/carSampleResult',
 				}
 			}
 		},

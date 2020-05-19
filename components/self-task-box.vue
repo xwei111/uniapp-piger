@@ -13,7 +13,7 @@
 		<view v-if="isShow">
 			<slot name="basic"></slot>
 		</view>
-		<view class="self_isExpend" @click="expendHandle">
+		<view class="self_isExpend" @click="expendHandle" v-if="$slots.basic">
 			<image
 				:class="[
 					'self_isExpend_ig',
