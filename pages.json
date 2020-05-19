@@ -79,7 +79,12 @@
 				"navigationBarTitleText": "报警详情"
 			}
 		}, {
-			"path": "pages/startTask/peopleTrans",
+			"path": "pages/warningDetail/index",
+			"style": {
+				"navigationBarTitleText": "访客邀请"
+			}
+		}, {
+			"path": "pages/invitaGuest/index",
 			"style": {
 				"navigationBarTitleText": "发起任务"
 			}
@@ -210,6 +215,76 @@
 			}
 		}, {
 			"path": "pages/allTask/people/disPeopkeSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/newSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/newSampleWrite",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/weakDisinSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/weakSampleResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/inQuarantine",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/beforeDisinfect",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/peopleTrans",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/carCheck",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/peopleRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/peopleColorRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/leaveApproval",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/people/leaveRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/carWash/carWashRecordOne",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/carWash/carWashCheckOne",
 			"style": {
 				"navigationBarTitleText": "任务详情"
 			}
