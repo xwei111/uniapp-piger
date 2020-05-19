@@ -3,14 +3,8 @@
 	<view class="mian_background main_content">
 		<self-task-box :detail="detail">
 			<view slot="basic">
-				<self-input label="当前流程" v-model="currentPro" disabled></self-input>
-				<self-input label="车牌号" v-model="carNo" disabled></self-input>
-				<self-input label="驾驶员" v-model="carUser" disabled></self-input>
-				<self-input label="到达地点" v-model="address" disabled></self-input>
-				<self-material-box label="物资列表" :dataSource="dataSource"></self-material-box>
-			</view>
-			<view slot="task">
-				<self-input label="登记时间">
+				<self-input label="记录人" v-model="address" disabled></self-input>
+				<self-input label="记录时间">
 					<view slot="fill" class="fill_content">
 						<timer
 							fields="second"
@@ -21,16 +15,18 @@
 						></timer>
 					</view>
 				</self-input>
-				<self-button-radio label="车辆中专" :dataSource="dataSource1" :active="active1" @selectHandle="selectHandle1"></self-button-radio>
-				<self-input label="车牌号/编号" v-model="carID" placeholder="请输入车牌号/编号"></self-input>
-				<view class="car_box" v-for="(item, index) in cars" :key="index">
-					<self-input v-model="item.carID" placeholder="请输入车牌号/编号"></self-input>
-					<view class="car_box_delete" @click="deleteHandle(index)">
-						<icon type="clear" size="16"/>
+				<view v-if="accompanying.length" class="otherPeople">
+					<view class="otherPeople_title">人员列表</view>
+					<view v-for="(item, index) in accompanying" :key="index" class="otherPeople_box" >
+						<view class="otherPeople_box_list">
+							<text class="otherPeople_box_list_name">姓名</text>
+							<text class="otherPeople_box_list_sfz">{{item.name}}</text>
+						</view>
+						<view class="otherPeople_box_list">
+							<text class="otherPeople_box_list_name">进入时间</text>
+							<text class="otherPeople_box_list_sfz">{{item.time}}</text>
+						</view>
 					</view>
-				</view>
-				<view class="addUser" >
-					<text @click="addUserHandle">+ 新增车牌号</text>
 				</view>
 			</view>
 		</self-task-box>
@@ -52,22 +48,13 @@
 		data() {
 			return {
 				detail: {},
-				currentPro: '物资到场登记',
-				carNo: '浙A 123',
-				carUser: '王五',
 				address: '前花园',
-				dataSource: [
-					{ title: '卷纸', number: '10箱', idno: '0384724-038' },
-					{ title: '疫苗', number: '20瓶', idno: '0384724-038' }
-				],
 				startTime: '',
-				dataSource1: [
-					{ id: 1, title: '需要' },
-					{ id: 2, title: '不需要' }
-				],
-				active1: 2,
-				carID: '',
-				cars: []
+				cars: [],
+				accompanying: [
+					{ name: '张三', time: '2018-01-02' },
+					{ name: '李四', time: '2018-01-02' }
+				]
 			}
 		},
 		components: {
@@ -90,19 +77,6 @@
 			startTimeChange(e) {
 				this.startTime = e
 			},
-			selectHandle1(e) {
-				this.active1 = e.id
-			},
-			addUserHandle() {
-				if(!this.carID || this.cars.some(e=>!e.carID)) {
-					uni.showToast({ title: '有未填写的车牌号', icon: 'none' });
-					return
-				}
-				this.cars.push({ carID: '' })
-			},
-			deleteHandle(index) {
-				this.cars.splice(index, 1);
-			},
 			okClick() {
 				alert('a')
 			}
@@ -114,23 +88,60 @@
 	.nextButton {
 		margin: 70rpx 0 150rpx 0;
 	}
-	.car_box {
-		position: relative;
-		.car_box_delete {
-			position: absolute;
-			top: 50%;
-			right: 28rpx;
-			transform: translate(0, -50%);
-			z-index: 1;
+	.otherPeople {
+		padding-top: 35rpx;
+		.otherPeople_title {
+			font-size:34rpx;
+			font-family:PingFangSC-Regular,PingFang SC;
+			font-weight:400;
+			color:rgba(0,0,0,0.7);
+			margin-bottom: 25rpx;
 		}
-	}
-	.addUser {
-		font-size:34rpx;
-		font-family:PingFangSC-Regular,PingFang SC;
-		font-weight:400;
-		color:rgba(15,187,135,1);
-		padding: 30rpx 0 0 0;
-		display: flex;
-		justify-content: space-between;
+		.otherPeople_box {
+			width: 582rpx;
+			height: 194rpx;
+			background-color: rgba(216,216,216,0.2);
+			margin-bottom: 35rpx;
+			position: relative;
+			.otherPeople_box_list {
+				width: 100%;
+				height: 50%;
+				display: flex;
+				align-items: center;
+				box-sizing: border-box;
+				padding-left: 23rpx;
+				font-size:30rpx;
+				font-family:PingFangSC-Regular,PingFang SC;
+				font-weight:400;
+				color:rgba(76,76,76,1);
+				.otherPeople_box_list_name {
+					width: 150rpx;
+					color: #0B8E69;
+				}
+				.otherPeople_box_list_sfz {
+					color: #4C4C4C;
+				}
+			}
+			.otherPeople_box_delete {
+				position: absolute;
+				width:52rpx;
+				height:52rpx;
+				background:rgba(255,113,113,1);
+				color: #fff;
+				font-size: 100rpx;
+				top: -26rpx;
+				right: -26rpx;
+				border-radius: 50%;
+				.otherPeople_box_delete_icon {
+					position: absolute;
+					width:25rpx;
+					height:4rpx;
+					background:rgba(255,255,255,1);
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+			}
+		}
 	}
 </style>

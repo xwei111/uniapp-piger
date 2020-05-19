@@ -50,7 +50,8 @@
 					{title: '人员流程', people: '憨憨', pros: '访客邀请确认', kind: 'region', key: 'guestInviate'},
 					{title: '人员流程', people: '憨憨', pros: '采样确认', kind: 'region', key: 'sampleSure'},
 					{title: '人员流程', people: '憨憨', pros: '洗澡确认', kind: 'region', key: 'washSure'},
-					{title: '人员流程', people: '憨憨', pros: '进入隔离点', kind: 'region', key: 'inDisinfect'}
+					{title: '人员流程', people: '憨憨', pros: '进入隔离点', kind: 'region', key: 'inDisinfect'},
+					{title: '人员流程', people: '憨憨', pros: '隔离点-人员采样结果', kind: 'region', key: 'disPeopkeSample'}
 				],
 				scrollTop: 0,
 				old: {
@@ -65,7 +66,8 @@
 					guestInviate: '/pages/allTask/people/guestInviate',
 					sampleSure: '/pages/allTask/people/sampleSure',
 					washSure: '/pages/allTask/people/washSure',
-					inDisinfect: '/pages/allTask/people/inDisinfect'
+					inDisinfect: '/pages/allTask/people/inDisinfect',
+					disPeopkeSample: '/pages/allTask/people/disPeopkeSample',
 				}
 			}
 		},

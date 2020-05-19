@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<!-- 基本信息 -->
-		<view class="self_task_basic">基本信息</view>
+		<view class="self_task_basic" v-if="$slots.basic">基本信息</view>
 		<view v-if="isShow">
 			<slot name="basic"></slot>
 		</view>
@@ -25,7 +25,7 @@
 			{{ isShow ? '收起' : '展开' }}
 		</view>
 		<!-- 任务处理 -->
-		<view class="self_task_basic">任务处理</view>
+		<view class="self_task_basic" v-if="$slots.task">任务处理</view>
 		<slot name="task"></slot>
 	</view>
 </template>

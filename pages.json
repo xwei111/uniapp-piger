@@ -208,6 +208,11 @@
 			"style": {
 				"navigationBarTitleText": "任务详情"
 			}
+		}, {
+			"path": "pages/allTask/people/disPeopkeSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
 		}
 	],
 	"globalStyle": {
