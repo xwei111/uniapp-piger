@@ -89,6 +89,11 @@
 				"navigationBarTitleText": "发起任务"
 			}
 		}, {
+			"path": "pages/startTask/peopleTrans",
+			"style": {
+				"navigationBarTitleText": "发起任务"
+			}
+		}, {
 			"path": "pages/startTask/quarantineDaily",
 			"style": {
 				"navigationBarTitleText": "发起任务"
@@ -460,6 +465,121 @@
 			}
 		}, {
 			"path": "pages/allTask/inPiger/carSampleResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/inPigerWashSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/inPigerSampleRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/washAndSampleSure",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/sampleResultRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/packing",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/backCheck",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/backCheckResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/afterInPigerWash",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/inPiger/afterSampleRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weanDisPeopleSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weanDisSampleRegister",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaCarSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaCarSampleResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaoutDisRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaWashAndSampleSure",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaSampleResultRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaInPigerWashSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaInPigerSampleRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaMilkWashAndSampleSure",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaCarFatten",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaTranCarSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaTranCarResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/weanPiger/weaTranCarDisRecord",
 			"style": {
 				"navigationBarTitleText": "任务详情"
 			}

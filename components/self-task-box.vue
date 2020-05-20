@@ -27,6 +27,7 @@
 		<!-- 任务处理 -->
 		<view class="self_task_basic" v-if="$slots.task">任务处理</view>
 		<slot name="task"></slot>
+		<slot></slot>
 	</view>
 </template>
 
