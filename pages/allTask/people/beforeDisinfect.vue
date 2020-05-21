@@ -4,7 +4,7 @@
 		<self-task-box :detail="detail">
 			<view slot="basic">
 				<self-input label="车牌号" v-model="carNo" disabled></self-input>
-				<self-input label="消毒人" v-model="王五" disabled></self-input>
+				<self-input label="消毒人" value="王五" disabled></self-input>
 				<self-input label="消毒方式" value="熏蒸" disabled></self-input>
 			</view>
 			<view slot="task">

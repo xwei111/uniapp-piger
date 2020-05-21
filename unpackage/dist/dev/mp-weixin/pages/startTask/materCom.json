@@ -1,4 +1,9 @@
 {
   "navigationBarTitleText": "发起任务",
-  "usingComponents": {}
+  "usingComponents": {
+    "self-start-task": "/components/self-start-task",
+    "self-input": "/components/self-input",
+    "self-button": "/components/self-button",
+    "self-button-radio": "/components/self-button-radio"
+  }
 }

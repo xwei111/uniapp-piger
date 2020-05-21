@@ -79,14 +79,9 @@
 				"navigationBarTitleText": "报警详情"
 			}
 		}, {
-			"path": "pages/warningDetail/index",
-			"style": {
-				"navigationBarTitleText": "访客邀请"
-			}
-		}, {
 			"path": "pages/invitaGuest/index",
 			"style": {
-				"navigationBarTitleText": "发起任务"
+				"navigationBarTitleText": "访客邀请"
 			}
 		}, {
 			"path": "pages/startTask/peopleTrans",
@@ -580,6 +575,161 @@
 			}
 		}, {
 			"path": "pages/allTask/weanPiger/weaTranCarDisRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/shop/shopCarWashRecordOne",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/shop/shopCarWashRecordTwo",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/shop/shopCarWashTwoSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/shop/shopCarWashTwoResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/shop/shopPigerWash",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/fertilizer/fertilizerCarWash",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/fertilizer/fertilizerSitCarWash",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/fertilizer/fertilizerOutRegister",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/pigerBoundary/pigerBoundaryDis",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/pigerBoundary/pigerBoundaryPatrol",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/food/foodRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/food/foodSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/food/foodSampleResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/food/foodTransRegister",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/food/foodSitDIsinfect",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/food/foodDisAgain",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerSampleSure",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerSampleVideo",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerCarWashRecordTwo",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerCarWashTwoSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerCarWashTwoResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerRegister",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerSitWash",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerchanCarSample",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerchanCarSampleResult",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerchanCarDisRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerRegisterRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerInRecord",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerTranDIs",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMertranRegister",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		}, {
+			"path": "pages/allTask/noMer/noMerFirstRegister",
 			"style": {
 				"navigationBarTitleText": "任务详情"
 			}

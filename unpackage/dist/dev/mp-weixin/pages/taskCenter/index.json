@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "任务中心",
   "usingComponents": {
     "self-task-center": "/components/taskmodel/self-task-center"
   }

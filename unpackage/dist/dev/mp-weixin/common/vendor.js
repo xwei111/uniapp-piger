@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2674,6 +2674,26 @@ var index_esm = {
 
 /* harmony default export */ __webpack_exports__["default"] = (index_esm);
 
+
+/***/ }),
+
+/***/ 1286:
+/*!*****************************************!*\
+  !*** D:/progress/piger/utils/consts.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.tasktype = void 0;var tasktype = {
+  car: { ig: '/static/img3.png', color: '#0FBB87' }, // 车辆洗消
+  region: { ig: '/static/img4.png', color: '#FF8D67' }, // 区域任务
+  piger: { ig: '/static/img5.png', color: '#FEA0D6' }, // 猪只任务
+  feed: { ig: '/static/img6.png', color: '#FEBA59' }, // 饲料任务
+  material: { ig: '/static/img7.png', color: '#88BFFE' }, // 物资任务
+  food: { ig: '/static/img8.png', color: '#C09DFF' }, // 食材任务
+  fertilizer: { ig: '/static/img9.png', color: '#BBA887' } // 粪肥任务
+};exports.tasktype = tasktype;
 
 /***/ }),
 
@@ -8321,7 +8341,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8342,14 +8362,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8425,7 +8445,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9707,26 +9727,6 @@ exports.verTell = verTell;var verSfz = function verSfz(value) {
   var reg = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
   return reg.test(value);
 };exports.verSfz = verSfz;
-
-/***/ }),
-
-/***/ 430:
-/*!*****************************************!*\
-  !*** D:/progress/piger/utils/consts.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.tasktype = void 0;var tasktype = {
-  car: { ig: '/static/img3.png', color: '#0FBB87' }, // 车辆洗消
-  region: { ig: '/static/img4.png', color: '#FF8D67' }, // 区域任务
-  piger: { ig: '/static/img5.png', color: '#FEA0D6' }, // 猪只任务
-  feed: { ig: '/static/img6.png', color: '#FEBA59' }, // 饲料任务
-  material: { ig: '/static/img7.png', color: '#88BFFE' }, // 物资任务
-  food: { ig: '/static/img8.png', color: '#C09DFF' }, // 食材任务
-  fertilizer: { ig: '/static/img9.png', color: '#BBA887' } // 粪肥任务
-};exports.tasktype = tasktype;
 
 /***/ }),
 
